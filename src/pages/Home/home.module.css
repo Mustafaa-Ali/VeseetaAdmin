@@ -1,0 +1,11 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.fav{
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+}
