@@ -80,7 +80,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="side-bar__item side__item--menu terms ">
-                            <Link to="/speciality" className="page-section-link">
+                            <Link to="/speaciality" className="page-section-link">
                           
                             <i class="side-bar__item--icon text-white  fs-2 fa-solid fa-building-user"></i>
                                 <span className="side-bar__item--text">Speciality</span>

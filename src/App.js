@@ -10,6 +10,8 @@ import { useState } from 'react';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Home from './pages/Home/home';
 import Cities from './pages/Cities/Cities';
+import Speaciality from './pages/Speaciality/Speaciality';
+
 function App() {
   const [lang , setLang]=   useState("en")
 
@@ -28,6 +30,8 @@ function App() {
      <Route path="/sidebar" element={<Sidebar/>}/>
      <Route path="/home" element={<Home/>}/>
      <Route path="/cities" element={<Cities/>}/>
+     <Route path="/speaciality" element={<Speaciality/>}/>
+     
 
 
      <Route path="*"  element={<NotFound/>} />
