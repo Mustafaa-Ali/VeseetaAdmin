@@ -2,19 +2,22 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar/Sidebar';
-import style from './Speaciality.module.css';
+import style from './Offers.module.css';
 import { useState, useEffect, useRef } from 'react';
 
-import AddSpeaciality from './../AddSpeaciality/AddSpeaciality';
-import EditSpeaciality from './../EditSpeaciality/EditSpeaciality';
+import AddOffers from './../AddOffers/AddOffers';
+import EditOffers from './../EditOffers/EditOffers';
 import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 
-const Speaciality =() =>{
-    const [Speaciality, setSpeaciality] = useState([])
-    const [speacialityId, setSpeacialityId] = useState([])
-  
+
+const Offers = () => {
+
+
+    const [Offers, setOffers] = useState([])
+    const [OffersId, setOffersId] = useState([])
+
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -35,11 +38,10 @@ const Speaciality =() =>{
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-               
+
             }
         })
     }
-
 
 
     const handleSubmit = async () => {
@@ -57,18 +59,18 @@ const Speaciality =() =>{
 
 
 
-    const fetchSpeaciality = async () => {
+    const fetchOffers = async () => {
         
         const user = auth.currentUser;
         console.log("user", user);
         if (user) {
             try {
-                const SpeacialityRef = db.collection('Speciality');
-                const SpeacialitySnapshot = await SpeacialityRef.get();
-                const SpeacialityData = SpeacialitySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                const OffersRef = db.collection('Offers');
+                const OffersSnapshot = await OffersRef.get();
+                const OffersData = OffersSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-                console.log("Speaciality", SpeacialityData);
-                setSpeaciality(SpeacialityData);
+                console.log("Offers", OffersData);
+                setOffers(OffersData);
             } catch (error) {
                 console.log(error);
             }
@@ -77,24 +79,17 @@ const Speaciality =() =>{
         }
     };
 
-
-
-
-
- 
     useEffect(() => {
-
         handleSubmit();
-        fetchSpeaciality();
-      
+        fetchOffers();
     }, []);
 
 
-
+    console.log("Offers", Offers)
 
     return (
         <>
-          
+
             <Sidebar />
             <section className='page-section py-2'>
                 <div className='container px-3 min-vh-100' >
@@ -103,32 +98,32 @@ const Speaciality =() =>{
                             <div className="row justify-content-center mx-2">
                                 <div className="col-lg-12 row my-4">
                                     <div className='col-6 p-0'>
-                                        <h2 >Speaciality</h2>
+                                        <h2 >Offers</h2>
                                     </div>
                                     <div className={`${style.pull_right} col-6 p-0`}>
                                         <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
-                                            let addSpeaciality = document.getElementById("add_speaciality");
-                                            addSpeaciality.classList.remove("d-none");
+                                            let addOffers = document.getElementById("add_offers");
+                                            addOffers.classList.remove("d-none");
 
-                                            let editSpeaciality = document.getElementById("edit_speaciality");
-                                            if (editSpeaciality.classList.contains('d-none') === false) {
-                                                editSpeaciality.classList.add("d-none");
+                                            let editOffers = document.getElementById("edit_offers");
+                                            if (editOffers.classList.contains('d-none') === false) {
+                                                editOffers.classList.add("d-none");
                                             }
-                                        }}>  Add New Speaciality</Link>
+                                        }}>  Add New Offers</Link>
                                     </div>
                                     <br />
                                     <br />
                                 </div>
                             </div>
 
-                            <div id="add_speaciality" className='d-none'>
-                                <AddSpeaciality/>
+                            <div id="add_offers" className='d-none'>
+                                <AddOffers />
                             </div>
 
 
-                      
-                            <div id="edit_speaciality" className='d-none'>
-                                <EditSpeaciality  />
+
+                            <div id="edit_offers" className='d-none'>
+                                <EditOffers />
                             </div>
 
 
@@ -136,34 +131,36 @@ const Speaciality =() =>{
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-md-12">
-                                   
+
                                     <div className="table-responsive table-responsive-data2" style={{ maxHeight: "100vh" }}>
-                                        <table  className={`table ${style.table_data2}  `} >
-                                            <thead className={`${style.thead}`}>
+                                        <table className={`table ${style.table_data2}  `} >
+                                            <thead className={`${style.thead} text-white`}>
                                                 <tr>
                                                     <th className='text-white'>Id</th>
-                                                    <th className='text-white'>Speaciality Name </th>
-                                                    <th className='text-white'>Speaciality Img URL </th>
+                                                    <th className='text-white'>Offers Name </th>
+                                                    <th className='text-white'>Img  </th>
+                                                    
 
 
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {Speaciality.map((Speaciality, index) => {
-                                                    console.log(Speaciality)
+                                                {Offers.map((Offers, index) => {
+                                                    
                                                     return (
                                                         
                                                         <>
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
-                                                                <td>{Speaciality.Name}</td>
+                                                                <td>{Offers.SessionName}</td>
+                                                                <td><img src={Offers.ImgUrl} width={100} height={100} alt=""/></td>
                                                              
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
                                                                         <Link className="item p-2" type='button'  onClick={() => {
                                                                             window.scrollTo(0, 0);
-                                                                            setSpeacialityId(Speaciality.id);
+                                                                            setOffersId(Offers.id);
                                                                         }}>
                                                                             <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
                                                                         </Link>
@@ -171,7 +168,7 @@ const Speaciality =() =>{
                                                                         <form>
                                                                             <Link type='button' className="item p-2"
                                                                                 onClick={() => {
-                                                                                    DeleteAlert(Speaciality.id)
+                                                                                    DeleteAlert(Offers.id)
                                                                                 }}>
                                                                                 <i className="fa-solid fa-trash text-danger"></i>
                                                                             </Link>
@@ -183,7 +180,7 @@ const Speaciality =() =>{
                                                     )
                                                 })}
 
-                                              
+
 
                                             </tbody>
                                         </table>
@@ -191,16 +188,16 @@ const Speaciality =() =>{
                                 </div>
                             </div>
 
-                            
+
                         </div>
                     </div>
                 </div>
             </section>
-          
+
         </>
     )
 }
 
-export default Speaciality;
+export default Offers;
 
 

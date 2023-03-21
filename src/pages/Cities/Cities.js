@@ -9,11 +9,15 @@ import AddCity from './../AddCity/AddCity';
 import EditCity from './../EditCity/EditCity';
 import Swal from "sweetalert2";
 import '../../index.css'
+import { db, auth } from '../../Firebase/Firebase';
 
 
-const Cities =() =>{
+const Cities = () => {
 
-  
+
+    const [cities, setCities] = useState([])
+    const [cityId, setcityId] = useState([])
+
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -34,12 +38,20 @@ const Cities =() =>{
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-               
+
             }
         })
     }
 
 
+    const handleSubmit = async () => {
+        try {
+            await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
 
 
@@ -47,17 +59,37 @@ const Cities =() =>{
 
 
 
- 
+    const fetchCities = async () => {
+        
+        const user = auth.currentUser;
+        console.log("user", user);
+        if (user) {
+            try {
+                const citiesRef = db.collection('City');
+                const citiesSnapshot = await citiesRef.get();
+                const citiesData = citiesSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+                console.log("cities", citiesData);
+                setCities(citiesData);
+            } catch (error) {
+                console.log(error);
+            }
+
+
+        }
+    };
+
     useEffect(() => {
-      
+        handleSubmit();
+        fetchCities();
     }, []);
 
 
-
+    console.log("cities", cities)
 
     return (
         <>
-          
+
             <Sidebar />
             <section className='page-section py-2'>
                 <div className='container px-3 min-vh-100' >
@@ -85,13 +117,13 @@ const Cities =() =>{
                             </div>
 
                             <div id="add_city" className='d-none'>
-                                <AddCity/>
+                                <AddCity />
                             </div>
 
 
-                      
+
                             <div id="edit_city" className='d-none'>
-                                <EditCity  />
+                                <EditCity />
                             </div>
 
 
@@ -99,23 +131,54 @@ const Cities =() =>{
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-md-12">
-                                   
+
                                     <div className="table-responsive table-responsive-data2" style={{ maxHeight: "100vh" }}>
-                                        <table  className={`table ${style.table_data2}  `} >
-                                            <thead className={`${style.thead}`}>
+                                        <table className={`table ${style.table_data2}  `} >
+                                            <thead className={`${style.thead} text-white`}>
                                                 <tr>
-                                                    <th>Id</th>
-                                                    <th>City Name </th>
-                                                    <th>City Code </th>
+                                                    <th className='text-white'>Id</th>
+                                                    <th className='text-white'>City Name </th>
+                                                    
 
 
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {cities.map((city, index) => {
+                                                    console.log(city)
+                                                    return (
+                                                        
+                                                        <>
+                                                            <tr key={index} className={`${style.tr_shadow}`}>
+                                                                <td>{index + 1}</td>
+                                                                <td>{city.Name}</td>
+                                                             
+                                                                <td>
+                                                                    <div className="d-flex justify-content-around">
+                                                                        <Link className="item p-2" type='button'  onClick={() => {
+                                                                            window.scrollTo(0, 0);
+                                                                            setcityId(city.id);
+                                                                        }}>
+                                                                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                                                                        </Link>
+
+                                                                        <form>
+                                                                            <Link type='button' className="item p-2"
+                                                                                onClick={() => {
+                                                                                    DeleteAlert(city.id)
+                                                                                }}>
+                                                                                <i className="fa-solid fa-trash text-danger"></i>
+                                                                            </Link>
+                                                                        </form>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </>
+                                                    )
+                                                })}
 
 
-                                              
 
                                             </tbody>
                                         </table>
@@ -123,12 +186,12 @@ const Cities =() =>{
                                 </div>
                             </div>
 
-                            
+
                         </div>
                     </div>
                 </div>
             </section>
-          
+
         </>
     )
 }

@@ -11,6 +11,7 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import Home from './pages/Home/home';
 import Cities from './pages/Cities/Cities';
 import Speaciality from './pages/Speaciality/Speaciality';
+import Offers from './pages/Offers/Offers';
 
 function App() {
   const [lang , setLang]=   useState("en")
@@ -31,6 +32,7 @@ function App() {
      <Route path="/home" element={<Home/>}/>
      <Route path="/cities" element={<Cities/>}/>
      <Route path="/speaciality" element={<Speaciality/>}/>
+     <Route path="/offers" element={<Offers/>}/>
      
 
 
