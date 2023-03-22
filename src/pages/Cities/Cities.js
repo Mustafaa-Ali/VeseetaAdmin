@@ -109,7 +109,7 @@ const Cities = () => {
                                             if (editCity.classList.contains('d-none') === false) {
                                                 editCity.classList.add("d-none");
                                             }
-                                        }}>  Add New City</Link>
+                                        }}>  + City</Link>
                                     </div>
                                     <br />
                                     <br />
@@ -156,9 +156,16 @@ const Cities = () => {
                                                              
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button'  onClick={() => {
+                                                                        <Link className="item p-2" type='button' onClick={() => {
                                                                             window.scrollTo(0, 0);
                                                                             setcityId(city.id);
+                                                                            let editcity = document.getElementById("edit_city");
+                                                                            editcity.classList.remove("d-none");
+
+                                                                            let addcity = document.getElementById("add_city");
+                                                                            if (addcity.classList.contains('d-none') === false) {
+                                                                                addcity.classList.add("d-none");
+                                                                            }
                                                                         }}>
                                                                             <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
                                                                         </Link>

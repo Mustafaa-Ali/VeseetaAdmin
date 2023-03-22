@@ -31,7 +31,7 @@ function AddSpeaciality(props){
     return(
     <>
    
-    <div className={`${style.contain}mx-auto`}>
+    <div className={`${style.contain}`}>
         <div className="row justify-content-center  mx-1 mb-5">
             <div className="col-lg-12 mb-4">
                 <div className={` ${style.pull_left}`}>

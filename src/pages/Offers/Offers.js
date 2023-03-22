@@ -109,7 +109,7 @@ const Offers = () => {
                                             if (editOffers.classList.contains('d-none') === false) {
                                                 editOffers.classList.add("d-none");
                                             }
-                                        }}>  Add New Offers</Link>
+                                        }}>  + Offers</Link>
                                     </div>
                                     <br />
                                     <br />
@@ -161,6 +161,13 @@ const Offers = () => {
                                                                         <Link className="item p-2" type='button'  onClick={() => {
                                                                             window.scrollTo(0, 0);
                                                                             setOffersId(Offers.id);
+                                                                            let editOffers = document.getElementById("edit_offers");
+                                                                            editOffers.classList.remove("d-none");
+
+                                                                            let addOffers = document.getElementById("add_offers");
+                                                                            if (addOffers.classList.contains('d-none') === false) {
+                                                                                addOffers.classList.add("d-none");
+                                                                            }
                                                                         }}>
                                                                             <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
                                                                         </Link>

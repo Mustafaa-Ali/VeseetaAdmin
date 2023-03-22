@@ -23,8 +23,8 @@ function EditOffers(props){
     
     function close(e){
         e.preventDefault();
-        let addOffers = document.getElementById("add_Offers");
-        addOffers.classList.add("d-none");
+        let editOffers = document.getElementById("edit_offers");
+        editOffers.classList.add("d-none");
       }
 
 
@@ -35,7 +35,7 @@ function EditOffers(props){
         <div className="row justify-content-center  mx-1 mb-5">
             <div className="col-lg-12 mb-4">
                 <div className={` ${style.pull_left}`}>
-                    <h2>Add Offers</h2>
+                    <h2>Edit Offers</h2>
                 </div>
             </div>
 
@@ -52,6 +52,15 @@ function EditOffers(props){
                             <input type="text"  
                            
                               className="form-control" placeholder="Category Name" />
+                                    
+                        </div>
+                    </div>
+                    <div className="col-12 mb-3">
+                        <div className="form-group">
+                            <strong className='d-block mb-2'>Offers Img Url:</strong>
+                            <input type="text"  
+                           
+                              className="form-control" placeholder="Category Img Url" />
                                     
                         </div>
                     </div>

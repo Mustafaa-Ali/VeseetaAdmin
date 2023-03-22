@@ -114,7 +114,7 @@ const Speaciality =() =>{
                                             if (editSpeaciality.classList.contains('d-none') === false) {
                                                 editSpeaciality.classList.add("d-none");
                                             }
-                                        }}>  Add New Speaciality</Link>
+                                        }}>  + Speaciality</Link>
                                     </div>
                                     <br />
                                     <br />
@@ -158,12 +158,20 @@ const Speaciality =() =>{
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{Speaciality.Name}</td>
+                                                                <td><img src={Speaciality.imgUrl} width={100} height={100} alt=""/></td>
                                                              
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button'  onClick={() => {
+                                                                        <Link className="item p-2" type='button'   onClick={() => {
                                                                             window.scrollTo(0, 0);
                                                                             setSpeacialityId(Speaciality.id);
+                                                                            let editSpeaciality = document.getElementById("edit_speaciality");
+                                                                            editSpeaciality.classList.remove("d-none");
+
+                                                                            let addSpeaciality = document.getElementById("add_speaciality");
+                                                                            if (addSpeaciality.classList.contains('d-none') === false) {
+                                                                                addSpeaciality.classList.add("d-none");
+                                                                            }
                                                                         }}>
                                                                             <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
                                                                         </Link>
