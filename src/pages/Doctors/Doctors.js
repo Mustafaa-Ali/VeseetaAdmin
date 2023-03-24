@@ -139,6 +139,7 @@ const Doctors = () => {
                                                     <th className='text-white'>Id</th>
                                                     <th className='text-white'>Doctor Name </th>
                                                     <th className='text-white'>Doctor Image </th>
+                                                    <th className='text-white'>Doctor Speciality </th>
                                                     <th className='text-white'>Doctor City </th>
                                                     <th className='text-white'>Doctor Phone </th>                                                    
 
@@ -156,6 +157,7 @@ const Doctors = () => {
                                                                 <td>{index + 1}</td>
                                                                 <td>{Doctor.Name}</td>
                                                                 <td><img src={Doctor.ImgUrl} width={100} height={100} alt=""/></td>
+                                                                <td>{Doctor.Speciality}</td>
                                                                 <td>{Doctor.City}</td>
                                                                 <td>{Doctor.Phone}</td>
                                                              
