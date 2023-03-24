@@ -9,6 +9,7 @@ import { LangProvider } from './contexts/lang';
 import { useState } from 'react';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Home from './pages/Home/home';
+import Doctors from './pages/Doctors/Doctors';
 import Cities from './pages/Cities/Cities';
 import Speaciality from './pages/Speaciality/Speaciality';
 import Offers from './pages/Offers/Offers';
@@ -30,6 +31,7 @@ function App() {
 
      <Route path="/sidebar" element={<Sidebar/>}/>
      <Route path="/home" element={<Home/>}/>
+     <Route path="/doctor" element={<Doctors />}/>
      <Route path="/cities" element={<Cities/>}/>
      <Route path="/speaciality" element={<Speaciality/>}/>
      <Route path="/offers" element={<Offers/>}/>
