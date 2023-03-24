@@ -82,6 +82,15 @@ function AddDoctor(props){
                                     
                         </div>
                     </div>
+                    <div className="col-12 mb-3">
+                        <div className="form-group">
+                            <strong className='d-block mb-2'>Doctor Image:</strong>
+                            <input type="text"  
+                           
+                              className="form-control" placeholder="Doctor Image" />
+                                    
+                        </div>
+                    </div>
                    
                
                   
