@@ -30,7 +30,7 @@ const Home = () => {
               <div className="card-body">
                 <h5 className="card-title text-danger">Doctors</h5>
                 <div className='d-flex justify-content-between'><h6 className="card-subtitle mb-2 ">Number Of Doctors </h6> <h6 className="card-subtitle mb-2 ">150</h6></div>
-                <Link to="#" className="card-link text-decoration-none text-white">Go To Doctors</Link>
+                <Link to="/doctor" className="card-link text-decoration-none text-white">Go To Doctors</Link>
                
               </div>
             </div>
@@ -40,7 +40,7 @@ const Home = () => {
             <div className="card-body" style={{backgroundColor:"rgb(255, 191, 67)", }}>
                 <h5 className="card-title">Cities</h5>
                 <div  className='d-flex justify-content-between'><h6 className="card-subtitle mb-2 text-muted">Number Of Cities </h6> <h6 className="card-subtitle mb-2 text-muted">150</h6></div>
-                <Link to="#" className="card-link text-decoration-none">Go To Cities</Link>
+                <Link to="/cities" className="card-link text-decoration-none">Go To Cities</Link>
                
               </div>
             </div>
@@ -50,7 +50,7 @@ const Home = () => {
             <div className="card-body">
                 <h5 className="card-title">Offers</h5>
                 <div  className='d-flex justify-content-between'><h6 className="card-subtitle mb-2 text-muted">Number Of Offers </h6> <h6 className="card-subtitle mb-2 text-muted">150</h6></div>
-                <Link to="#" className="card-link text-decoration-none">Go To Offers</Link>
+                <Link to="/offers" className="card-link text-decoration-none">Go To Offers</Link>
                
               </div>
             </div>
@@ -60,7 +60,7 @@ const Home = () => {
             <div className="card-body">
                 <h5 className="card-title">Speacilaity</h5>
                 <div  className='d-flex justify-content-between'><h6 className="card-subtitle mb-2 text-white">Number Of Speacilaity </h6> <h6>150</h6></div>
-                <Link to="#" className="card-link text-decoration-none text-white">Go To Speacilaity</Link>
+                <Link to="/speaciality" className="card-link text-decoration-none text-white">Go To Speacilaity</Link>
                
               </div>
             </div>
@@ -70,12 +70,12 @@ const Home = () => {
             <div className="card-body" style={{backgroundColor:"#f699e0", color:"white"}}>
                 <h5 className="card-title">Users</h5>
                 <div  className='d-flex justify-content-between'><h6 className="card-subtitle mb-2 text-muted">Number Of Users </h6> <h6 className="card-subtitle mb-2 text-muted">150</h6></div>
-                <Link to="#" className="card-link text-decoration-none text-white">Go To Users</Link>
+                <Link to="/users" className="card-link text-decoration-none text-white">Go To Users</Link>
                
               </div>
             </div>
           </div>
-          <div className='col-lg-4 my-3 '>
+          {/* <div className='col-lg-4 my-3 '>
             <div className="card" >
             <div className="card-body" style={{backgroundColor:"#99f6ca"}}>
                 <h5 className="card-title">Pharmacies</h5>
@@ -84,7 +84,7 @@ const Home = () => {
                
               </div>
             </div>
-          </div>
+          </div> */}
         
 
         </div>
