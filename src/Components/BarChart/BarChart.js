@@ -5,23 +5,23 @@ import { Column } from '@ant-design/plots';
 const DemoColumn = () => {
   const data = [
     {
-      action: '浏览网站',
+      action: '2018',
       pv: 50000,
     },
     {
-      action: '放入购物车',
+      action: '2019',
       pv: 35000,
     },
     {
-      action: '生成订单',
+      action: '2020',
       pv: 25000,
     },
     {
-      action: '支付订单',
+      action: '2021',
       pv: 15000,
     },
     {
-      action: '完成交易',
+      action: '2022',
       pv: 8500,
     },
   ];
