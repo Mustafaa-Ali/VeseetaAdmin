@@ -64,6 +64,33 @@ function AddOffers(props){
                                     
                         </div>
                     </div>
+                    <div className="col-12 mb-3">
+                        <div className="form-group">
+                            <strong className='d-block mb-2'>Available</strong>
+                            <input type="text"  
+                           
+                              className="form-control" placeholder="Available" />
+                                    
+                        </div>
+                    </div>
+                    <div className="col-12 mb-3">
+                        <div className="form-group">
+                            <strong className='d-block mb-2'>Price</strong>
+                            <input type="text"  
+                           
+                              className="form-control" placeholder="Price" />
+                                    
+                        </div>
+                    </div>
+                    <div className="col-12 mb-3">
+                        <div className="form-group">
+                            <strong className='d-block mb-2'>Discount</strong>
+                            <input type="text"  
+                           
+                              className="form-control" placeholder="Discount" />
+                                    
+                        </div>
+                    </div>
                    
                
                   

@@ -139,6 +139,9 @@ const Offers = () => {
                                                     <th className='text-white'>Id</th>
                                                     <th className='text-white'>Offers Name </th>
                                                     <th className='text-white'>Img  </th>
+                                                    <th className='text-white'>Available  </th>
+                                                    <th className='text-white'>Price  </th>
+                                                    <th className='text-white'>Discount  </th>
                                                     
 
 
@@ -147,15 +150,19 @@ const Offers = () => {
                                             </thead>
                                             <tbody>
                                                 {Offers.map((Offers, index) => {
-                                                    
+                                                    console.log("offer", Offers.Available)
                                                     return (
                                                         
                                                         <>
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{Offers.SessionName}</td>
-                                                                <td><img src={Offers.ImgUrl} width={100} height={100} alt=""/></td>
                                                              
+                                                                
+                                                                <td><img src={Offers.ImgUrl} width={100} height={100} alt=""/></td>
+                                                                <td>{`${Offers.Available}`}</td>
+                                                                <td>{Offers.Price}&pound;</td>
+                                                                <td>{Offers.Discount}%</td>
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
                                                                         <Link className="item p-2" type='button'  onClick={() => {
