@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar/Sidebar';
@@ -38,7 +37,16 @@ const Offers = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-
+                const OffersRef = db.collection('Offers').doc(id);
+                OffersRef.delete()
+                    .then(() => {
+                        setOffers(Offers.filter(d => d.id !== id));
+                        afterDelete("Offer deleted successfully.", "success");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        afterDelete("Failed to delete Offer.", "error");
+                    });
             }
         })
     }
@@ -55,12 +63,8 @@ const Offers = () => {
 
 
 
-
-
-
-
     const fetchOffers = async () => {
-        
+
         const user = auth.currentUser;
         console.log("user", user);
         if (user) {
@@ -142,7 +146,7 @@ const Offers = () => {
                                                     <th className='text-white'>Available  </th>
                                                     <th className='text-white'>Price  </th>
                                                     <th className='text-white'>Discount  </th>
-                                                    
+
 
 
                                                     <th></th>
@@ -152,20 +156,20 @@ const Offers = () => {
                                                 {Offers.map((Offers, index) => {
                                                     console.log("offer", Offers.Available)
                                                     return (
-                                                        
+
                                                         <>
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{Offers.SessionName}</td>
-                                                             
-                                                                
-                                                                <td><img src={Offers.ImgUrl} width={100} height={100} alt=""/></td>
+
+
+                                                                <td><img src={Offers.ImgUrl} width={100} height={100} alt="" /></td>
                                                                 <td>{`${Offers.Available}`}</td>
                                                                 <td>{Offers.Price}&pound;</td>
                                                                 <td>{Offers.Discount}%</td>
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button'  onClick={() => {
+                                                                        <Link className="item p-2" type='button' onClick={() => {
                                                                             window.scrollTo(0, 0);
                                                                             setOffersId(Offers.id);
                                                                             let editOffers = document.getElementById("edit_offers");

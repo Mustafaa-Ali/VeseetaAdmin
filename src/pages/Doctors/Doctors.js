@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar/Sidebar';
@@ -27,21 +26,29 @@ const Doctors = () => {
         });
     }
 
-
     function DeleteAlert(id) {
         Swal.fire({
-            title: 'Are you sure?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
+          title: 'Are you sure?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
-            if (result.isConfirmed) {
-
-            }
-        })
-    }
+          if (result.isConfirmed) {
+            const DoctorRef = db.collection('Doctor').doc(id);
+            DoctorRef.delete()
+              .then(() => {
+                setDoctor(Doctor.filter(d => d.id !== id));
+                afterDelete("Doctor deleted successfully.", "success");
+              })
+              .catch((error) => {
+                console.log(error);
+                afterDelete("Failed to delete Doctor.", "error");
+              });
+          }
+        });
+      }      
 
 
     const handleSubmit = async () => {
