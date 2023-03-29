@@ -42,20 +42,20 @@ function EditOffers(props) {
                     <form className={`${style.create_accont}`}>
 
                         <div className="row">
-                            <div className={` col-12`}>
+                            <div className={` col-12 text-end`}>
                                 <button className={`${style.pull_right} outline-none fa-solid fa-square-xmark fs-4  text-danger`} style={{ border: "none" }} onClick={close}> </button>
                             </div>
 
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Offers Name:</strong>
                                     <input type="text"
-
+                                        
                                         className="form-control" placeholder="Offers Name" />
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Offers Img Url:</strong>
                                     <input type="text"
@@ -64,30 +64,87 @@ function EditOffers(props) {
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Available</strong>
+                                    <strong className='d-block mb-2'>Doctor Name</strong>
                                     <input type="text"
-
-                                        className="form-control" placeholder="Available" />
+                                        
+                                        className="form-control" placeholder="Doctor Name" />
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Doctor Img Url</strong>
+                                    <input type="text"
+                                        
+                                        className="form-control" placeholder="Doctor Img" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Available</strong>
+                                    <div className='row mb-3'>
+                                        <div className='col-6'>
+                                            <input type="radio" id="true" name="available" value="true" className='mx-2'
+                                                checked/>
+                                                 
+                                            <label for="true">True</label>
+                                        </div>
+
+                                        <div className='col-6'>
+                                            <input type="radio" id="false" name="available" value="false" className='mx-2'/>
+                                                
+                                            <label for="false">False</label>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Price</strong>
-                                    <input type="text"
-
+                                    <input type="number"
+                                       
                                         className="form-control" placeholder="Price" />
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Discount</strong>
-                                    <input type="text"
-
+                                    <input type="number"
+                                        
                                         className="form-control" placeholder="Discount" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Booked</strong>
+                                    <input type="number"
+                                        
+                                        className="form-control" placeholder="Booked" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Booking Date</strong>
+                                    <input type="date"
+                                        
+                                        className="form-control" placeholder="Booking Date" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Info</strong>
+                                    <input type="text"
+                                        
+                                        className="form-control" placeholder="Info" />
 
                                 </div>
                             </div>

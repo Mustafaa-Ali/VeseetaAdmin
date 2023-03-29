@@ -23,7 +23,7 @@ function EditCity(props) {
 
     function close(e) {
         e.preventDefault();
-        let EditCity = document.getElementById("Edit_city");
+        let EditCity = document.getElementById("edit_city");
         EditCity.classList.add("d-none");
     }
 

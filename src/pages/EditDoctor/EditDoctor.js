@@ -23,8 +23,8 @@ function EditDoctor(props) {
 
     function close(e) {
         e.preventDefault();
-        let addDoctor = document.getElementById("add_Doctor");
-        addDoctor.classList.add("d-none");
+        let editDoctor = document.getElementById("edit_Doctor");
+        editDoctor.classList.add("d-none");
     }
 
 
@@ -35,7 +35,7 @@ function EditDoctor(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>Add Doctor</h2>
+                            <h2>Edit Doctor</h2>
                         </div>
                     </div>
 
@@ -51,7 +51,47 @@ function EditDoctor(props) {
                                     <strong className='d-block mb-2'>Doctor Name:</strong>
                                     <input type="text"
 
-                                        className="form-control" placeholder="Category Name" />
+                                        className="form-control" placeholder="Doctor Name" />
+
+                                </div>
+                            </div>
+
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Doctor Speciality:</strong>
+                                    <input type="text"
+
+                                        className="form-control" placeholder="Doctor Speciality" />
+
+                                </div>
+                            </div>
+
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Doctor City:</strong>
+                                    <input type="text"
+
+                                        className="form-control" placeholder="Doctor City" />
+
+                                </div>
+                            </div>
+
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Doctor Phone:</strong>
+                                    <input type="text"
+
+                                        className="form-control" placeholder="Doctor Phone" />
+
+                                </div>
+                            </div>
+
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Doctor Image URL:</strong>
+                                    <input type="text"
+
+                                        className="form-control" placeholder="Doctor Image URL" />
 
                                 </div>
                             </div>
