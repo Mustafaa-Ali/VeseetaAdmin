@@ -4,13 +4,35 @@ import { useState } from 'react';
 import style from './AddSpeaciality.module.css';
 
 import Swal from "sweetalert2";
-
+import { db, auth } from '../../Firebase/Firebase';
+import { collection, addDoc} from "firebase/firestore";
 
 
 function AddSpeaciality(props){
  
+
+const [Name, setName] = useState('')
+const [imgUrl, setimgUrl] = useState('')
+
    
-    
+const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+            const docRef = await addDoc(collection(db, "Speciality"), {Name, imgUrl});
+            console.log("Document written with ID: ", docRef.id);
+            let addSpeaciality = document.getElementById("add_speaciality");
+           
+            showAlert("Speaciality addwe successfully", "success")
+            addSpeaciality.classList.add("d-none");
+
+    } catch (e) {
+            console.error("Error adding document: ", e);
+            showAlert("Speaciality added failed", "error")
+    }
+
+    e.target.reset();
+};
     function showAlert(message,icon){
         Swal.fire({
             title: message,
@@ -39,7 +61,7 @@ function AddSpeaciality(props){
                 </div>
             </div>
 
-            <form className={`${style.create_accont}`}>
+            <form className={`${style.create_accont}`} onSubmit={handleFormSubmit} >
                
                 <div className="row">
                 <div  className={` col-12`}>
@@ -50,7 +72,9 @@ function AddSpeaciality(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>Speaciality Name:</strong>
                             <input type="text"  
-                           
+                             onChange={(e)=>{
+                                setName(e.target.value)
+                             }}
                               className="form-control" placeholder="Speaciality Name" />
                                     
                         </div>
@@ -59,7 +83,9 @@ function AddSpeaciality(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>Speaciality Img URL:</strong>
                             <input type="text"  
-                           
+                            onChange={(e)=>{
+                                setimgUrl(e.target.value)
+                             }}
                               className="form-control" placeholder="Speaciality Img URL" />
                                     
                         </div>

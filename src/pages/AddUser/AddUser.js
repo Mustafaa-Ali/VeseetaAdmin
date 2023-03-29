@@ -5,10 +5,32 @@ import style from './AddUser.module.css';
 
 import Swal from "sweetalert2";
 
-
+import { db, auth } from '../../Firebase/Firebase';
+import { collection, addDoc} from "firebase/firestore";
 
 function AddUser(props){
  
+    const [Name, setName] = useState('')
+    const [User_Name, setUser_Name] = useState('')
+    const [Phone, setPhone] = useState('')
+    const [Email, setEmail] = useState('')
+    const [City, setCity] = useState('')
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+                const docRef = await addDoc(collection(db, "Users"), {Name, User_Name, Phone, Email, City});
+                console.log("Document written with ID: ", docRef.id);
+                let addUser = document.getElementById("add_User");
+                showAlert("User added successfully", "success")
+                addUser.classList.add("d-none");
+        } catch (e) {
+                console.error("Error adding document: ", e);
+        }
+
+        e.target.reset();
+    };
    
     
     function showAlert(message,icon){
@@ -39,7 +61,7 @@ function AddUser(props){
                 </div>
             </div>
 
-            <form className={`${style.create_accont}`}>
+            <form className={`${style.create_accont}`} onSubmit={handleFormSubmit}>
                
                 <div className="row">
                 <div  className={` col-12`}>
@@ -50,7 +72,9 @@ function AddUser(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>User Name:</strong>
                             <input type="text"  
-                           
+                           onChange={(e)=>{
+                            setName(e.target.value);
+                         }}
                               className="form-control" placeholder="User Name" />
                                     
                         </div>
@@ -58,8 +82,10 @@ function AddUser(props){
                     <div className="col-12 mb-3">
                         <div className="form-group">
                             <strong className='d-block mb-2'>User Email:</strong>
-                            <input type="text"  
-                           
+                            <input type="email"  
+                           onChange={(e)=>{
+                            setEmail(e.target.value);
+                         }}
                               className="form-control" placeholder="User Email" />
                                     
                         </div>
@@ -68,7 +94,9 @@ function AddUser(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>User City:</strong>
                             <input type="text"  
-                           
+                           onChange={(e)=>{
+                            setCity(e.target.value);
+                         }}
                               className="form-control" placeholder="User City" />
                                     
                         </div>
@@ -77,7 +105,9 @@ function AddUser(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>User Phone:</strong>
                             <input type="text"  
-                           
+                           onChange={(e)=>{
+                            setPhone(e.target.value);
+                         }}
                               className="form-control" placeholder="User Phone" />
                                     
                         </div>

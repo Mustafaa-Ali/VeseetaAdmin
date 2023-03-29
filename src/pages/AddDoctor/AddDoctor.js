@@ -5,12 +5,34 @@ import style from './AddDoctor.module.css';
 
 import Swal from "sweetalert2";
 
-
+import { db, auth } from '../../Firebase/Firebase';
+import { collection, addDoc} from "firebase/firestore";
 
 function AddDoctor(props){
  
-   
+    const [Name, setName] = useState('')
+    const [Speciality, setSpeciality] = useState('')
+    const [Phone, setPhone] = useState('')
+    const [ImgUrl, setImgUrl] = useState('')
+    const [ExaminationFees, setExaminationFees] = useState('')
+    const [City, setCity] = useState('')
     
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+                const docRef = await addDoc(collection(db, "Doctor"), {Name, Speciality, Phone, ImgUrl, City});
+                console.log("Document written with ID: ", docRef.id);
+                let addDoctor = document.getElementById("add_Doctor");
+                showAlert("Doctor added successfully", "success")
+                addDoctor.classList.add("d-none");
+        } catch (e) {
+                console.error("Error adding document: ", e);
+        }
+
+        e.target.reset();
+    };
     function showAlert(message,icon){
         Swal.fire({
             title: message,
@@ -39,7 +61,7 @@ function AddDoctor(props){
                 </div>
             </div>
 
-            <form className={`${style.create_accont}`}>
+            <form className={`${style.create_accont}`} onSubmit={handleFormSubmit}>
                
                 <div className="row">
                 <div  className={` col-12`}>
@@ -50,7 +72,9 @@ function AddDoctor(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>Doctor Name:</strong>
                             <input type="text"  
-                           
+                             onChange={(e)=>{
+                                setName(e.target.value);
+                             }}
                               className="form-control" placeholder="Doctor Name" />
                                     
                         </div>
@@ -59,7 +83,9 @@ function AddDoctor(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>Doctor Speciality:</strong>
                             <input type="text"  
-                           
+                            onChange={(e)=>{
+                                setSpeciality(e.target.value);
+                             }}
                               className="form-control" placeholder="Doctor Speciality" />
                                     
                         </div>
@@ -68,7 +94,9 @@ function AddDoctor(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>Doctor City:</strong>
                             <input type="text"  
-                           
+                            onChange={(e)=>{
+                                setCity(e.target.value);
+                             }}
                               className="form-control" placeholder="Doctor City" />
                                     
                         </div>
@@ -77,17 +105,21 @@ function AddDoctor(props){
                         <div className="form-group">
                             <strong className='d-block mb-2'>Doctor Phone:</strong>
                             <input type="text"  
-                           
+                            onChange={(e)=>{
+                                setPhone(e.target.value);
+                             }}
                               className="form-control" placeholder="Doctor Phone" />
                                     
                         </div>
                     </div>
                     <div className="col-12 mb-3">
                         <div className="form-group">
-                            <strong className='d-block mb-2'>Doctor Image:</strong>
+                            <strong className='d-block mb-2'>Doctor Image URL:</strong>
                             <input type="text"  
-                           
-                              className="form-control" placeholder="Doctor Image" />
+                            onChange={(e)=>{
+                                setImgUrl(e.target.value);
+                             }}
+                              className="form-control" placeholder="Doctor Image URl" />
                                     
                         </div>
                     </div>
