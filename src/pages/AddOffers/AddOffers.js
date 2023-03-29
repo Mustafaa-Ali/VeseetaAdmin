@@ -6,7 +6,7 @@ import style from './AddOffers.module.css';
 import Swal from "sweetalert2";
 
 import { db, auth } from '../../Firebase/Firebase';
-import { collection, addDoc} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 function AddOffers(props) {
 
@@ -28,8 +28,10 @@ function AddOffers(props) {
         e.preventDefault();
 
         try {
-            const docRef = await addDoc(collection(db, "Offers"), { SessionName,Price,Info,ImgUrl,
-                DoctorName, DoctorName,DoctorImg,Discount,Booked,Available,BookingDate});
+            const docRef = await addDoc(collection(db, "Offers"), {
+                SessionName, Price, Info, ImgUrl,
+                DoctorName, DoctorName, DoctorImg, Discount, Booked, Available, BookingDate
+            });
             console.log("Document written with ID: ", docRef.id);
             let addoffers = document.getElementById("add_offers");
             showAlert("Offer added successfully", "success")
@@ -57,7 +59,7 @@ function AddOffers(props) {
     }
 
 
-    
+
     return (
         <>
 
@@ -80,9 +82,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Offers Name:</strong>
                                     <input type="text"
-                                        onChange={(e)=>{
+                                        onChange={(e) => {
                                             setSessionName(e.target.value);
-                                         }}
+                                        }}
                                         className="form-control" placeholder="Offers Name" />
 
                                 </div>
@@ -100,9 +102,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Name</strong>
                                     <input type="text"
-                                        onChange={(e)=>{
+                                        onChange={(e) => {
                                             setDoctorName(e.target.value);
-                                         }}
+                                        }}
                                         className="form-control" placeholder="Doctor Name" />
 
                                 </div>
@@ -111,9 +113,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Img Url</strong>
                                     <input type="text"
-                                            onChange={(e)=>{
-                                                setDoctorImg(e.target.value);
-                                             }}
+                                        onChange={(e) => {
+                                            setDoctorImg(e.target.value);
+                                        }}
                                         className="form-control" placeholder="Doctor Img" />
 
                                 </div>
@@ -124,22 +126,22 @@ function AddOffers(props) {
                                     <div className='row mb-3'>
                                         <div className='col-6'>
                                             <input type="radio" id="true" name="available" value="true" className='mx-2'
-                                                checked 
-                                                onChange={(e)=>{
+                                                checked
+                                                onChange={(e) => {
                                                     setAvailable(e.target.value);
-                                                 }}/>
-                                                <label for="true">True</label>
+                                                }} />
+                                            <label for="true">True</label>
                                         </div>
 
                                         <div className='col-6'>
                                             <input type="radio" id="false" name="available" value="false" className='mx-2'
-                                                onChange={(e)=>{
+                                                onChange={(e) => {
                                                     setAvailable(e.target.value);
-                                                 }}/>
-                                                <label for="false">False</label>
+                                                }} />
+                                            <label for="false">False</label>
                                         </div>
                                     </div>
-                              
+
 
                                 </div>
                             </div>
@@ -147,9 +149,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Price</strong>
                                     <input type="number"
-                                            onChange={(e)=>{
-                                                setPrice(e.target.value);
-                                             }}
+                                        onChange={(e) => {
+                                            setPrice(e.target.value);
+                                        }}
                                         className="form-control" placeholder="Price" />
 
                                 </div>
@@ -158,9 +160,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Discount</strong>
                                     <input type="number"
-                                            onChange={(e)=>{
-                                                setDiscount(e.target.value);
-                                             }}
+                                        onChange={(e) => {
+                                            setDiscount(e.target.value);
+                                        }}
                                         className="form-control" placeholder="Discount" />
 
                                 </div>
@@ -169,9 +171,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Booked</strong>
                                     <input type="number"
-                                            onChange={(e)=>{
-                                                setBooked(e.target.value);
-                                             }}
+                                        onChange={(e) => {
+                                            setBooked(e.target.value);
+                                        }}
                                         className="form-control" placeholder="Booked" />
 
                                 </div>
@@ -180,9 +182,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Booking Date</strong>
                                     <input type="date"
-                                            onChange={(e)=>{
-                                                setBookingDate(e.target.value);
-                                             }}
+                                        onChange={(e) => {
+                                            setBookingDate(e.target.value);
+                                        }}
                                         className="form-control" placeholder="Booking Date" />
 
                                 </div>
@@ -191,9 +193,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Info</strong>
                                     <input type="text"
-                                            onChange={(e)=>{
-                                                setInfo(e.target.value);
-                                             }}
+                                        onChange={(e) => {
+                                            setInfo(e.target.value);
+                                        }}
                                         className="form-control" placeholder="Info" />
 
                                 </div>

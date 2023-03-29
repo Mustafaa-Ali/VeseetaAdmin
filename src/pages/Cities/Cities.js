@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar/Sidebar';
@@ -38,9 +37,18 @@ const Cities = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-
+                const cityRef = db.collection('City').doc(id);
+                cityRef.delete()
+                    .then(() => {
+                        setCities(cities.filter(d => d.id !== id));
+                        afterDelete('City deleted successfully', 'success');
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        afterDelete('Error deleting city', 'error');
+                    });
             }
-        })
+        });
     }
 
 
@@ -54,13 +62,8 @@ const Cities = () => {
     };
 
 
-
-
-
-
-
     const fetchCities = async () => {
-        
+
         const user = auth.currentUser;
         console.log("user", user);
         if (user) {
@@ -74,7 +77,6 @@ const Cities = () => {
             } catch (error) {
                 console.log(error);
             }
-
 
         }
     };
@@ -138,7 +140,7 @@ const Cities = () => {
                                                 <tr>
                                                     <th className='text-white'>Id</th>
                                                     <th className='text-white'>City Name </th>
-                                                    
+
 
 
                                                     <th></th>
@@ -148,12 +150,12 @@ const Cities = () => {
                                                 {cities.map((city, index) => {
                                                     console.log(city)
                                                     return (
-                                                        
+
                                                         <>
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{city.Name}</td>
-                                                             
+
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
                                                                         <Link className="item p-2" type='button' onClick={() => {

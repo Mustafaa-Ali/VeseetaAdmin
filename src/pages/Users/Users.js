@@ -38,7 +38,16 @@ const Users = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-
+                const UsersRef = db.collection('Users').doc(id);
+                UsersRef.delete()
+                    .then(() => {
+                        setUser(User.filter(d => d.id !== id));
+                        afterDelete("Offer deleted successfully.", "success");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        afterDelete("Failed to delete Offer.", "error");
+                    });
             }
         })
     }
@@ -60,7 +69,7 @@ const Users = () => {
 
 
     const fetchUser = async () => {
-        
+
         const user = auth.currentUser;
         console.log("user", user);
         if (user) {
@@ -140,7 +149,7 @@ const Users = () => {
                                                     <th className='text-white'>User Name </th>
                                                     <th className='text-white'>User Email </th>
                                                     <th className='text-white'>User City </th>
-                                                    <th className='text-white'>User Phone </th>                                                    
+                                                    <th className='text-white'>User Phone </th>
 
 
                                                     <th></th>
@@ -148,9 +157,9 @@ const Users = () => {
                                             </thead>
                                             <tbody>
                                                 {User.map((User, index) => {
-                                                    
+
                                                     return (
-                                                        
+
                                                         <>
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
@@ -158,10 +167,10 @@ const Users = () => {
                                                                 <td>{User.Email}</td>
                                                                 <td>{User.City}</td>
                                                                 <td>{User.Phone}</td>
-                                                             
+
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button'  onClick={() => {
+                                                                        <Link className="item p-2" type='button' onClick={() => {
                                                                             window.scrollTo(0, 0);
                                                                             setUserId(User.id);
                                                                             let editUser = document.getElementById("edit_User");

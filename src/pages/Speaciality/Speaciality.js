@@ -11,10 +11,10 @@ import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 
-const Speaciality =() =>{
+const Speaciality = () => {
     const [Speaciality, setSpeaciality] = useState([])
     const [speacialityId, setSpeacialityId] = useState([])
-  
+
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -35,7 +35,16 @@ const Speaciality =() =>{
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-               
+                const speacialityRef = db.collection('Speciality').doc(id);
+                speacialityRef.delete()
+                    .then(() => {
+                        setSpeaciality(Speaciality.filter(d => d.id !== id));
+                        afterDelete("Speciality deleted successfully.", "success");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        afterDelete("Failed to delete Speciality.", "error");
+                    });
             }
         })
     }
@@ -58,7 +67,7 @@ const Speaciality =() =>{
 
 
     const fetchSpeaciality = async () => {
-        
+
         const user = auth.currentUser;
         console.log("user", user);
         if (user) {
@@ -81,12 +90,12 @@ const Speaciality =() =>{
 
 
 
- 
+
     useEffect(() => {
 
         handleSubmit();
         fetchSpeaciality();
-      
+
     }, []);
 
 
@@ -94,7 +103,7 @@ const Speaciality =() =>{
 
     return (
         <>
-          
+
             <Sidebar />
             <section className='page-section py-2'>
                 <div className='container px-3 min-vh-100' >
@@ -122,13 +131,13 @@ const Speaciality =() =>{
                             </div>
 
                             <div id="add_speaciality" className='d-none'>
-                                <AddSpeaciality/>
+                                <AddSpeaciality />
                             </div>
 
 
-                      
+
                             <div id="edit_speaciality" className='d-none'>
-                                <EditSpeaciality  />
+                                <EditSpeaciality />
                             </div>
 
 
@@ -136,9 +145,9 @@ const Speaciality =() =>{
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-md-12">
-                                   
+
                                     <div className="table-responsive table-responsive-data2" style={{ maxHeight: "100vh" }}>
-                                        <table  className={`table ${style.table_data2}  `} >
+                                        <table className={`table ${style.table_data2}  `} >
                                             <thead className={`${style.thead}`}>
                                                 <tr>
                                                     <th className='text-white'>Id</th>
@@ -150,19 +159,19 @@ const Speaciality =() =>{
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {Speaciality.map((Speaciality, index) => {
+                                                {Speaciality.map((Speaciality, index) => {
                                                     console.log(Speaciality)
                                                     return (
-                                                        
+
                                                         <>
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{Speaciality.Name}</td>
-                                                                <td><img src={Speaciality.imgUrl} width={100} height={100} alt=""/></td>
-                                                             
+                                                                <td><img src={Speaciality.imgUrl} width={100} height={100} alt="" /></td>
+
                                                                 <td>
                                                                     <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button'   onClick={() => {
+                                                                        <Link className="item p-2" type='button' onClick={() => {
                                                                             window.scrollTo(0, 0);
                                                                             setSpeacialityId(Speaciality.id);
                                                                             let editSpeaciality = document.getElementById("edit_speaciality");
@@ -191,7 +200,7 @@ const Speaciality =() =>{
                                                     )
                                                 })}
 
-                                              
+
 
                                             </tbody>
                                         </table>
@@ -199,12 +208,12 @@ const Speaciality =() =>{
                                 </div>
                             </div>
 
-                            
+
                         </div>
                     </div>
                 </div>
             </section>
-          
+
         </>
     )
 }
