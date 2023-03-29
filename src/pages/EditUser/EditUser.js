@@ -23,8 +23,8 @@ function EditUser(props) {
 
     function close(e) {
         e.preventDefault();
-        let addUser = document.getElementById("add_User");
-        addUser.classList.add("d-none");
+        let editUser = document.getElementById("edit_User");
+        editUser.classList.add("d-none");
     }
 
 
@@ -35,7 +35,7 @@ function EditUser(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>Add User</h2>
+                            <h2>Edit User</h2>
                         </div>
                     </div>
 
@@ -51,7 +51,37 @@ function EditUser(props) {
                                     <strong className='d-block mb-2'>User Name:</strong>
                                     <input type="text"
 
-                                        className="form-control" placeholder="Category Name" />
+                                        className="form-control" placeholder="User Name" />
+
+                                </div>
+                            </div>
+
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>User Email:</strong>
+                                    <input type="text"
+
+                                        className="form-control" placeholder="User Email" />
+
+                                </div>
+                            </div>
+
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>User City:</strong>
+                                    <input type="text"
+
+                                        className="form-control" placeholder="User City" />
+
+                                </div>
+                            </div>
+
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>User Phone:</strong>
+                                    <input type="text"
+
+                                        className="form-control" placeholder="User Phone" />
 
                                 </div>
                             </div>

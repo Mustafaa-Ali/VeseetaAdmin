@@ -23,8 +23,8 @@ function EditSpeaciality(props) {
 
     function close(e) {
         e.preventDefault();
-        let addSpeaciality = document.getElementById("add_speaciality");
-        addSpeaciality.classList.add("d-none");
+        let editSpeaciality = document.getElementById("edit_speaciality");
+        editSpeaciality.classList.add("d-none");
     }
 
 
