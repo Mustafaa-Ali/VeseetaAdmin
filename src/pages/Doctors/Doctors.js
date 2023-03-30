@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import style from './Doctors.module.css';
 import { useState, useEffect, useRef } from 'react';
-
+import { useSelector } from 'react-redux';
 import AddDoctor from './../AddDoctor/AddDoctor';
 import EditDoctor from './../EditDoctor/EditDoctor';
 import Swal from "sweetalert2";
@@ -16,7 +16,7 @@ const Doctors = () => {
 
     const [Doctor, setDoctor] = useState([])
     const [DoctorId, setDoctorId] = useState([])
-
+    const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -51,14 +51,14 @@ const Doctors = () => {
       }      
 
 
-    const handleSubmit = async () => {
-        try {
-            await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
+    // const handleSubmit = async () => {
+    //     try {
+    //         await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
 
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
 
 
@@ -68,7 +68,7 @@ const Doctors = () => {
 
     const fetchDoctor = async () => {
         
-        const user = auth.currentUser;
+        // const user = auth.currentUser;
         console.log("user", user);
         if (user) {
             try {
@@ -87,7 +87,7 @@ const Doctors = () => {
     };
 
     useEffect(() => {
-        handleSubmit();
+        // handleSubmit();
         fetchDoctor();
     }, []);
 

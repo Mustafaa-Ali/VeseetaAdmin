@@ -4,6 +4,7 @@ import style from './home.module.css';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import { db, auth } from '../../Firebase/Firebase';
 import BarChart from '../../Components/BarChart/BarChart';
+import { useSelector } from 'react-redux';
 const Home = () => {
 
 
@@ -13,14 +14,18 @@ const Home = () => {
   const [doctors, setdoctors] = useState({"Name": "Doctors", "Number": 0})
   const [users, setusers] = useState({"Name": "Users", "Number": 0})
   const [offers, setoffers] = useState({"Name": "Offers", "Number": 0})
-  const handleSubmit = async () => {
-    try {
-        await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
+  const user =   useSelector(state=>state.user.user);
 
-    } catch (error) {
-        console.error(error);
-    }
-};
+
+
+//   const handleSubmit = async () => {
+//     try {
+//         await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
+
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 
 
 
@@ -30,7 +35,7 @@ const Home = () => {
 
 const fetchInfo = async () => {
     let allinfo =[];
-    const user = auth.currentUser;
+    // const user = auth.currentUser;
     console.log("user", user);
     if (user) {
         try {
@@ -69,7 +74,7 @@ const fetchInfo = async () => {
 console.log("info", info)
   useEffect(() => {
 
-  handleSubmit()
+  // handleSubmit()
     fetchInfo()
 
    

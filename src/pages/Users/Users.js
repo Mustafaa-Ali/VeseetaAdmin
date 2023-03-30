@@ -11,13 +11,13 @@ import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 
-
+import { useSelector } from 'react-redux';
 const Users = () => {
 
 
     const [User, setUser] = useState([])
     const [UserId, setUserId] = useState([])
-
+    const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -53,14 +53,14 @@ const Users = () => {
     }
 
 
-    const handleSubmit = async () => {
-        try {
-            await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
+    // const handleSubmit = async () => {
+    //     try {
+    //         await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
 
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
 
 
@@ -70,7 +70,7 @@ const Users = () => {
 
     const fetchUser = async () => {
 
-        const user = auth.currentUser;
+        // const user = auth.currentUser;
         console.log("user", user);
         if (user) {
             try {
@@ -89,7 +89,7 @@ const Users = () => {
     };
 
     useEffect(() => {
-        handleSubmit();
+        // handleSubmit();
         fetchUser();
     }, []);
 

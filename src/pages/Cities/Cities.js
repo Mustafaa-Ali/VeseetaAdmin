@@ -9,14 +9,14 @@ import EditCity from './../EditCity/EditCity';
 import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
-
+import { useSelector } from 'react-redux';
 
 const Cities = () => {
 
 
     const [cities, setCities] = useState([])
     const [cityId, setcityId] = useState([])
-
+    const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -52,20 +52,12 @@ const Cities = () => {
     }
 
 
-    const handleSubmit = async () => {
-        try {
-            await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
-
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  
 
 
     const fetchCities = async () => {
 
-        const user = auth.currentUser;
-        console.log("user", user);
+     
         if (user) {
             try {
                 const citiesRef = db.collection('City');
@@ -82,7 +74,7 @@ const Cities = () => {
     };
 
     useEffect(() => {
-        handleSubmit();
+        
         fetchCities();
     }, []);
 

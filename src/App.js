@@ -14,7 +14,9 @@ import Cities from './pages/Cities/Cities';
 import Speaciality from './pages/Speaciality/Speaciality';
 import Offers from './pages/Offers/Offers';
 import Users from './pages/Users/Users';
-
+import Login from './Components/Login/Login';
+import ForgetPass from './Components/ForgetPass/ForgetPass';
+import PrivateRoutes from './utils/PrivateRoutes';
 function App() {
   const [lang , setLang]=   useState("en")
 
@@ -27,16 +29,21 @@ function App() {
      <NavBar/>
     
      <Routes>
-     <Route path="/" element={<Home/>}/>
+     <Route path="/" element={<Login/>}/>
    
 
-     <Route path="/sidebar" element={<Sidebar/>}/>
-     <Route path="/home" element={<Home/>}/>
-     <Route path="/users" element={<Users />}/>
-     <Route path="/doctor" element={<Doctors />}/>
-     <Route path="/cities" element={<Cities/>}/>
-     <Route path="/speaciality" element={<Speaciality/>}/>
-     <Route path="/offers" element={<Offers/>}/>
+     <Route element={<PrivateRoutes/>} >
+      <Route path="/sidebar" element={<Sidebar/>}/>
+      <Route path="/home" element={<Home/>}/>
+      <Route path="/users" element={<Users />}/>
+      <Route path="/doctor" element={<Doctors />}/>
+      <Route path="/cities" element={<Cities/>}/>
+      <Route path="/speaciality" element={<Speaciality/>}/>
+      <Route path="/offers" element={<Offers/>}/>
+      </Route>
+    
+     <Route path="/login" element={<Login/>}/>
+     <Route path="/forgetpassword" element={<ForgetPass/>}/>
      
 
 

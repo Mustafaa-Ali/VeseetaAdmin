@@ -10,11 +10,11 @@ import EditSpeaciality from './../EditSpeaciality/EditSpeaciality';
 import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
-
+import { useSelector } from 'react-redux';
 const Speaciality = () => {
     const [Speaciality, setSpeaciality] = useState([])
     const [speacialityId, setSpeacialityId] = useState([])
-
+    const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -51,14 +51,14 @@ const Speaciality = () => {
 
 
 
-    const handleSubmit = async () => {
-        try {
-            await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
+    // const handleSubmit = async () => {
+    //     try {
+    //         await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
 
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
 
 
@@ -68,7 +68,7 @@ const Speaciality = () => {
 
     const fetchSpeaciality = async () => {
 
-        const user = auth.currentUser;
+        // const user = auth.currentUser;
         console.log("user", user);
         if (user) {
             try {
@@ -93,7 +93,7 @@ const Speaciality = () => {
 
     useEffect(() => {
 
-        handleSubmit();
+        // handleSubmit();
         fetchSpeaciality();
 
     }, []);
