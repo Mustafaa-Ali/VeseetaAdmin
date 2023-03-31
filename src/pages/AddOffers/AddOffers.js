@@ -93,7 +93,9 @@ function AddOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Offers Img Url:</strong>
                                     <input type="text"
-
+                                         onChange={(e)=>{
+                                            setImgUrl(e.target.value)
+                                        }}
                                         className="form-control" placeholder="Offers Img Url" />
 
                                 </div>

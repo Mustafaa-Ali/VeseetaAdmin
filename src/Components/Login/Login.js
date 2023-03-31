@@ -27,7 +27,9 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user);
                 console.log(user.auth.uid);
-                localStorage.setItem('token', true)
+                localStorage.setItem('token', true);
+                const user1 = JSON.stringify(user)
+                localStorage.setItem('user',user1)
                 dispatch(changeUser(user))
                 dispatch(changeShow('d-block'))
                 navigate('/home');

@@ -25,7 +25,9 @@ const NavBar = () => {
    const dispatch = useDispatch()
 
 
-   const show = useSelector(state=>state.show.show)   
+//    const show = useSelector(state=>state.show.show)   
+
+const [show,setShow] = useState('d-block')
 
    
     const handleChange = () => {
@@ -40,7 +42,8 @@ const NavBar = () => {
           .then(() => {
            
             dispatch(changeUser(null))
-            dispatch(changeShow('d-none'));
+            // dispatch(changeShow('d-none'));
+            setShow('d-none')
             localStorage.removeItem('token')
             navigate('/')
           })
@@ -49,15 +52,20 @@ const NavBar = () => {
           });
       };
 
-      const userinfo =   useSelector(state=>state.user.user);
+      
+      const userinfo =   JSON.parse(localStorage.getItem('user'));
 
-      console.log("userinfo", userinfo)
+    //   console.log("userinfo", userinfo)
       useEffect(() => {
         
+        if(userinfo.uid){
+            setShow('d-block')
+        }
+        dispatch(changeUser(userinfo))
      
        
     
-      }, []);
+      }, [userinfo]);
     return (<>
         <section className=''>
             <Navbar className='fixed-top' expand="lg" style={{ background: `radial-gradient(circle, rgb(11, 109, 227) 0%, rgb(22, 103, 201) 0%, rgb(2, 76, 167) 90%)`, color: "white" }}>

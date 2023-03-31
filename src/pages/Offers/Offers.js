@@ -15,7 +15,7 @@ const Offers = () => {
 
 
     const [Offers, setOffers] = useState([])
-    const [OffersId, setOffersId] = useState([])
+    const [OffersId, setOffersId] = useState('')
     const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
@@ -121,13 +121,13 @@ const Offers = () => {
                             </div>
 
                             <div id="add_offers" className='d-none'>
-                                <AddOffers />
+                                <AddOffers fetchData={fetchOffers}/>
                             </div>
 
 
 
                             <div id="edit_offers" className='d-none'>
-                                <EditOffers />
+                                <EditOffers id={OffersId} fetchData={fetchOffers}/>
                             </div>
 
 

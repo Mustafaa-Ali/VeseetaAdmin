@@ -22,6 +22,8 @@ function AddCity(props) {
             let addCity = document.getElementById("add_city");
             showAlert("City added successfully", "success")
             addCity.classList.add("d-none");
+
+            props.fetchData()
         } catch (e) {
             console.error("Error adding document: ", e);
         }

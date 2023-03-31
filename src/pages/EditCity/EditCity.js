@@ -1,15 +1,19 @@
 
 import * as React from 'react';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import style from './EditCity.module.css';
 
 import Swal from "sweetalert2";
-
+import { db, auth } from '../../Firebase/Firebase';
 
 
 function EditCity(props) {
 
+    const [data, setData] = useState(null);
+    const [Name, setName] = useState('');
 
+
+  console.log("props", props)
 
     function showAlert(message, icon) {
         Swal.fire({
@@ -27,6 +31,65 @@ function EditCity(props) {
         EditCity.classList.add("d-none");
     }
 
+    const getOne = ()=>{
+        const id = props.cityId;
+        console.log("idd", id)
+        db.collection("City")
+        .doc(id)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            console.log("dataaaaaaaaaaaaaaa",data)
+            setData(data);
+            setName(data.Name)
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+
+    }
+
+    const handleEditData = (event) => {
+        event.preventDefault();
+        
+       if(props.cityId){
+        const  id = props.cityId;
+        db.collection("City")
+          .doc(id)
+          .update({
+            Name: Name
+            
+          })
+          .then(() => {
+            console.log("Document successfully updated!");
+            showAlert("Document successfully updated!", "success");
+            let EditCity = document.getElementById("edit_city");
+            EditCity.classList.add("d-none");
+            props.fetchData();
+          })
+          .catch((error) => {
+            console.error("Error updating document: ", error);
+            showAlert("Error updating document",'error')
+          });
+       }
+     
+      };
+
+    useEffect(() => {
+      if(props.cityId){
+        console.log("from useeffect")
+       
+            getOne();
+     
+       
+      }
+  
+    
+      }, [props.cityId]);
 
     return (
         <>
@@ -39,7 +102,7 @@ function EditCity(props) {
                         </div>
                     </div>
 
-                    <form className={`${style.create_accont}`}>
+                    <form className={`${style.create_accont}`} onSubmit={handleEditData}>
 
                         <div className="row">
                             <div className={` col-12`}>
@@ -50,7 +113,10 @@ function EditCity(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>City Name:</strong>
                                     <input type="text"
-
+                                        value={Name}
+                                        onChange={(e)=>{
+                                            setName(e.target.value)
+                                        }}
                                         className="form-control" placeholder="City Name" />
 
                                 </div>

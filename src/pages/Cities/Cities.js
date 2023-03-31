@@ -15,7 +15,7 @@ const Cities = () => {
 
 
     const [cities, setCities] = useState([])
-    const [cityId, setcityId] = useState([])
+    const [cityId, setcityId] = useState('')
     const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
@@ -111,13 +111,13 @@ const Cities = () => {
                             </div>
 
                             <div id="add_city" className='d-none'>
-                                <AddCity />
+                                <AddCity fetchData={fetchCities}/>
                             </div>
 
 
 
                             <div id="edit_city" className='d-none'>
-                                <EditCity />
+                                <EditCity  cityId={cityId} fetchData={fetchCities}/>
                             </div>
 
 
@@ -140,7 +140,7 @@ const Cities = () => {
                                             </thead>
                                             <tbody>
                                                 {cities.map((city, index) => {
-                                                    console.log(city)
+                                                    
                                                     return (
 
                                                         <>
