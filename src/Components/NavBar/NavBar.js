@@ -27,7 +27,7 @@ const NavBar = () => {
 
 //    const show = useSelector(state=>state.show.show)   
 
-const [show,setShow] = useState('d-block')
+const [show,setShow] = useState('d-none')
 
    
     const handleChange = () => {
@@ -58,8 +58,10 @@ const [show,setShow] = useState('d-block')
     //   console.log("userinfo", userinfo)
       useEffect(() => {
         
-        if(userinfo.uid){
-            setShow('d-block')
+        if(userinfo){
+            if(userinfo.uid){
+                setShow('d-block')
+            }
         }
         dispatch(changeUser(userinfo))
      
