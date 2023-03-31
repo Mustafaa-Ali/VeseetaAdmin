@@ -16,7 +16,7 @@ const Cities = () => {
 
     const [cities, setCities] = useState([])
     const [cityId, setcityId] = useState('')
-    const user =   useSelector(state=>state.user.user);
+    const user = useSelector(state => state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -52,12 +52,12 @@ const Cities = () => {
     }
 
 
-  
+
 
 
     const fetchCities = async () => {
 
-     
+
         if (user) {
             try {
                 const citiesRef = db.collection('City');
@@ -74,7 +74,7 @@ const Cities = () => {
     };
 
     useEffect(() => {
-        
+
         fetchCities();
     }, []);
 
@@ -111,13 +111,13 @@ const Cities = () => {
                             </div>
 
                             <div id="add_city" className='d-none'>
-                                <AddCity fetchData={fetchCities}/>
+                                <AddCity fetchData={fetchCities} />
                             </div>
 
 
 
                             <div id="edit_city" className='d-none'>
-                                <EditCity  cityId={cityId} fetchData={fetchCities}/>
+                                <EditCity cityId={cityId} fetchData={fetchCities} />
                             </div>
 
 
@@ -140,7 +140,7 @@ const Cities = () => {
                                             </thead>
                                             <tbody>
                                                 {cities.map((city, index) => {
-                                                    
+
                                                     return (
 
                                                         <>

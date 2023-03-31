@@ -114,7 +114,7 @@ function EditSpeaciality(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Speaciality Name:</strong>
                                     <input type="text"
-                                    value={Name}
+                                        value={Name}
                                         onChange={(e) => {
                                             setName(e.target.value)
                                         }}
@@ -126,7 +126,7 @@ function EditSpeaciality(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Speaciality Img URL:</strong>
                                     <input type="text"
-                                    value={imgUrl}
+                                        value={imgUrl}
                                         onChange={(e) => {
                                             setimgUrl(e.target.value)
                                         }}

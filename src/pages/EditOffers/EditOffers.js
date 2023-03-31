@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { useState ,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import style from './EditOffers.module.css';
 
 import Swal from "sweetalert2";
@@ -11,7 +11,7 @@ function EditOffers(props) {
 
 
 
-    console.log("props",props)
+    console.log("props", props)
     const [data, setData] = useState(null);
     const [SessionName, setSessionName] = useState('')
     const [Price, setPrice] = useState(0)
@@ -40,83 +40,83 @@ function EditOffers(props) {
         editOffers.classList.add("d-none");
     }
 
-    const getOne = ()=>{
+    const getOne = () => {
         const id = props.id;
         console.log("idd", id)
         db.collection("Offers")
-        .doc(id)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            const data = doc.data();
-            console.log("dataaaaaaaaaaaaaaa",data)
-            setData(data);
-            setSessionName(data.SessionName)
-            setAvailable(data.Available)
-            setBooked(data.Booked)
-            setBookingDate(data.BookingDate)
-            setDiscount(data.Discount)
-            setInfo(data.Info)
-            setImgUrl(data.ImgUrl)
-            setDoctorName(data.DoctorName)
-            setPrice(data.Price)
-            setDoctorImg(data.DoctorImg)
-          } else {
-            console.log("No such document!");
-          }
-        })
-        .catch((error) => {
-          console.log("Error getting document:", error);
-        });
+            .doc(id)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    console.log("dataaaaaaaaaaaaaaa", data)
+                    setData(data);
+                    setSessionName(data.SessionName)
+                    setAvailable(data.Available)
+                    setBooked(data.Booked)
+                    setBookingDate(data.BookingDate)
+                    setDiscount(data.Discount)
+                    setInfo(data.Info)
+                    setImgUrl(data.ImgUrl)
+                    setDoctorName(data.DoctorName)
+                    setPrice(data.Price)
+                    setDoctorImg(data.DoctorImg)
+                } else {
+                    console.log("No such document!");
+                }
+            })
+            .catch((error) => {
+                console.log("Error getting document:", error);
+            });
 
     }
 
     const handleEditData = (event) => {
         event.preventDefault();
-        
-       if(props.id){
-        const  id = props.id;
-        db.collection("Offers")
-          .doc(id)
-          .update({
-            SessionName: SessionName,
-            DoctorImg:DoctorImg,
-            DoctorName:DoctorName,
-            Discount:Discount,
-            Price:Price,
-            ImgUrl:ImgUrl,
-            Available:Available,
-            Info:Info,
-            Booked: Booked,
-            BookingDate:BookingDate,
-            
-          })
-          .then(() => {
-            console.log("Document successfully updated!");
-            showAlert("Document successfully updated!", "success");
-            let editOffers = document.getElementById("edit_offers");
-            editOffers.classList.add("d-none");
-            props.fetchData();
-          })
-          .catch((error) => {
-            console.error("Error updating document: ", error);
-            showAlert("Error updating document",'error')
-          });
-       }
-     
-      };
+
+        if (props.id) {
+            const id = props.id;
+            db.collection("Offers")
+                .doc(id)
+                .update({
+                    SessionName: SessionName,
+                    DoctorImg: DoctorImg,
+                    DoctorName: DoctorName,
+                    Discount: Discount,
+                    Price: Price,
+                    ImgUrl: ImgUrl,
+                    Available: Available,
+                    Info: Info,
+                    Booked: Booked,
+                    BookingDate: BookingDate,
+
+                })
+                .then(() => {
+                    console.log("Document successfully updated!");
+                    showAlert("Document successfully updated!", "success");
+                    let editOffers = document.getElementById("edit_offers");
+                    editOffers.classList.add("d-none");
+                    props.fetchData();
+                })
+                .catch((error) => {
+                    console.error("Error updating document: ", error);
+                    showAlert("Error updating document", 'error')
+                });
+        }
+
+    };
 
     useEffect(() => {
-      if(props.id){
-        console.log("from useeffect")
-       
+        if (props.id) {
+            console.log("from useeffect")
+
             getOne();
-     
-       
-      }
-  
-    
-      }, [props.id]);
+
+
+        }
+
+
+    }, [props.id]);
 
     return (
         <>
@@ -140,7 +140,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Offers Name:</strong>
                                     <input type="text"
-                                    value={SessionName}
+                                        value={SessionName}
                                         onChange={(e) => {
                                             setSessionName(e.target.value);
                                         }}
@@ -152,7 +152,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Offers Img Url:</strong>
                                     <input type="text"
-                                        onChange={(e)=>{
+                                        onChange={(e) => {
                                             setImgUrl(e.target.value)
                                         }}
                                         value={ImgUrl}
@@ -164,7 +164,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Name</strong>
                                     <input type="text"
-                                    value={DoctorName}
+                                        value={DoctorName}
                                         onChange={(e) => {
                                             setDoctorName(e.target.value);
                                         }}
@@ -176,7 +176,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Img Url</strong>
                                     <input type="text"
-                                    value={DoctorImg}
+                                        value={DoctorImg}
                                         onChange={(e) => {
                                             setDoctorImg(e.target.value);
                                         }}
@@ -189,7 +189,7 @@ function EditOffers(props) {
                                     <strong className='d-block mb-2'>Available</strong>
                                     <div className='row mb-3'>
                                         <div className='col-6'>
-                                            <input type="radio" id="true" name="available"  className='mx-2'
+                                            <input type="radio" id="true" name="available" className='mx-2'
                                                 value={Available}
                                                 checked={Available == true}
                                                 onChange={(e) => {
@@ -199,9 +199,9 @@ function EditOffers(props) {
                                         </div>
 
                                         <div className='col-6'>
-                                            <input type="radio" id="false" name="available"  className='mx-2'
-                                               value={!Available}
-                                               checked={Available == false}
+                                            <input type="radio" id="false" name="available" className='mx-2'
+                                                value={!Available}
+                                                checked={Available == false}
                                                 onChange={(e) => {
                                                     setAvailable(e.target.checked);
                                                 }} />
@@ -216,7 +216,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Price</strong>
                                     <input type="number"
-                                    value={Price}
+                                        value={Price}
                                         onChange={(e) => {
                                             setPrice(e.target.value);
                                         }}
@@ -228,7 +228,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Discount</strong>
                                     <input type="number"
-                                    value={Discount}
+                                        value={Discount}
                                         onChange={(e) => {
                                             setDiscount(e.target.value);
                                         }}
@@ -240,7 +240,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Booked</strong>
                                     <input type="number"
-                                    value={Booked}
+                                        value={Booked}
                                         onChange={(e) => {
                                             setBooked(e.target.value);
                                         }}
@@ -252,7 +252,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Booking Date</strong>
                                     <input type="date"
-                                    value={BookingDate}
+                                        value={BookingDate}
                                         onChange={(e) => {
                                             setBookingDate(e.target.value);
                                         }}
@@ -264,7 +264,7 @@ function EditOffers(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Info</strong>
                                     <input type="text"
-                                    value={Info}
+                                        value={Info}
                                         onChange={(e) => {
                                             setInfo(e.target.value);
                                         }}
