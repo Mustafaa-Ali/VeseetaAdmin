@@ -16,7 +16,7 @@ const Users = () => {
 
 
     const [User, setUser] = useState([])
-    const [UserId, setUserId] = useState([])
+    const [UserId, setUserId] = useState('')
     const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
@@ -126,13 +126,13 @@ const Users = () => {
                             </div>
 
                             <div id="add_User" className='d-none'>
-                                <AddUser />
+                                <AddUser fetchData={fetchUser}/>
                             </div>
 
 
 
                             <div id="edit_User" className='d-none'>
-                                <EditUser />
+                                <EditUser id={UserId} fetchData={fetchUser}/>
                             </div>
 
 
@@ -146,6 +146,7 @@ const Users = () => {
                                             <thead className={`${style.thead} text-white`}>
                                                 <tr>
                                                     <th className='text-white'>Id</th>
+                                                    <th className='text-white'>Name </th>
                                                     <th className='text-white'>User Name </th>
                                                     <th className='text-white'>User Email </th>
                                                     <th className='text-white'>User City </th>
@@ -164,6 +165,7 @@ const Users = () => {
                                                             <tr key={index} className={`${style.tr_shadow}`}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{User.Name}</td>
+                                                                <td>{User.UName}</td>
                                                                 <td>{User.Email}</td>
                                                                 <td>{User.City}</td>
                                                                 <td>{User.Phone}</td>

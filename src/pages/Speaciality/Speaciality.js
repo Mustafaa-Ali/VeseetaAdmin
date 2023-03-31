@@ -13,8 +13,8 @@ import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
 const Speaciality = () => {
     const [Speaciality, setSpeaciality] = useState([])
-    const [speacialityId, setSpeacialityId] = useState()
-    const user =   useSelector(state=>state.user.user);
+    const [speacialityId, setSpeacialityId] = useState('')
+    const user = useSelector(state => state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -131,7 +131,7 @@ const Speaciality = () => {
                             </div>
 
                             <div id="add_speaciality" className='d-none'>
-                                <AddSpeaciality fetchData={fetchSpeaciality}/>
+                                <AddSpeaciality fetchData={fetchSpeaciality} />
                             </div>
 
 

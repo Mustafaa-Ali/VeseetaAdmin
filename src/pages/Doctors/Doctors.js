@@ -15,7 +15,7 @@ const Doctors = () => {
 
 
     const [Doctor, setDoctor] = useState([])
-    const [DoctorId, setDoctorId] = useState([])
+    const [DoctorId, setDoctorId] = useState('')
     const user =   useSelector(state=>state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
@@ -124,13 +124,13 @@ const Doctors = () => {
                             </div>
 
                             <div id="add_Doctor" className='d-none'>
-                                <AddDoctor />
+                                <AddDoctor fetchData={fetchDoctor}/>
                             </div>
 
 
 
                             <div id="edit_Doctor" className='d-none'>
-                                <EditDoctor />
+                                <EditDoctor id={DoctorId} fetchData={fetchDoctor}/>
                             </div>
 
 
