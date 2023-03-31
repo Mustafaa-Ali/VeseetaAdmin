@@ -45,6 +45,7 @@ const [show,setShow] = useState('d-none')
             // dispatch(changeShow('d-none'));
             setShow('d-none')
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
             navigate('/')
           })
           .catch((error) => {
