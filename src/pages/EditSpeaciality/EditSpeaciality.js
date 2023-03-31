@@ -1,15 +1,16 @@
 
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from './EditSpeaciality.module.css';
 
 import Swal from "sweetalert2";
 
-
+import { db, auth } from '../../Firebase/Firebase';
 
 function EditSpeaciality(props) {
-
-
+    const [data, setData] = useState()
+    const [Name, setName] = useState('')
+    const [imgUrl, setimgUrl] = useState('')
 
     function showAlert(message, icon) {
         Swal.fire({
@@ -28,6 +29,69 @@ function EditSpeaciality(props) {
     }
 
 
+    const getOne = () => {
+        const id = props.id;
+        console.log("idd", id)
+        db.collection("Speciality")
+            .doc(id)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    console.log("dataaaaaaaaaaaaaaa", data)
+                    setData(data);
+                    setName(data.Name)
+                    setimgUrl(data.imgUrl)
+                } else {
+                    console.log("No such document!");
+                }
+            })
+            .catch((error) => {
+                console.log("Error getting document:", error);
+            });
+
+    }
+
+    const handleEditData = (event) => {
+        event.preventDefault();
+
+        if (props.id) {
+            const id = props.id;
+            db.collection("Speciality")
+                .doc(id)
+                .update({
+                    Name: Name,
+                    imgUrl: imgUrl
+
+                })
+                .then(() => {
+                    console.log("Document successfully updated!");
+                    showAlert("Document successfully updated!", "success");
+                    let editSpeaciality = document.getElementById("edit_speaciality");
+                    editSpeaciality.classList.add("d-none");
+                    props.fetchData();
+                })
+                .catch((error) => {
+                    console.error("Error updating document: ", error);
+                    showAlert("Error updating document", 'error')
+                });
+        }
+
+    };
+
+    useEffect(() => {
+        if (props.id) {
+            console.log("from useeffect")
+
+            getOne();
+
+
+        }
+
+
+    }, [props.id]);
+
+
     return (
         <>
 
@@ -39,7 +103,7 @@ function EditSpeaciality(props) {
                         </div>
                     </div>
 
-                    <form className={`${style.create_accont}`}>
+                    <form className={`${style.create_accont}`} onSubmit={handleEditData} >
 
                         <div className="row">
                             <div className={` col-12`}>
@@ -50,7 +114,10 @@ function EditSpeaciality(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Speaciality Name:</strong>
                                     <input type="text"
-
+                                    value={Name}
+                                        onChange={(e) => {
+                                            setName(e.target.value)
+                                        }}
                                         className="form-control" placeholder="Speaciality Name" />
 
                                 </div>
@@ -59,7 +126,10 @@ function EditSpeaciality(props) {
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Speaciality Img URL:</strong>
                                     <input type="text"
-
+                                    value={imgUrl}
+                                        onChange={(e) => {
+                                            setimgUrl(e.target.value)
+                                        }}
                                         className="form-control" placeholder="Speaciality Img URL" />
 
                                 </div>

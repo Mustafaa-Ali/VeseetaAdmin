@@ -189,8 +189,9 @@ function EditOffers(props) {
                                     <strong className='d-block mb-2'>Available</strong>
                                     <div className='row mb-3'>
                                         <div className='col-6'>
-                                            <input type="radio" id="true" name="available" value="true" className='mx-2'
-                                                checked={Available === true}
+                                            <input type="radio" id="true" name="available"  className='mx-2'
+                                                value={Available}
+                                                checked={Available == true}
                                                 onChange={(e) => {
                                                     setAvailable(e.target.checked);
                                                 }} />
@@ -198,8 +199,9 @@ function EditOffers(props) {
                                         </div>
 
                                         <div className='col-6'>
-                                            <input type="radio" id="false" name="available" value="false" className='mx-2'
-                                                checked={Available === false}
+                                            <input type="radio" id="false" name="available"  className='mx-2'
+                                               value={!Available}
+                                               checked={Available == false}
                                                 onChange={(e) => {
                                                     setAvailable(e.target.checked);
                                                 }} />
