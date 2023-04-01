@@ -34,7 +34,7 @@
 }
 @media only screen and (min-width: 992px) {
     .contain{
-        width:30%;
+        width:50%;
         margin: auto;
     }
     .pull_left {

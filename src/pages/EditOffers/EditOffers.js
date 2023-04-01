@@ -189,22 +189,24 @@ function EditOffers(props) {
                                     <strong className='d-block mb-2'>Available</strong>
                                     <div className='row mb-3'>
                                         <div className='col-6'>
+                                            {console.log("Available", Available)}
+                                            {console.log("Available true", Available === true)}
                                             <input type="radio" id="true" name="available" className='mx-2'
-                                                value={Available}
-                                                checked={Available == true}
+                                                value='true'
+                                                
                                                 onChange={(e) => {
-                                                    setAvailable(e.target.checked);
-                                                }} />
+                                                    setAvailable(e.target.value);
+                                                }}checked={Available === 'true'} />
                                             <label for="true">True</label>
                                         </div>
 
                                         <div className='col-6'>
                                             <input type="radio" id="false" name="available" className='mx-2'
-                                                value={!Available}
-                                                checked={Available == false}
+                                                value='false'
+                                                
                                                 onChange={(e) => {
-                                                    setAvailable(e.target.checked);
-                                                }} />
+                                                    setAvailable(e.target.value);
+                                                }} checked={Available === 'false'}/>
                                             <label for="false">False</label>
                                         </div>
                                     </div>
