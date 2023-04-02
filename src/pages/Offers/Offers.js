@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
-
+import ReactPaginate from "react-paginate";
 const Offers = () => {
 
 
@@ -83,6 +83,59 @@ const Offers = () => {
         }
     };
 
+    const [currentPage, setCurrentPage] = useState(0);
+    let PER_PAGE = 5;
+    let offset = currentPage * PER_PAGE;
+    let currentPageData = Offers.slice(offset, offset + PER_PAGE).map((Offers, index) => {
+        return (
+           
+            <>
+            <tr key={index} className={`${style.tr_shadow}`}>
+                <td>{index + 1}</td>
+                <td>{Offers.SessionName}</td>
+
+
+                <td><img className='rounded' src={Offers.ImgUrl} width={100} height={100} alt="" /></td>
+                <td>{`${Offers.Available}`}</td>
+                <td>{Offers.Price}&pound;</td>
+                <td>{Offers.Discount}%</td>
+                <td>
+                    <div className="d-flex justify-content-around">
+                        <Link className="item p-2" type='button' onClick={() => {
+                            window.scrollTo(0, 0);
+                            setOffersId(Offers.id);
+                            let editOffers = document.getElementById("edit_offers");
+                            editOffers.classList.remove("d-none");
+
+                            let addOffers = document.getElementById("add_offers");
+                            if (addOffers.classList.contains('d-none') === false) {
+                                addOffers.classList.add("d-none");
+                            }
+                        }}>
+                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                        </Link>
+
+                        <form>
+                            <Link type='button' className="item p-2"
+                                onClick={() => {
+                                    DeleteAlert(Offers.id)
+                                }}>
+                                <i className="fa-solid fa-trash text-danger"></i>
+                            </Link>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </>
+        )
+    });
+    let pageCount = Math.ceil(Offers.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
+
+
     useEffect(() => {
         // handleSubmit();
         fetchOffers();
@@ -153,55 +206,36 @@ const Offers = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {Offers.map((Offers, index) => {
-                                                    console.log("offer", Offers.Available)
-                                                    return (
-
-                                                        <>
-                                                            <tr key={index} className={`${style.tr_shadow}`}>
-                                                                <td>{index + 1}</td>
-                                                                <td>{Offers.SessionName}</td>
-
-
-                                                                <td><img src={Offers.ImgUrl} width={100} height={100} alt="" /></td>
-                                                                <td>{`${Offers.Available}`}</td>
-                                                                <td>{Offers.Price}&pound;</td>
-                                                                <td>{Offers.Discount}%</td>
-                                                                <td>
-                                                                    <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button' onClick={() => {
-                                                                            window.scrollTo(0, 0);
-                                                                            setOffersId(Offers.id);
-                                                                            let editOffers = document.getElementById("edit_offers");
-                                                                            editOffers.classList.remove("d-none");
-
-                                                                            let addOffers = document.getElementById("add_offers");
-                                                                            if (addOffers.classList.contains('d-none') === false) {
-                                                                                addOffers.classList.add("d-none");
-                                                                            }
-                                                                        }}>
-                                                                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
-                                                                        </Link>
-
-                                                                        <form>
-                                                                            <Link type='button' className="item p-2"
-                                                                                onClick={() => {
-                                                                                    DeleteAlert(Offers.id)
-                                                                                }}>
-                                                                                <i className="fa-solid fa-trash text-danger"></i>
-                                                                            </Link>
-                                                                        </form>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </>
-                                                    )
-                                                })}
-
+                                               {currentPageData}
 
 
                                             </tbody>
                                         </table>
+                                        <div className="w-75 mx-auto">
+
+                                            <ReactPaginate
+                                                nextLabel="Next"
+                                                onPageChange={handlePageClick}
+                                                pageRangeDisplayed={3}
+                                                marginPagesDisplayed={2}
+                                                pageCount={pageCount}
+                                                previousLabel="Previous"
+                                                pageClassName="page-item"
+                                                pageLinkClassName="page-link"
+                                                previousClassName="page-item"
+                                                previousLinkClassName="page-link"
+                                                nextClassName="page-item"
+                                                nextLinkClassName="page-link"
+                                                breakLabel="..."
+                                                breakClassName="page-item"
+                                                breakLinkClassName="page-link"
+                                                containerClassName="pagination"
+                                                activeClassName="active"
+                                                renderOnZeroPageCount={null}
+                                            />
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

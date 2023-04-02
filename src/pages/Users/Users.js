@@ -12,12 +12,13 @@ import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 
 import { useSelector } from 'react-redux';
+import ReactPaginate from "react-paginate";
 const Users = () => {
 
 
     const [User, setUser] = useState([])
     const [UserId, setUserId] = useState('')
-    const user =   useSelector(state=>state.user.user);
+    const user = useSelector(state => state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -88,6 +89,57 @@ const Users = () => {
         }
     };
 
+
+    const [currentPage, setCurrentPage] = useState(0);
+    let PER_PAGE = 10;
+    let offset = currentPage * PER_PAGE;
+    let currentPageData = User.slice(offset, offset + PER_PAGE).map((User, index) => {
+        return (
+            <>
+                <tr key={index} className={`${style.tr_shadow}`}>
+                    <td>{index + 1}</td>
+                    <td>{User.Name}</td>
+                    <td>{User.UName}</td>
+                    <td>{User.Email}</td>
+                    <td>{User.City}</td>
+                    <td>{User.Phone}</td>
+
+                    <td>
+                        <div className="d-flex justify-content-around">
+                            <Link className="item p-2" type='button' onClick={() => {
+                                window.scrollTo(0, 0);
+                                setUserId(User.id);
+                                let editUser = document.getElementById("edit_User");
+                                editUser.classList.remove("d-none");
+
+                                let addUser = document.getElementById("add_User");
+                                if (addUser.classList.contains('d-none') === false) {
+                                    addUser.classList.add("d-none");
+                                }
+                            }}>
+                                <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                            </Link>
+
+                            <form>
+                                <Link type='button' className="item p-2"
+                                    onClick={() => {
+                                        DeleteAlert(User.id)
+                                    }}>
+                                    <i className="fa-solid fa-trash text-danger"></i>
+                                </Link>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </>
+        )
+    });
+    let pageCount = Math.ceil(User.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
+
     useEffect(() => {
         // handleSubmit();
         fetchUser();
@@ -126,13 +178,13 @@ const Users = () => {
                             </div>
 
                             <div id="add_User" className='d-none'>
-                                <AddUser fetchData={fetchUser}/>
+                                <AddUser fetchData={fetchUser} />
                             </div>
 
 
 
                             <div id="edit_User" className='d-none'>
-                                <EditUser id={UserId} fetchData={fetchUser}/>
+                                <EditUser id={UserId} fetchData={fetchUser} />
                             </div>
 
 
@@ -157,54 +209,36 @@ const Users = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {User.map((User, index) => {
-
-                                                    return (
-
-                                                        <>
-                                                            <tr key={index} className={`${style.tr_shadow}`}>
-                                                                <td>{index + 1}</td>
-                                                                <td>{User.Name}</td>
-                                                                <td>{User.UName}</td>
-                                                                <td>{User.Email}</td>
-                                                                <td>{User.City}</td>
-                                                                <td>{User.Phone}</td>
-
-                                                                <td>
-                                                                    <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button' onClick={() => {
-                                                                            window.scrollTo(0, 0);
-                                                                            setUserId(User.id);
-                                                                            let editUser = document.getElementById("edit_User");
-                                                                            editUser.classList.remove("d-none");
-
-                                                                            let addUser = document.getElementById("add_User");
-                                                                            if (addUser.classList.contains('d-none') === false) {
-                                                                                addUser.classList.add("d-none");
-                                                                            }
-                                                                        }}>
-                                                                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
-                                                                        </Link>
-
-                                                                        <form>
-                                                                            <Link type='button' className="item p-2"
-                                                                                onClick={() => {
-                                                                                    DeleteAlert(User.id)
-                                                                                }}>
-                                                                                <i className="fa-solid fa-trash text-danger"></i>
-                                                                            </Link>
-                                                                        </form>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </>
-                                                    )
-                                                })}
-
+                                                {currentPageData}
 
 
                                             </tbody>
                                         </table>
+                                        <div className="w-75 mx-auto">
+
+                                            <ReactPaginate
+                                                nextLabel="Next"
+                                                onPageChange={handlePageClick}
+                                                pageRangeDisplayed={3}
+                                                marginPagesDisplayed={2}
+                                                pageCount={pageCount}
+                                                previousLabel="Previous"
+                                                pageClassName="page-item"
+                                                pageLinkClassName="page-link"
+                                                previousClassName="page-item"
+                                                previousLinkClassName="page-link"
+                                                nextClassName="page-item"
+                                                nextLinkClassName="page-link"
+                                                breakLabel="..."
+                                                breakClassName="page-item"
+                                                breakLinkClassName="page-link"
+                                                containerClassName="pagination"
+                                                activeClassName="active"
+                                                renderOnZeroPageCount={null}
+                                            />
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

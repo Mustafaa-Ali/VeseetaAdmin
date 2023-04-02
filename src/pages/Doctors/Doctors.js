@@ -9,14 +9,14 @@ import EditDoctor from './../EditDoctor/EditDoctor';
 import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
-
+import ReactPaginate from "react-paginate";
 
 const Doctors = () => {
 
 
     const [Doctor, setDoctor] = useState([])
     const [DoctorId, setDoctorId] = useState('')
-    const user =   useSelector(state=>state.user.user);
+    const user = useSelector(state => state.user.user);
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -28,27 +28,27 @@ const Doctors = () => {
 
     function DeleteAlert(id) {
         Swal.fire({
-          title: 'Are you sure?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!',
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
-          if (result.isConfirmed) {
-            const DoctorRef = db.collection('Doctor').doc(id);
-            DoctorRef.delete()
-              .then(() => {
-                setDoctor(Doctor.filter(d => d.id !== id));
-                afterDelete("Doctor deleted successfully.", "success");
-              })
-              .catch((error) => {
-                console.log(error);
-                afterDelete("Failed to delete Doctor.", "error");
-              });
-          }
+            if (result.isConfirmed) {
+                const DoctorRef = db.collection('Doctor').doc(id);
+                DoctorRef.delete()
+                    .then(() => {
+                        setDoctor(Doctor.filter(d => d.id !== id));
+                        afterDelete("Doctor deleted successfully.", "success");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        afterDelete("Failed to delete Doctor.", "error");
+                    });
+            }
         });
-      }      
+    }
 
 
     // const handleSubmit = async () => {
@@ -67,7 +67,7 @@ const Doctors = () => {
 
 
     const fetchDoctor = async () => {
-        
+
         // const user = auth.currentUser;
         console.log("user", user);
         if (user) {
@@ -85,6 +85,56 @@ const Doctors = () => {
 
         }
     };
+
+    const [currentPage, setCurrentPage] = useState(0);
+    let PER_PAGE = 10;
+    let offset = currentPage * PER_PAGE;
+    let currentPageData = Doctor.slice(offset, offset + PER_PAGE).map((Doctor, index) => {
+        return (
+            <>
+            <tr key={index} className={`${style.tr_shadow}`}>
+                <td>{index + 1}</td>
+                <td>{Doctor.Name}</td>
+                <td><img src={Doctor.ImgUrl} width={100} height={100} alt="" /></td>
+                <td>{Doctor.Speciality}</td>
+                <td>{Doctor.City}</td>
+                <td>{Doctor.Phone}</td>
+
+                <td>
+                    <div className="d-flex justify-content-around">
+                        <Link className="item p-2" type='button' onClick={() => {
+                            window.scrollTo(0, 0);
+                            setDoctorId(Doctor.id);
+                            let editDoctor = document.getElementById("edit_Doctor");
+                            editDoctor.classList.remove("d-none");
+
+                            let addDoctor = document.getElementById("add_Doctor");
+                            if (addDoctor.classList.contains('d-none') === false) {
+                                addDoctor.classList.add("d-none");
+                            }
+                        }}>
+                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                        </Link>
+
+                        <form>
+                            <Link type='button' className="item p-2"
+                                onClick={() => {
+                                    DeleteAlert(Doctor.id)
+                                }}>
+                                <i className="fa-solid fa-trash text-danger"></i>
+                            </Link>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </>
+        )
+    });
+    let pageCount = Math.ceil(Doctor.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
 
     useEffect(() => {
         // handleSubmit();
@@ -124,13 +174,13 @@ const Doctors = () => {
                             </div>
 
                             <div id="add_Doctor" className='d-none'>
-                                <AddDoctor fetchData={fetchDoctor}/>
+                                <AddDoctor fetchData={fetchDoctor} />
                             </div>
 
 
 
                             <div id="edit_Doctor" className='d-none'>
-                                <EditDoctor id={DoctorId} fetchData={fetchDoctor}/>
+                                <EditDoctor id={DoctorId} fetchData={fetchDoctor} />
                             </div>
 
 
@@ -148,61 +198,43 @@ const Doctors = () => {
                                                     <th className='text-white'>Doctor Image </th>
                                                     <th className='text-white'>Doctor Speciality </th>
                                                     <th className='text-white'>Doctor City </th>
-                                                    <th className='text-white'>Doctor Phone </th>                                                    
+                                                    <th className='text-white'>Doctor Phone </th>
 
 
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {Doctor.map((Doctor, index) => {
-                                                    
-                                                    return (
-                                                        
-                                                        <>
-                                                            <tr key={index} className={`${style.tr_shadow}`}>
-                                                                <td>{index + 1}</td>
-                                                                <td>{Doctor.Name}</td>
-                                                                <td><img src={Doctor.ImgUrl} width={100} height={100} alt=""/></td>
-                                                                <td>{Doctor.Speciality}</td>
-                                                                <td>{Doctor.City}</td>
-                                                                <td>{Doctor.Phone}</td>
-                                                             
-                                                                <td>
-                                                                    <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button'  onClick={() => {
-                                                                            window.scrollTo(0, 0);
-                                                                            setDoctorId(Doctor.id);
-                                                                            let editDoctor = document.getElementById("edit_Doctor");
-                                                                            editDoctor.classList.remove("d-none");
-
-                                                                            let addDoctor = document.getElementById("add_Doctor");
-                                                                            if (addDoctor.classList.contains('d-none') === false) {
-                                                                                addDoctor.classList.add("d-none");
-                                                                            }
-                                                                        }}>
-                                                                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
-                                                                        </Link>
-
-                                                                        <form>
-                                                                            <Link type='button' className="item p-2"
-                                                                                onClick={() => {
-                                                                                    DeleteAlert(Doctor.id)
-                                                                                }}>
-                                                                                <i className="fa-solid fa-trash text-danger"></i>
-                                                                            </Link>
-                                                                        </form>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </>
-                                                    )
-                                                })}
-
+                                              {currentPageData}
 
 
                                             </tbody>
                                         </table>
+                                        <div className="w-75 mx-auto">
+
+                                            <ReactPaginate
+                                                nextLabel="Next"
+                                                onPageChange={handlePageClick}
+                                                pageRangeDisplayed={3}
+                                                marginPagesDisplayed={2}
+                                                pageCount={pageCount}
+                                                previousLabel="Previous"
+                                                pageClassName="page-item"
+                                                pageLinkClassName="page-link"
+                                                previousClassName="page-item"
+                                                previousLinkClassName="page-link"
+                                                nextClassName="page-item"
+                                                nextLinkClassName="page-link"
+                                                breakLabel="..."
+                                                breakClassName="page-item"
+                                                breakLinkClassName="page-link"
+                                                containerClassName="pagination"
+                                                activeClassName="active"
+                                                renderOnZeroPageCount={null}
+                                            />
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

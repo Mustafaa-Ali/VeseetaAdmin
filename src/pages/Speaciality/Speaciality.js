@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
+import ReactPaginate from "react-paginate";
 const Speaciality = () => {
     const [Speaciality, setSpeaciality] = useState([])
     const [speacialityId, setSpeacialityId] = useState('')
@@ -50,15 +51,53 @@ const Speaciality = () => {
     }
 
 
+    const [currentPage, setCurrentPage] = useState(0);
+    let PER_PAGE = 5;
+    let offset = currentPage * PER_PAGE;
+    let currentPageData = Speaciality.slice(offset, offset + PER_PAGE).map((Speaciality, index) => {
+        return (
+            <>
+            <tr key={index} className={`${style.tr_shadow}`}>
+                <td>{index + 1}</td>
+                <td>{Speaciality.Name}</td>
+                <td><img className='rounded' src={Speaciality.imgUrl} width={100} height={100} alt="" /></td>
 
-    // const handleSubmit = async () => {
-    //     try {
-    //         await auth.signInWithEmailAndPassword("amanyasad88@gmail.com", "Amany@1234");
+                <td>
+                    <div className="d-flex justify-content-around">
+                        <Link className="item p-2" type='button' onClick={() => {
+                            window.scrollTo(0, 0);
+                            setSpeacialityId(Speaciality.id);
+                            let editSpeaciality = document.getElementById("edit_speaciality");
+                            editSpeaciality.classList.remove("d-none");
 
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
+                            let addSpeaciality = document.getElementById("add_speaciality");
+                            if (addSpeaciality.classList.contains('d-none') === false) {
+                                addSpeaciality.classList.add("d-none");
+                            }
+                        }}>
+                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                        </Link>
+
+                        <form>
+                            <Link type='button' className="item p-2"
+                                onClick={() => {
+                                    DeleteAlert(Speaciality.id)
+                                }}>
+                                <i className="fa-solid fa-trash text-danger"></i>
+                            </Link>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </>
+        )
+    });
+    let pageCount = Math.ceil(Speaciality.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
+
 
 
 
@@ -159,51 +198,34 @@ const Speaciality = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {Speaciality.map((Speaciality, index) => {
-                                                    console.log(Speaciality)
-                                                    return (
-
-                                                        <>
-                                                            <tr key={index} className={`${style.tr_shadow}`}>
-                                                                <td>{index + 1}</td>
-                                                                <td>{Speaciality.Name}</td>
-                                                                <td><img src={Speaciality.imgUrl} width={100} height={100} alt="" /></td>
-
-                                                                <td>
-                                                                    <div className="d-flex justify-content-around">
-                                                                        <Link className="item p-2" type='button' onClick={() => {
-                                                                            window.scrollTo(0, 0);
-                                                                            setSpeacialityId(Speaciality.id);
-                                                                            let editSpeaciality = document.getElementById("edit_speaciality");
-                                                                            editSpeaciality.classList.remove("d-none");
-
-                                                                            let addSpeaciality = document.getElementById("add_speaciality");
-                                                                            if (addSpeaciality.classList.contains('d-none') === false) {
-                                                                                addSpeaciality.classList.add("d-none");
-                                                                            }
-                                                                        }}>
-                                                                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
-                                                                        </Link>
-
-                                                                        <form>
-                                                                            <Link type='button' className="item p-2"
-                                                                                onClick={() => {
-                                                                                    DeleteAlert(Speaciality.id)
-                                                                                }}>
-                                                                                <i className="fa-solid fa-trash text-danger"></i>
-                                                                            </Link>
-                                                                        </form>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </>
-                                                    )
-                                                })}
-
-
-
+                                                {currentPageData}
                                             </tbody>
                                         </table>
+                                        <div className="w-75 mx-auto">
+
+                                            <ReactPaginate
+                                                nextLabel="Next"
+                                                onPageChange={handlePageClick}
+                                                pageRangeDisplayed={3}
+                                                marginPagesDisplayed={2}
+                                                pageCount={pageCount}
+                                                previousLabel="Previous"
+                                                pageClassName="page-item"
+                                                pageLinkClassName="page-link"
+                                                previousClassName="page-item"
+                                                previousLinkClassName="page-link"
+                                                nextClassName="page-item"
+                                                nextLinkClassName="page-link"
+                                                breakLabel="..."
+                                                breakClassName="page-item"
+                                                breakLinkClassName="page-link"
+                                                containerClassName="pagination"
+                                                activeClassName="active"
+                                                renderOnZeroPageCount={null}
+                                            />
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
