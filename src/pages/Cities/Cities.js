@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
-
+import ReactPaginate from "react-paginate";
 const Cities = () => {
 
 
@@ -72,6 +72,53 @@ const Cities = () => {
 
         }
     };
+
+
+    const [currentPage, setCurrentPage] = useState(0);
+    let PER_PAGE = 10;
+    let offset = currentPage * PER_PAGE;
+    let currentPageData = cities.slice(offset, offset + PER_PAGE).map((city, index) => {
+        return (
+            <>
+                <tr key={index} className={`${style.tr_shadow}`}>
+                    <td>{index + 1}</td>
+                    <td>{city.Name}</td>
+
+                    <td>
+                        <div className="d-flex justify-content-around">
+                            <Link className="item p-2" type='button' onClick={() => {
+                                window.scrollTo(0, 0);
+                                setcityId(city.id);
+                                let editcity = document.getElementById("edit_city");
+                                editcity.classList.remove("d-none");
+
+                                let addcity = document.getElementById("add_city");
+                                if (addcity.classList.contains('d-none') === false) {
+                                    addcity.classList.add("d-none");
+                                }
+                            }}>
+                                <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                            </Link>
+
+                            <form>
+                                <Link type='button' className="item p-2"
+                                    onClick={() => {
+                                        DeleteAlert(city.id)
+                                    }}>
+                                    <i className="fa-solid fa-trash text-danger"></i>
+                                </Link>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </>
+        )
+    });
+    let pageCount = Math.ceil(cities.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
 
     useEffect(() => {
 
@@ -139,7 +186,8 @@ const Cities = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {cities.map((city, index) => {
+                                            {currentPageData}
+                                                {/* {cities.map((city, index) => {
 
                                                     return (
 
@@ -177,12 +225,39 @@ const Cities = () => {
                                                             </tr>
                                                         </>
                                                     )
-                                                })}
+                                                })} */}
 
 
 
                                             </tbody>
+
+
                                         </table>
+                                        <div className="w-75 mx-auto">
+
+                                            <ReactPaginate
+                                                nextLabel="Next"
+                                                onPageChange={handlePageClick}
+                                                pageRangeDisplayed={3}
+                                                marginPagesDisplayed={2}
+                                                pageCount={pageCount}
+                                                previousLabel="Previous"
+                                                pageClassName="page-item"
+                                                pageLinkClassName="page-link"
+                                                previousClassName="page-item"
+                                                previousLinkClassName="page-link"
+                                                nextClassName="page-item"
+                                                nextLinkClassName="page-link"
+                                                breakLabel="..."
+                                                breakClassName="page-item"
+                                                breakLinkClassName="page-link"
+                                                containerClassName="pagination"
+                                                activeClassName="active"
+                                                renderOnZeroPageCount={null}
+                                            />
+
+                                          
+                                        </div>
                                     </div>
                                 </div>
                             </div>
