@@ -29,10 +29,11 @@ function App() {
      <NavBar/>
     
      <Routes>
-     <Route path="/" element={<Login/>}/>
+     
    
 
      <Route element={<PrivateRoutes/>} >
+     <Route path="/" element={<Home/>}/>
       <Route path="/sidebar" element={<Sidebar/>}/>
       <Route path="/home" element={<Home/>}/>
       <Route path="/users" element={<Users />}/>
