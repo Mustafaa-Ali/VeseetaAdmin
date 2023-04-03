@@ -3,16 +3,13 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { useState , useEffect} from "react";
 import './Sidebar.css';
-// import homeImg from '../../img/home2.png';
-// import sectorImg from '../../img/Group.png';
-// import benchmarkImg from '../../img/chart.png';
-// import valueWorldImg from '../../img/value_world.png';
+import { useTranslation } from 'react-i18next';
 
 import { useSelector } from "react-redux";
 
 function Sidebar() {
 
-   
+    const { t } = useTranslation();
 
     const [isActive, setActive] = useState("false");
     const ToggleClass = () => {
@@ -45,14 +42,14 @@ function Sidebar() {
                                 <Link to="/home" className="page-section-link">
                               
                                 <i className="  side-bar__item--icon text-white  fs-2  bi bi-house-lock-fill"></i>
-                                    <span className="side-bar__item--text">Home</span>
+                                    <span className="side-bar__item--text">{t('home')}</span>
                                 </Link>
                             </li>
                             <li className="side-bar__item side__item--menu terms ">
                                 <Link to="/users" className="page-section-link">
                                 <i className=" side-bar__item--icon text-white  fs-2 bi bi-people-fill"></i>
                                  
-                                    <span className="side-bar__item--text">Users</span>
+                                    <span className="side-bar__item--text">{t('_user')}</span>
                                 </Link>
                             </li>
                             <li className="side-bar__item side__item--menu terms  ">
@@ -60,14 +57,14 @@ function Sidebar() {
                                 
                                 <i class=" side-bar__item--icon text-white  fs-2 fa-solid fa-user-doctor"></i>
                                  
-                                    <span className="side-bar__item--text">Doctors</span>
+                                    <span className="side-bar__item--text">{t('_doctor')}</span>
                                 </Link>
                             </li>
 
                             <Link to="/cities" className="page-section-link">
                                
                                 <i className="side-bar__item--icon text-white  fs-2 fa-solid fa-city"></i>
-                                <span className="side-bar__item--text"> Cities</span>
+                                <span className="side-bar__item--text">{t('_city')}</span>
                             </Link>
                         </li>
 
@@ -76,14 +73,14 @@ function Sidebar() {
                             
                             <i className="side-bar__item--icon text-white  fs-2 bi bi-building-gear"></i>
                                
-                                <span className="side-bar__item--text">Offers</span>
+                                <span className="side-bar__item--text">{t('_offer')}</span>
                             </Link>
                         </li>
                         <li className="side-bar__item side__item--menu terms ">
                             <Link to="/speaciality" className="page-section-link">
                           
                             <i class="side-bar__item--icon text-white  fs-2 fa-solid fa-building-user"></i>
-                                <span className="side-bar__item--text">Speciality</span>
+                                <span className="side-bar__item--text">{t('_speaciality')}</span>
                             </Link>
                         </li>
 

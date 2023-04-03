@@ -1,0 +1,20 @@
+﻿{
+"home": "Home",
+"_city":"Cities",
+"_user":"Users",
+"_doctor":"Doctors",
+"_speaciality":"Speaciality",
+"_offer":"Offers",
+"app_title":"Vesseta Dashboard",
+"num_doctor":"Number Of Doctors ",
+"num_city":"Number Of Cities ",
+"num_offer":"Number Of Offer ",
+"num_speaciality":"Number Of Speaciality ",
+"num_user":"Number Of Users ",
+"go_doctor":"Go To Doctors",
+"go_offer":"Go To Offer",
+"go_speaciality":"Go To Speaciality",
+"go_user":"Go To User",
+"go_city":"Go To City"
+}
+
