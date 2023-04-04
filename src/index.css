@@ -14,10 +14,12 @@ code {
 
 .page-section {
   margin-top: 5rem !important;
-  padding-bottom: 1.3rem !important;
   margin-left: 70px;
 }
-
+body[dir='rtl'] .page-section {
+   margin-left: unset;
+  margin-right: 70px;
+}
 
 .pagination{
   justify-content: center !important;
