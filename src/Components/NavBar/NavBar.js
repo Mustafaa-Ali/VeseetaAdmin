@@ -31,6 +31,7 @@ const NavBar = () => {
     //    const show = useSelector(state=>state.show.show)   
 
     const [show, setShow] = useState('d-none')
+    const [hidden, sethidden] = useState('d-block')
 
 
     const handleChange = () => {
@@ -47,6 +48,7 @@ const NavBar = () => {
                 dispatch(changeUser(null))
                 // dispatch(changeShow('d-none'));
                 setShow('d-none')
+                sethidden("d-block")
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
                 navigate('/login')
@@ -100,6 +102,7 @@ const NavBar = () => {
         if (userinfo) {
             if (userinfo.uid) {
                 setShow('d-block')
+                sethidden('d-none')
             }
         }
         dispatch(changeUser(userinfo))
@@ -111,12 +114,12 @@ const NavBar = () => {
         <section className=''>
             <Navbar className='fixed-top' expand="lg" style={{ background: `radial-gradient(circle, rgb(11, 109, 227) 0%, rgb(22, 103, 201) 0%, rgb(2, 76, 167) 90%)`, color: "white" }}>
                 <Container style={{ color: "white" }}>
-                    <Navbar.Brand to="/home"><img src={logo} alt="" /></Navbar.Brand>
+                    <Navbar.Brand to="/" as={Link}><img src={logo} alt="" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
                         <Nav id="mainBtns" className='flex-row'>
 
-
+                        {/* <Nav.Link className={`  nav-link btn  text-capitalize text-white  fw-bold  ${hidden} `} as={Link} to="/login">Login</Nav.Link> */}
                             <Dropdown className={`d-flex drop-user  align-items-center   ${show}`}>
 
                                 <Dropdown.Toggle name='lang' variant="transparent" id="dropdown-basic" className={`text-white d-flex align-items-center dropnav testPad  `}>

@@ -10,10 +10,11 @@ import Swal from "sweetalert2";
 import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import ReactPaginate from "react-paginate";
-
+import { useTranslation } from 'react-i18next';
 const Doctors = () => {
 
 
+    const { t } = useTranslation();
     const [Doctor, setDoctor] = useState([])
     const [DoctorId, setDoctorId] = useState('')
     const user = useSelector(state => state.user.user);
@@ -113,7 +114,7 @@ const Doctors = () => {
                                 addDoctor.classList.add("d-none");
                             }
                         }}>
-                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                            <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                         </Link>
 
                         <form>
@@ -121,7 +122,7 @@ const Doctors = () => {
                                 onClick={() => {
                                     DeleteAlert(Doctor.id)
                                 }}>
-                                <i className="fa-solid fa-trash text-danger"></i>
+                                <i className="fa-solid fa-trash fs-6 text-danger"></i>
                             </Link>
                         </form>
                     </div>
@@ -155,7 +156,7 @@ const Doctors = () => {
                             <div className="row justify-content-center mx-2">
                                 <div className="col-lg-12 row my-4">
                                     <div className='col-6 p-0'>
-                                        <h2 >Doctor</h2>
+                                        <h2 >{t("_doctor")}</h2>
                                     </div>
                                     <div className={`${style.pull_right} col-6 p-0`}>
                                         <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
@@ -166,7 +167,7 @@ const Doctors = () => {
                                             if (editDoctor.classList.contains('d-none') === false) {
                                                 editDoctor.classList.add("d-none");
                                             }
-                                        }}>  + Doctor</Link>
+                                        }}>  + {t("one_doctor")}</Link>
                                     </div>
                                     <br />
                                     <br />
@@ -193,12 +194,12 @@ const Doctors = () => {
                                         <table className={`table ${style.table_data2}  `} >
                                             <thead className={`${style.thead} text-white`}>
                                                 <tr>
-                                                    <th className='text-white'>Id</th>
-                                                    <th className='text-white'>Doctor Name </th>
-                                                    <th className='text-white'>Doctor Image </th>
-                                                    <th className='text-white'>Doctor Speciality </th>
-                                                    <th className='text-white'>Doctor City </th>
-                                                    <th className='text-white'>Doctor Phone </th>
+                                                    <th className='text-white'>{t("id")}</th>
+                                                    <th className='text-white'>{t("item_name")} </th>
+                                                    <th className='text-white'>{t("item_img")}</th>
+                                                    <th className='text-white'>{t("item_speciality")} </th>
+                                                    <th className='text-white'>{t("item_city")}</th>
+                                                    <th className='text-white'>{t("item_phone")} </th>
 
 
                                                     <th></th>
@@ -213,12 +214,12 @@ const Doctors = () => {
                                         <div className="w-75 mx-auto">
 
                                             <ReactPaginate
-                                                nextLabel="Next"
+                                                nextLabel={t("next")}
                                                 onPageChange={handlePageClick}
                                                 pageRangeDisplayed={3}
                                                 marginPagesDisplayed={2}
                                                 pageCount={pageCount}
-                                                previousLabel="Previous"
+                                                previousLabel={t("prev")}
                                                 pageClassName="page-item"
                                                 pageLinkClassName="page-link"
                                                 previousClassName="page-item"

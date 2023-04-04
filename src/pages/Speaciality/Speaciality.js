@@ -12,6 +12,7 @@ import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate";
+import { t } from 'i18next';
 const Speaciality = () => {
     const [Speaciality, setSpeaciality] = useState([])
     const [speacialityId, setSpeacialityId] = useState('')
@@ -75,7 +76,7 @@ const Speaciality = () => {
                                 addSpeaciality.classList.add("d-none");
                             }
                         }}>
-                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                            <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                         </Link>
 
                         <form>
@@ -83,7 +84,7 @@ const Speaciality = () => {
                                 onClick={() => {
                                     DeleteAlert(Speaciality.id)
                                 }}>
-                                <i className="fa-solid fa-trash text-danger"></i>
+                                <i className="fa-solid fa-trash fs-6 text-danger"></i>
                             </Link>
                         </form>
                     </div>
@@ -151,7 +152,7 @@ const Speaciality = () => {
                             <div className="row justify-content-center mx-2">
                                 <div className="col-lg-12 row my-4">
                                     <div className='col-6 p-0'>
-                                        <h2 >Speaciality</h2>
+                                        <h2 >{t("_speaciality")}</h2>
                                     </div>
                                     <div className={`${style.pull_right} col-6 p-0`}>
                                         <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
@@ -162,7 +163,7 @@ const Speaciality = () => {
                                             if (editSpeaciality.classList.contains('d-none') === false) {
                                                 editSpeaciality.classList.add("d-none");
                                             }
-                                        }}>  + Speaciality</Link>
+                                        }}>  + {t("one_speaciality")}</Link>
                                     </div>
                                     <br />
                                     <br />
@@ -189,9 +190,9 @@ const Speaciality = () => {
                                         <table className={`table ${style.table_data2}  `} >
                                             <thead className={`${style.thead}`}>
                                                 <tr>
-                                                    <th className='text-white'>Id</th>
-                                                    <th className='text-white'>Speaciality Name </th>
-                                                    <th className='text-white'>Speaciality Img URL </th>
+                                                    <th className='text-white'>{t("id")} </th>
+                                                    <th className='text-white'>{t("item_name")} </th>
+                                                    <th className='text-white'>{t("item_img")} </th>
 
 
                                                     <th></th>
@@ -204,12 +205,12 @@ const Speaciality = () => {
                                         <div className="w-75 mx-auto">
 
                                             <ReactPaginate
-                                                nextLabel="Next"
+                                                nextLabel={t("next")}
                                                 onPageChange={handlePageClick}
                                                 pageRangeDisplayed={3}
                                                 marginPagesDisplayed={2}
                                                 pageCount={pageCount}
-                                                previousLabel="Previous"
+                                                previousLabel={t("prev")} 
                                                 pageClassName="page-item"
                                                 pageLinkClassName="page-link"
                                                 previousClassName="page-item"

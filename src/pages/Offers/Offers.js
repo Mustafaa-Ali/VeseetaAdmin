@@ -11,9 +11,11 @@ import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate";
+import { useTranslation } from 'react-i18next';
 const Offers = () => {
 
 
+    const { t } = useTranslation();
     const [Offers, setOffers] = useState([])
     const [OffersId, setOffersId] = useState('')
     const user = useSelector(state => state.user.user);
@@ -112,7 +114,7 @@ const Offers = () => {
                                 addOffers.classList.add("d-none");
                             }
                         }}>
-                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                            <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                         </Link>
 
                         <form>
@@ -120,7 +122,7 @@ const Offers = () => {
                                 onClick={() => {
                                     DeleteAlert(Offers.id)
                                 }}>
-                                <i className="fa-solid fa-trash text-danger"></i>
+                                <i className="fa-solid fa-trash fs-6 text-danger"></i>
                             </Link>
                         </form>
                     </div>
@@ -155,7 +157,7 @@ const Offers = () => {
                             <div className="row justify-content-center mx-2">
                                 <div className="col-lg-12 row my-4">
                                     <div className='col-6 p-0'>
-                                        <h2 >Offers</h2>
+                                        <h2 >{t("_offer")}</h2>
                                     </div>
                                     <div className={`${style.pull_right} col-6 p-0`}>
                                         <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
@@ -166,7 +168,7 @@ const Offers = () => {
                                             if (editOffers.classList.contains('d-none') === false) {
                                                 editOffers.classList.add("d-none");
                                             }
-                                        }}>  + Offers</Link>
+                                        }}>  + {t("one_offer")}</Link>
                                     </div>
                                     <br />
                                     <br />
@@ -193,12 +195,12 @@ const Offers = () => {
                                         <table className={`table ${style.table_data2}  `} >
                                             <thead className={`${style.thead} text-white`}>
                                                 <tr>
-                                                    <th className='text-white'>Id</th>
-                                                    <th className='text-white'>Offers Name </th>
-                                                    <th className='text-white'>Img  </th>
-                                                    <th className='text-white'>Available  </th>
-                                                    <th className='text-white'>Price  </th>
-                                                    <th className='text-white'>Discount  </th>
+                                                    <th className='text-white'>{t("id")}</th>
+                                                    <th className='text-white'>{t("item_name")} </th>
+                                                    <th className='text-white'>{t("item_img")} </th>
+                                                    <th className='text-white'>{t("item_available")} </th>
+                                                    <th className='text-white'>{t("item_price")}  </th>
+                                                    <th className='text-white'>{t("item_dicount")}   </th>
 
 
 
@@ -214,12 +216,12 @@ const Offers = () => {
                                         <div className="w-75 mx-auto">
 
                                             <ReactPaginate
-                                                nextLabel="Next"
+                                                nextLabel={t("next")}
                                                 onPageChange={handlePageClick}
                                                 pageRangeDisplayed={3}
                                                 marginPagesDisplayed={2}
                                                 pageCount={pageCount}
-                                                previousLabel="Previous"
+                                                previousLabel={t("prev")}
                                                 pageClassName="page-item"
                                                 pageLinkClassName="page-link"
                                                 previousClassName="page-item"
