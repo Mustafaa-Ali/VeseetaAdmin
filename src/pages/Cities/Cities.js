@@ -11,9 +11,10 @@ import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate";
+import { useTranslation } from 'react-i18next';
 const Cities = () => {
 
-
+    const { t } = useTranslation();
     const [cities, setCities] = useState([])
     const [cityId, setcityId] = useState('')
     const user = useSelector(state => state.user.user);
@@ -97,7 +98,7 @@ const Cities = () => {
                                     addcity.classList.add("d-none");
                                 }
                             }}>
-                                <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                                <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                             </Link>
 
                             <form>
@@ -105,7 +106,7 @@ const Cities = () => {
                                     onClick={() => {
                                         DeleteAlert(city.id)
                                     }}>
-                                    <i className="fa-solid fa-trash text-danger"></i>
+                                    <i className="fa-solid fa-trash fs-6  text-danger"></i>
                                 </Link>
                             </form>
                         </div>
@@ -139,7 +140,7 @@ const Cities = () => {
                             <div className="row justify-content-center mx-2">
                                 <div className="col-lg-12 row my-4">
                                     <div className='col-6 p-0'>
-                                        <h2 >Cities</h2>
+                                        <h2 >{t('_city')}</h2>
                                     </div>
                                     <div className={`${style.pull_right} col-6 p-0`}>
                                         <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
@@ -150,7 +151,7 @@ const Cities = () => {
                                             if (editCity.classList.contains('d-none') === false) {
                                                 editCity.classList.add("d-none");
                                             }
-                                        }}>  + City</Link>
+                                        }}>  + {t("one_city")}</Link>
                                     </div>
                                     <br />
                                     <br />
@@ -177,8 +178,8 @@ const Cities = () => {
                                         <table className={`table ${style.table_data2}  `} >
                                             <thead className={`${style.thead} text-white`}>
                                                 <tr>
-                                                    <th className='text-white'>Id</th>
-                                                    <th className='text-white'>City Name </th>
+                                                    <th className='text-white'>{t("id")}</th>
+                                                    <th className='text-white'>{t("city_name")} </th>
 
 
 
@@ -209,7 +210,7 @@ const Cities = () => {
                                                                                 addcity.classList.add("d-none");
                                                                             }
                                                                         }}>
-                                                                            <i className={`fa-solid fa-pen   ${style.text_creat}`} ></i>
+                                                                            <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                                                                         </Link>
 
                                                                         <form>
@@ -217,7 +218,7 @@ const Cities = () => {
                                                                                 onClick={() => {
                                                                                     DeleteAlert(city.id)
                                                                                 }}>
-                                                                                <i className="fa-solid fa-trash text-danger"></i>
+                                                                                <i className="fa-solid fa-trash fs-6 text-danger"></i>
                                                                             </Link>
                                                                         </form>
                                                                     </div>
@@ -236,12 +237,12 @@ const Cities = () => {
                                         <div className="w-75 mx-auto">
 
                                             <ReactPaginate
-                                                nextLabel="Next"
+                                                nextLabel={t("next")}
                                                 onPageChange={handlePageClick}
                                                 pageRangeDisplayed={3}
                                                 marginPagesDisplayed={2}
                                                 pageCount={pageCount}
-                                                previousLabel="Previous"
+                                                previousLabel={t("prev")} 
                                                 pageClassName="page-item"
                                                 pageLinkClassName="page-link"
                                                 previousClassName="page-item"

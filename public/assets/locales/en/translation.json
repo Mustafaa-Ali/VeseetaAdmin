@@ -15,6 +15,32 @@
 "go_offer":"Go To Offer",
 "go_speaciality":"Go To Speaciality",
 "go_user":"Go To User",
-"go_city":"Go To City"
+"go_city":"Go To City",
+"one_city":"City",
+"one_offer": "Offer",
+"one_speaciality": "Speaciality",
+"one_doctor": "Doctor",
+"one_user": "User",
+"id": "ID ",
+"city_name": "City Name ",
+"item_name": "Name",
+"item_img": "Image",
+"item_phone": "Phone",
+"item_city": "City",
+"item_speciality": "Speciality",
+"item_available": "Available",
+"item_price": "Price",
+"item_dicount": "Discount",
+"item_email": "Email ",
+"item_username": "Username ",
+"next": "Next ",
+"prev": " Previous",
+"signin": " Sign In",
+"password": "Password ",
+"forget": "  Forget Password ? ",
+"remember": "Remember Me",
+"sign": "Login",
+"reset": "Reset Password"
+
 }
 
