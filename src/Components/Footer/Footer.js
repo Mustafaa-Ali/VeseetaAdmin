@@ -1,15 +1,42 @@
 import React from 'react'
-import style from './Footer.module.css'
-
+import style from './Footer.css'
+import '../../index.css'
+import { Link } from 'react-router-dom'
 export default class Footer extends React.Component {
 
 
-render() {
+    render() {
 
-    return <>
+        return <>
 
-        <section className={`${style.main} `}>
-            <div className='container'>
+            <section className={`${style.main} page-section `}>
+                {/* <!-- footer --> */}
+                <footer className="py-5">
+                    <div className="container">
+                        <div className=" footer-content row justify-content-center">
+                  
+                            <div className=" mb-3 text-center row justify-content-center">
+                                <img src="assets/google-play-badge.jfif" alt=""/>
+                                    <img src="assets/app-store-badge.png" alt=""/>
+
+                                        <div className="social text-lg-start text-center">
+                                            <ul className='d-flex justify-content-center'>
+                                                <li><a href="" className=""><i className="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="" className=""><i className="fab fa-instagram"></i></a></li>
+                                                <li><a href="" className=""><i className="fab fa-twitter"></i></a></li>
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+                            </div>
+
+
+                        </div>
+
+
+                </footer>
+                {/* <div className='container'>
                 <div className='row'>
                     <div className='col-md-4'>
                         <h3 className='text-white text-uppercase'>get in touch</h3>
@@ -46,10 +73,10 @@ render() {
                         <p className='text-white ms-5'>copyright &copy; 2023</p>
                     </div>
                 </div>
-            </div>
-        </section>
-    </>
-}
-    
+            </div> */}
+            </section>
+        </>
+    }
+
 
 }
