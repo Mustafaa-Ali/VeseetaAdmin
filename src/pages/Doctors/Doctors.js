@@ -96,7 +96,7 @@ const Doctors = () => {
             <tr key={index} className={`${style.tr_shadow}`}>
                 <td>{index + 1}</td>
                 <td>{Doctor.Name}</td>
-                <td><img src={Doctor.ImgUrl} width={100} height={100} alt="" /></td>
+                <td><img src={Doctor.ImgUrl} className='rounded' width={100} height={100} alt="" /></td>
                 <td>{Doctor.Speciality}</td>
                 <td>{Doctor.City}</td>
                 <td>{Doctor.Phone}</td>
@@ -114,7 +114,7 @@ const Doctors = () => {
                                 addDoctor.classList.add("d-none");
                             }
                         }}>
-                            <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
+                            <i className={`bi bi-eye-fill fs-6   ${style.text_creat}`} ></i>
                         </Link>
 
                         <form>

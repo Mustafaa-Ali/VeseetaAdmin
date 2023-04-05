@@ -9,12 +9,19 @@ import { collection, addDoc } from "firebase/firestore";
 
 function AddDoctor(props) {
 
-    const [Name, setName] = useState('')
-    const [Speciality, setSpeciality] = useState('')
-    const [Phone, setPhone] = useState('')
-    const [ImgUrl, setImgUrl] = useState('')
-    const [ExaminationFees, setExaminationFees] = useState('')
-    const [City, setCity] = useState('')
+
+    const [data, setData] = useState(null);
+    const [Name, setName] = useState('');
+    const [ImgUrl, setImgUrl] = useState('');
+    const [Speciality, setSpeciality] = useState('');
+    const [City, setCity] = useState('');
+    const [Phone, setPhone] = useState();
+    const [Waitingtime, setWaitingtime] = useState();
+    const [Rate, setRate] = useState();
+    const [location, setLocation] = useState();
+    const [ExaminationFees, setExaminationFees] = useState();
+    const [Availability, setAvailability] = useState();
+    const [About, setAbout] = useState();
 
 
     const handleFormSubmit = async (e) => {
@@ -63,11 +70,11 @@ function AddDoctor(props) {
                     <form className={`${style.create_accont}`} onSubmit={handleFormSubmit}>
 
                         <div className="row">
-                            <div className={` col-12`}>
+                            <div className={` col-12 `}>
                                 <button className={`${style.pull_right} outline-none fa-solid fa-square-xmark fs-4  text-danger`} style={{ border: "none" }} onClick={close}> </button>
                             </div>
 
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Name:</strong>
                                     <input type="text"
@@ -78,7 +85,7 @@ function AddDoctor(props) {
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Speciality:</strong>
                                     <input type="text"
@@ -89,7 +96,7 @@ function AddDoctor(props) {
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor City:</strong>
                                     <input type="text"
@@ -100,7 +107,7 @@ function AddDoctor(props) {
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Phone:</strong>
                                     <input type="text"
@@ -111,7 +118,7 @@ function AddDoctor(props) {
 
                                 </div>
                             </div>
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Image URL:</strong>
                                     <input type="text"
@@ -119,6 +126,72 @@ function AddDoctor(props) {
                                             setImgUrl(e.target.value);
                                         }}
                                         className="form-control" placeholder="Doctor Image URl" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Location:</strong>
+                                    <input type="text"
+                                        onChange={(e) => {
+                                            setLocation(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Location" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>ExaminationFees:</strong>
+                                    <input type="text"
+                                        onChange={(e) => {
+                                            setExaminationFees(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="ExaminationFees" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Rate:</strong>
+                                    <input type="text"
+                                        onChange={(e) => {
+                                            setRate(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Rate" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Waitingtime:</strong>
+                                    <input type="text"
+                                        onChange={(e) => {
+                                            setWaitingtime(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Waitingtime" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Availability:</strong>
+                                    <input type="text"
+                                        onChange={(e) => {
+                                            setAvailability(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Availability" />
+
+                                </div>
+                            </div>
+                            <div className="col-12  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>About:</strong>
+                                    <input type="text"
+                                        onChange={(e) => {
+                                            setAbout(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="About" />
 
                                 </div>
                             </div>

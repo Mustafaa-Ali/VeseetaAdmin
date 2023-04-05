@@ -105,6 +105,7 @@ const Users = () => {
                     <td>{User.Email}</td>
                     <td>{User.City}</td>
                     <td>{User.Phone}</td>
+                    <td>{User.Status}</td>
 
                     <td>
                         <div className="d-flex justify-content-around">
@@ -119,16 +120,16 @@ const Users = () => {
                                     addUser.classList.add("d-none");
                                 }
                             }}>
-                                <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
+                                <i className={`bi bi-eye-fill fs-6   ${style.text_creat}`} ></i>
                             </Link>
 
                             <form>
-                                <Link type='button' className="item p-2"
+                                {/* <Link type='button' className="item p-2"
                                     onClick={() => {
                                         DeleteAlert(User.id)
                                     }}>
                                     <i className="fa-solid fa-trash fs-6 text-danger"></i>
-                                </Link>
+                                </Link> */}
                             </form>
                         </div>
                     </td>
@@ -205,6 +206,7 @@ const Users = () => {
                                                     <th className='text-white'>{t("item_email")}  </th>
                                                     <th className='text-white'>{t("item_city")} </th>
                                                     <th className='text-white'>{t("item_phone")}  </th>
+                                                    <th className='text-white'>{t("item_status")}  </th>
 
 
                                                     <th></th>
