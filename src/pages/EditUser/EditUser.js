@@ -13,7 +13,8 @@ function EditUser(props) {
     const [email, setEmail] = useState('');
     const [uName, setUName] = useState('');
     const [city, setCity] = useState('');
-    const [phone, setPhone] = useState(0);
+    const [phone, setPhone] = useState();
+    const [status, setStatus] = useState();
 
     function showAlert(message, icon) {
         Swal.fire({
@@ -48,6 +49,7 @@ function EditUser(props) {
                     setUName(data.Name);
                     setCity(data.City);
                     setPhone(data.Phone);
+                    setStatus(data.status);
                 } else {
                     console.log("No such document!");
                 }
@@ -67,10 +69,11 @@ function EditUser(props) {
                 .doc(id)
                 .update({
                     Name: Name,
-                    email: email,
-                    uName: uName,
-                    city: city,
-                    phone: phone
+                    Email: email,
+                    UName: uName,
+                    City: city,
+                    Phone: phone,
+                    Status:status
                 })
                 .then(() => {
                     console.log("Document successfully updated!");
@@ -120,7 +123,7 @@ function EditUser(props) {
                             <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Name:</strong>
-                                    <input type="text"
+                                    <input type="text" value={Name}
                                         onChange={(e) => {
                                             setName(e.target.value);
                                         }}
@@ -132,7 +135,7 @@ function EditUser(props) {
                             <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>User Email:</strong>
-                                    <input type="text"
+                                    <input type="text" value={email}
                                         onChange={(e) => {
                                             setEmail(e.target.value);
                                         }}
@@ -144,7 +147,7 @@ function EditUser(props) {
                             <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>User City:</strong>
-                                    <input type="text"
+                                    <input type="text" value={city}
                                         onChange={(e) => {
                                             setCity(e.target.value);
                                         }}
@@ -156,11 +159,29 @@ function EditUser(props) {
                             <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>User Phone:</strong>
-                                    <input type="text"
+                                    <input type="text" value={phone}
                                         onChange={(e) => {
                                             setPhone(e.target.value);
                                         }}
                                         className="form-control" placeholder="User Phone" />
+
+                                </div>
+                            </div>
+                            <div className="col-12 mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Change Status:</strong>
+                                    <select className='form-control' onChange={(e)=>{
+                                        console.log("e", e.target.value)
+                                        setStatus(e.target.value)
+                                    }}>
+                                        <option selected={status === "Active"} value="Active"> Active</option>
+                                        <option selected={status === "Block"} value="Block">Block</option>
+                                    </select>
+                                    {/* <input type="text" value={phone}
+                                        onChange={(e) => {
+                                            setPhone(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="User Phone" /> */}
 
                                 </div>
                             </div>

@@ -11,10 +11,16 @@ function EditDoctor(props) {
 
     const [data, setData] = useState(null);
     const [Name, setName] = useState('');
-    const [image, setImage] = useState('');
-    const [speciality, setSpeciality] = useState('');
-    const [city, setCity] = useState('');
-    const [phone, setPhone] = useState(0);
+    const [ImgUrl, setImgUrl] = useState('');
+    const [Speciality, setSpeciality] = useState('');
+    const [City, setCity] = useState('');
+    const [Phone, setPhone] = useState();
+    const [Waitingtime, setWaitingtime] = useState('');
+    const [Rate, setRate] = useState();
+    const [Location, setLocation] = useState();
+    const [ExaminationFees, setExaminationFees] = useState();
+    const [Availability, setAvailability] = useState();
+    const [About, setAbout] = useState();
 
 
     function showAlert(message, icon) {
@@ -46,10 +52,14 @@ function EditDoctor(props) {
                     console.log("dataaaaaaaaaaaaaaa", data)
                     setData(data);
                     setName(data.Name);
-                    setImage(data.ImgUrl);
+                    setImgUrl(data.ImgUrl);
                     setCity(data.City);
                     setSpeciality(data.Speciality);
                     setPhone(data.Phone);
+                    setWaitingtime(data.Waitingtime);
+                    setRate(data.Rate);
+                    setAbout(data.About);
+                    setAvailability(data.Availability);
                 } else {
                     console.log("No such document!");
                 }
@@ -69,10 +79,17 @@ function EditDoctor(props) {
                 .doc(id)
                 .update({
                     Name: Name,
-                    image: image,
-                    speciality: speciality,
-                    city: city,
-                    phone: phone
+                    ImgUrl: ImgUrl,
+                    Speciality: Speciality,
+                    City: City,
+                    Phone: Phone,
+                    Waitingtime: Waitingtime,
+                    Rate: Rate,
+                    ExaminationFees: ExaminationFees,
+                    Availability: Availability,
+                    About: About,
+                    Location: Location,
+
                 })
                 .then(() => {
                     console.log("Document successfully updated!");
@@ -108,21 +125,33 @@ function EditDoctor(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>Edit Doctor</h2>
+                            <h2>View Doctor</h2>
                         </div>
                     </div>
 
                     <form className={`${style.create_accont}`} onSubmit={handleEditData}>
 
                         <div className="row">
-                            <div className={` col-12`}>
-                                <button className={`${style.pull_right} fa-solid fa-square-xmark fs-4  text-danger`} style={{ border: "none" }} onClick={close}> </button>
+                            <div className={` col-12 `}>
+                                <button className={`${style.pull_right} outline-none fa-solid fa-square-xmark fs-4  text-danger`} style={{ border: "none" }} onClick={close}> </button>
                             </div>
+                            <div className="col-12  mb-3">
+                                <div className="form-group d-flex justify-content-center">
 
-                            <div className="col-12 mb-3">
+                                    <img  className=" rounded-circle " src={ImgUrl} alt=""/>
+                                    {/* <strong className='d-block mb-2'>Doctor Image URL:</strong>
+                                    <input type="text" value={ImgUrl} disabled
+                                        onChange={(e) => {
+                                            setImgUrl(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Doctor Image URl" /> */}
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Name:</strong>
-                                    <input type="text"
+                                    <input type="text" value={Name} disabled
                                         onChange={(e) => {
                                             setName(e.target.value);
                                         }}
@@ -130,11 +159,10 @@ function EditDoctor(props) {
 
                                 </div>
                             </div>
-
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Speciality:</strong>
-                                    <input type="text"
+                                    <input type="text" value={Speciality} disabled
                                         onChange={(e) => {
                                             setSpeciality(e.target.value);
                                         }}
@@ -142,11 +170,10 @@ function EditDoctor(props) {
 
                                 </div>
                             </div>
-
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor City:</strong>
-                                    <input type="text"
+                                    <input type="text" value={City} disabled
                                         onChange={(e) => {
                                             setCity(e.target.value);
                                         }}
@@ -154,11 +181,10 @@ function EditDoctor(props) {
 
                                 </div>
                             </div>
-
-                            <div className="col-12 mb-3">
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>Doctor Phone:</strong>
-                                    <input type="text"
+                                    <input type="text" value={Phone} disabled
                                         onChange={(e) => {
                                             setPhone(e.target.value);
                                         }}
@@ -166,22 +192,79 @@ function EditDoctor(props) {
 
                                 </div>
                             </div>
-
-                            <div className="col-12 mb-3">
+                            
+                            <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Doctor Image URL:</strong>
-                                    <input type="text"
+                                    <strong className='d-block mb-2'>Location:</strong>
+                                    <input type="text" value={Location} disabled
                                         onChange={(e) => {
-                                            setImage(e.target.value);
+                                            setLocation(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Doctor Image URL" />
+                                        className="form-control" placeholder="Location" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>ExaminationFees:</strong>
+                                    <input type="text" value={ExaminationFees} disabled
+                                        onChange={(e) => {
+                                            setExaminationFees(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="ExaminationFees" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Rate:</strong>
+                                    <input type="text" value={Rate} disabled
+                                        onChange={(e) => {
+                                            setRate(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Rate" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Waitingtime:</strong>
+                                    <input type="text" value={Waitingtime} disabled
+                                        onChange={(e) => {
+                                            setWaitingtime(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Waitingtime" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>Availability:</strong>
+                                    <input type="text" value={Availability} disabled
+                                        onChange={(e) => {
+                                            setAvailability(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="Availability" />
+
+                                </div>
+                            </div>
+                            <div className="col-lg-6  mb-3">
+                                <div className="form-group">
+                                    <strong className='d-block mb-2'>About:</strong>
+                                    <input type="text" value={About} disabled
+                                        onChange={(e) => {
+                                            setAbout(e.target.value);
+                                        }}
+                                        className="form-control" placeholder="About" />
 
                                 </div>
                             </div>
 
-                            <div className="col-xs-12 col-sm-12 col-md-12 text-center">
+
+
+                            {/* <div className="col-xs-12 col-sm-12 col-md-12 text-center">
                                 <button type="submit" className={`btn ${style.btnCreate} mb-3`}>Submit</button>
-                            </div>
+                            </div> */}
                         </div>
                     </form>
                 </div>
