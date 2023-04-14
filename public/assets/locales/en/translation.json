@@ -29,6 +29,7 @@
 "item_city": "City",
 "item_speciality": "Speciality",
 "item_available": "Available",
+"item_not_available": "Not Available",
 "item_price": "Price",
 "item_dicount": "Discount",
 "item_email": "Email ",
@@ -41,7 +42,28 @@
 "remember": "Remember Me",
 "sign": "Login",
 "reset": "Reset Password",
-"item_status": "Status"
+"item_status": "Status",
+"item_date":"Date",
+"item_notes":"Notes",
+"item_time":"Time",
+"_Appointments":"My Appointments",
+"add": "Add",
+"submit":"Submit",
+"edit":"Edit",
+"location":"Location",
+"examination":"ExaminationFees",
+"rate":"Rate",
+"waiting_time":"WaitingTime",
+"about":"About",
+"view_doctor":"View Doctor",
+"doctor_name": "Doctor Name",
+"doctor_img":"Doctor Img URL",
+"book":"Booked",
+"booking_date":"Booking Date ",
+"info":"Information",
+"status": "Change Status",
+"active":"Active",
+"block":"Block"
 
 }
 

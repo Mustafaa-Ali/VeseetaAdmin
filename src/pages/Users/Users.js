@@ -41,7 +41,7 @@ const Users = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                const UsersRef = db.collection('Users').doc(id);
+                const UsersRef = db.collection('users').doc(id);
                 UsersRef.delete()
                     .then(() => {
                         setUser(User.filter(d => d.id !== id));
@@ -77,7 +77,7 @@ const Users = () => {
         console.log("user", user);
         if (user) {
             try {
-                const UserRef = db.collection('Users');
+                const UserRef = db.collection('users');
                 const UserSnapshot = await UserRef.get();
                 const UserData = UserSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 

@@ -12,12 +12,16 @@ import { db, auth } from '../../Firebase/Firebase';
 import { useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate";
 import { useTranslation } from 'react-i18next';
+import { setLanguage, t } from '../../Firebase/Firebase';
 const Cities = () => {
 
     const { t } = useTranslation();
     const [cities, setCities] = useState([])
     const [cityId, setcityId] = useState('')
     const user = useSelector(state => state.user.user);
+    const language = 'ar';
+
+    setLanguage('ar')
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -61,11 +65,19 @@ const Cities = () => {
 
         if (user) {
             try {
+
+          
+                // const citiesRef = db.collection('City').orderByChild('language').equalTo('en');
+
                 const citiesRef = db.collection('City');
                 const citiesSnapshot = await citiesRef.get();
+                // const querySnapshot = await citiesRef.where("language", "==", language).get();
+                // const data = querySnapshot.docs.map((doc) => doc.data());
+                // console.log("city dataaa",data)
+                // return data;
                 const citiesData = citiesSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-                console.log("cities", citiesData);
+                console.log("cities in dataaaaa", citiesData);
                 setCities(citiesData);
             } catch (error) {
                 console.log(error);
@@ -123,11 +135,15 @@ const Cities = () => {
 
     useEffect(() => {
 
+        // const fetchCities = async () => {
+        //     const data = await fetchCities(language);
+        //     setCities(data);
+        // }
         fetchCities();
-    }, []);
+    }, [language]);
 
 
-    console.log("cities", cities)
+    console.log("citiesdaaaaaaaaa", cities)
 
     return (
         <>

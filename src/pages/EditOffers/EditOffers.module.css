@@ -4,7 +4,7 @@
         margin: auto;
     }
     .pull_left {
-        float: left;
+        /* float: left; */
     }
     
     .btnCreate {
@@ -38,7 +38,7 @@
         margin: auto;
     }
     .pull_left {
-        float: left;
+        /* float: left; */
     }
     
     .btnCreate {

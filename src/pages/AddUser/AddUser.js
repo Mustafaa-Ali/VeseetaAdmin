@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 
 import { db, auth } from '../../Firebase/Firebase';
 import { collection, addDoc } from "firebase/firestore";
-
+import { useTranslation } from 'react-i18next';
 function AddUser(props) {
-
+    const { t } = useTranslation();
     const [Name, setName] = useState('')
     const [User_Name, setUser_Name] = useState('')
     const [Phone, setPhone] = useState('')
@@ -19,7 +19,7 @@ function AddUser(props) {
         e.preventDefault();
 
         try {
-            const docRef = await addDoc(collection(db, "Users"), { Name, User_Name, Phone, Email, City });
+            const docRef = await addDoc(collection(db, "users"), { Name, User_Name, Phone, Email, City });
             console.log("Document written with ID: ", docRef.id);
             let addUser = document.getElementById("add_User");
             showAlert("User added successfully", "success")
@@ -56,7 +56,7 @@ function AddUser(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>Add User</h2>
+                            <h2>{t("add")}</h2>
                         </div>
                     </div>
 
@@ -69,45 +69,45 @@ function AddUser(props) {
 
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>User Name:</strong>
+                                    <strong className='d-block mb-2'> {t("item_name")}:</strong>
                                     <input type="text"
                                         onChange={(e) => {
                                             setName(e.target.value);
                                         }}
-                                        className="form-control" placeholder="User Name" />
+                                        className="form-control" placeholder={t("item_name")} />
 
                                 </div>
                             </div>
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>User Email:</strong>
+                                    <strong className='d-block mb-2'> {t("item_email")}:</strong>
                                     <input type="email"
                                         onChange={(e) => {
                                             setEmail(e.target.value);
                                         }}
-                                        className="form-control" placeholder="User Email" />
+                                        className="form-control" placeholder={t("item_email")} />
 
                                 </div>
                             </div>
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>User City:</strong>
+                                    <strong className='d-block mb-2'> {t("item_city")}:</strong>
                                     <input type="text"
                                         onChange={(e) => {
                                             setCity(e.target.value);
                                         }}
-                                        className="form-control" placeholder="User City" />
+                                        className="form-control" placeholder={t("item_city")} />
 
                                 </div>
                             </div>
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>User Phone:</strong>
+                                    <strong className='d-block mb-2'> {t("item_phone")}:</strong>
                                     <input type="text"
                                         onChange={(e) => {
                                             setPhone(e.target.value);
                                         }}
-                                        className="form-control" placeholder="User Phone" />
+                                        className="form-control" placeholder={t("item_phone")} />
 
                                 </div>
                             </div>
@@ -115,7 +115,7 @@ function AddUser(props) {
 
 
                             <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>Submit</button>
+                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>{t("submit")}</button>
                             </div>
                         </div>
                     </form>

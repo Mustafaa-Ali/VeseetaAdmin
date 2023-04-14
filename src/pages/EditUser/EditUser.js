@@ -5,9 +5,9 @@ import style from './EditUser.module.css';
 import Swal from "sweetalert2";
 
 import { db, auth } from '../../Firebase/Firebase';
-
+import { useTranslation } from 'react-i18next';
 function EditUser(props) {
-
+    const { t } = useTranslation();
     const [data, setData] = useState(null);
     const [Name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -65,7 +65,7 @@ function EditUser(props) {
 
         if (props.id) {
             const id = props.id;
-            db.collection("Users")
+            db.collection("users")
                 .doc(id)
                 .update({
                     Name: Name,
@@ -109,7 +109,7 @@ function EditUser(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>Edit User</h2>
+                            <h2>{t("edit")}</h2>
                         </div>
                     </div>
 
@@ -122,60 +122,60 @@ function EditUser(props) {
 
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Name:</strong>
-                                    <input type="text" value={Name}
+                                    <strong className='d-block mb-2'>{t("item_name")}:</strong>
+                                    <input type="text" value={Name} disabled
                                         onChange={(e) => {
                                             setName(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Name" />
+                                        className="form-control" placeholder={t("item_name")} />
 
                                 </div>
                             </div>
 
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>User Email:</strong>
-                                    <input type="text" value={email}
+                                    <strong className='d-block mb-2'>{t("item_email")}:</strong>
+                                    <input type="text" value={email} disabled
                                         onChange={(e) => {
                                             setEmail(e.target.value);
                                         }}
-                                        className="form-control" placeholder="User Email" />
+                                        className="form-control" placeholder={t("item_email")} />
 
                                 </div>
                             </div>
 
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>User City:</strong>
-                                    <input type="text" value={city}
+                                    <strong className='d-block mb-2'>{t("item_city")}:</strong>
+                                    <input type="text" value={city} disabled
                                         onChange={(e) => {
                                             setCity(e.target.value);
                                         }}
-                                        className="form-control" placeholder="User City" />
+                                        className="form-control" placeholder={t("item_city")} />
 
                                 </div>
                             </div>
 
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>User Phone:</strong>
-                                    <input type="text" value={phone}
+                                    <strong className='d-block mb-2'>{t("item_phone")}:</strong>
+                                    <input type="text" value={phone} disabled
                                         onChange={(e) => {
                                             setPhone(e.target.value);
                                         }}
-                                        className="form-control" placeholder="User Phone" />
+                                        className="form-control" placeholder={t("item_phone")} />
 
                                 </div>
                             </div>
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Change Status:</strong>
+                                    <strong className='d-block mb-2'>{t("status")}:</strong>
                                     <select className='form-control' onChange={(e)=>{
                                         console.log("e", e.target.value)
                                         setStatus(e.target.value)
                                     }}>
-                                        <option selected={status === "Active"} value="Active"> Active</option>
-                                        <option selected={status === "Block"} value="Block">Block</option>
+                                        <option selected={status === "Active"} value="Active"> {t("active")}</option>
+                                        <option selected={status === "Block"} value="Block">{t("block")}</option>
                                     </select>
                                     {/* <input type="text" value={phone}
                                         onChange={(e) => {
@@ -187,7 +187,7 @@ function EditUser(props) {
                             </div>
 
                             <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>Submit</button>
+                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>{t("submit")}</button>
                             </div>
                         </div>
                     </form>
