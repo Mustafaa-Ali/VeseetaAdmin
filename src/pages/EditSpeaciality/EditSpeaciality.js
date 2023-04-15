@@ -6,8 +6,10 @@ import style from './EditSpeaciality.module.css';
 import Swal from "sweetalert2";
 
 import { db, auth } from '../../Firebase/Firebase';
-
+import { useTranslation } from 'react-i18next';
 function EditSpeaciality(props) {
+
+    const { t } = useTranslation();
     const [data, setData] = useState()
     const [Name, setName] = useState('')
     const [imgUrl, setimgUrl] = useState('')
@@ -99,7 +101,7 @@ function EditSpeaciality(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>Edit Speaciality</h2>
+                            <h2>{t("edit")} </h2>
                         </div>
                     </div>
 
@@ -112,25 +114,25 @@ function EditSpeaciality(props) {
 
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Speaciality Name:</strong>
+                                    <strong className='d-block mb-2'> {t("doctor_name")}:</strong>
                                     <input type="text"
                                         value={Name}
                                         onChange={(e) => {
                                             setName(e.target.value)
                                         }}
-                                        className="form-control" placeholder="Speaciality Name" />
+                                        className="form-control" placeholder={t("doctor_name")} />
 
                                 </div>
                             </div>
                             <div className="col-12 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Speaciality Img URL:</strong>
+                                    <strong className='d-block mb-2'> {t(("item_img"))}:</strong>
                                     <input type="text"
                                         value={imgUrl}
                                         onChange={(e) => {
                                             setimgUrl(e.target.value)
                                         }}
-                                        className="form-control" placeholder="Speaciality Img URL" />
+                                        className="form-control" placeholder={t(("item_img"))} />
 
                                 </div>
                             </div>
@@ -138,7 +140,7 @@ function EditSpeaciality(props) {
 
 
                             <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>Submit</button>
+                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>{t("submit")}</button>
                             </div>
                         </div>
                     </form>

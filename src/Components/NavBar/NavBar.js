@@ -96,14 +96,14 @@ const NavBar = () => {
     )
     const userinfo = JSON.parse(localStorage.getItem('user'));
 
-    //   console.log("userinfo", userinfo)
+      console.log("userinfo", userinfo)
     useEffect(() => {
 
         if (userinfo) {
-            if (userinfo.uid) {
+            // if (userinfo.uid) {
                 setShow('d-block')
                 sethidden('d-none')
-            }
+            // }
         }
         dispatch(changeUser(userinfo))
 

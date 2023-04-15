@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 
 import { db, auth } from '../../Firebase/Firebase';
 
-
+import { useTranslation } from 'react-i18next';
 function EditDoctor(props) {
-
+    const { t } = useTranslation();
     const [data, setData] = useState(null);
     const [Name, setName] = useState('');
     const [ImgUrl, setImgUrl] = useState('');
@@ -125,7 +125,7 @@ function EditDoctor(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>View Doctor</h2>
+                            <h2>{t("view_doctor")}</h2>
                         </div>
                     </div>
 
@@ -150,112 +150,112 @@ function EditDoctor(props) {
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Doctor Name:</strong>
+                                    <strong className='d-block mb-2'> {t("item_name")}:</strong>
                                     <input type="text" value={Name} disabled
                                         onChange={(e) => {
                                             setName(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Doctor Name" />
+                                        className="form-control" placeholder={t("item_name")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Doctor Speciality:</strong>
+                                    <strong className='d-block mb-2'> {t("item_speciality")}:</strong>
                                     <input type="text" value={Speciality} disabled
                                         onChange={(e) => {
                                             setSpeciality(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Doctor Speciality" />
+                                        className="form-control" placeholder={t("item_speciality")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Doctor City:</strong>
+                                    <strong className='d-block mb-2'> {t("item_city")}:</strong>
                                     <input type="text" value={City} disabled
                                         onChange={(e) => {
                                             setCity(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Doctor City" />
+                                        className="form-control" placeholder={t("item_city")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Doctor Phone:</strong>
+                                    <strong className='d-block mb-2'> {t("item_phone")}:</strong>
                                     <input type="text" value={Phone} disabled
                                         onChange={(e) => {
                                             setPhone(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Doctor Phone" />
+                                        className="form-control" placeholder={t("item_phone")} />
 
                                 </div>
                             </div>
                             
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Location:</strong>
+                                    <strong className='d-block mb-2'>{t("location")}:</strong>
                                     <input type="text" value={Location} disabled
                                         onChange={(e) => {
                                             setLocation(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Location" />
+                                        className="form-control" placeholder={t("location")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>ExaminationFees:</strong>
+                                    <strong className='d-block mb-2'>{t("examination")}:</strong>
                                     <input type="text" value={ExaminationFees} disabled
                                         onChange={(e) => {
                                             setExaminationFees(e.target.value);
                                         }}
-                                        className="form-control" placeholder="ExaminationFees" />
+                                        className="form-control" placeholder={t("examination")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Rate:</strong>
+                                    <strong className='d-block mb-2'>{t("rate")}:</strong>
                                     <input type="text" value={Rate} disabled
                                         onChange={(e) => {
                                             setRate(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Rate" />
+                                        className="form-control" placeholder={t("rate")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Waitingtime:</strong>
+                                    <strong className='d-block mb-2'>{t("waiting_time")}:</strong>
                                     <input type="text" value={Waitingtime} disabled
                                         onChange={(e) => {
                                             setWaitingtime(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Waitingtime" />
+                                        className="form-control" placeholder={t("waiting_time")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Availability:</strong>
+                                    <strong className='d-block mb-2'>{t("item_available")} :</strong>
                                     <input type="text" value={Availability} disabled
                                         onChange={(e) => {
                                             setAvailability(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Availability" />
+                                        className="form-control" placeholder={t("item_available")}  />
 
                                 </div>
                             </div>
                             <div className="col-lg-6  mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>About:</strong>
+                                    <strong className='d-block mb-2'>{t("about")}</strong>
                                     <input type="text" value={About} disabled
                                         onChange={(e) => {
                                             setAbout(e.target.value);
                                         }}
-                                        className="form-control" placeholder="About" />
+                                        className="form-control" placeholder={t("about")} />
 
                                 </div>
                             </div>

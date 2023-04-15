@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
 
         return <>
 
-            <section className={`${style.main} page-section `}>
+            <section className={`${style.main} `}>
                 {/* <!-- footer --> */}
                 <footer className="py-5">
                     <div className="container">

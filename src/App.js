@@ -17,6 +17,7 @@ import Users from './pages/Users/Users';
 import Login from './Components/Login/Login';
 import ForgetPass from './Components/ForgetPass/ForgetPass';
 import PrivateRoutes from './utils/PrivateRoutes';
+import DoctorAppoint from './pages/DoctorAppoint/DoctorAppoint';
 function App() {
   const [lang , setLang]=   useState("en")
 
@@ -41,6 +42,7 @@ function App() {
       <Route path="/cities" element={<Cities/>}/>
       <Route path="/speaciality" element={<Speaciality/>}/>
       <Route path="/offers" element={<Offers/>}/>
+      <Route path="/doctorappoint" element={<DoctorAppoint/>}/>
       </Route>
     
      <Route path="/login" element={<Login/>}/>

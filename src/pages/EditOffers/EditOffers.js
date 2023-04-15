@@ -6,10 +6,10 @@ import style from './EditOffers.module.css';
 import Swal from "sweetalert2";
 
 import { db, auth } from '../../Firebase/Firebase';
-
+import { useTranslation } from 'react-i18next';
 function EditOffers(props) {
 
-
+    const { t } = useTranslation();
 
     console.log("props", props)
     const [data, setData] = useState(null);
@@ -125,7 +125,7 @@ function EditOffers(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>Edit Offers</h2>
+                            <h2>{t("edit")} </h2>
                         </div>
                     </div>
 
@@ -138,55 +138,55 @@ function EditOffers(props) {
 
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Offers Name:</strong>
+                                    <strong className='d-block mb-2'> {t("item_name")}:</strong>
                                     <input type="text"
                                         value={SessionName}
                                         onChange={(e) => {
                                             setSessionName(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Offers Name" />
+                                        className="form-control" placeholder={t("item_name")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Offers Img Url:</strong>
+                                    <strong className='d-block mb-2'>{t(("item_img"))}:</strong>
                                     <input type="text"
                                         onChange={(e) => {
                                             setImgUrl(e.target.value)
                                         }}
                                         value={ImgUrl}
-                                        className="form-control" placeholder="Offers Img Url" />
+                                        className="form-control" placeholder={t(("item_img"))} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Doctor Name</strong>
+                                    <strong className='d-block mb-2'>{t("doctor_name")}</strong>
                                     <input type="text"
                                         value={DoctorName}
                                         onChange={(e) => {
                                             setDoctorName(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Doctor Name" />
+                                        className="form-control" placeholder={t("doctor_name")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Doctor Img Url</strong>
+                                    <strong className='d-block mb-2'>{t("doctor_img")}</strong>
                                     <input type="text"
                                         value={DoctorImg}
                                         onChange={(e) => {
                                             setDoctorImg(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Doctor Img" />
+                                        className="form-control" placeholder={t("doctor_img")}/>
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Available</strong>
+                                    <strong className='d-block mb-2'>{t("item_available")} </strong>
                                     <div className='row mb-3'>
                                         <div className='col-6'>
                                             {console.log("Available", Available)}
@@ -197,7 +197,7 @@ function EditOffers(props) {
                                                 onChange={(e) => {
                                                     setAvailable(e.target.value);
                                                 }}checked={Available === 'true'} />
-                                            <label for="true">True</label>
+                                            <label for="true">{t("item_available")} </label>
                                         </div>
 
                                         <div className='col-6'>
@@ -207,7 +207,7 @@ function EditOffers(props) {
                                                 onChange={(e) => {
                                                     setAvailable(e.target.value);
                                                 }} checked={Available === 'false'}/>
-                                            <label for="false">False</label>
+                                            <label for="false">{t("item_not_available")} </label>
                                         </div>
                                     </div>
 
@@ -216,61 +216,61 @@ function EditOffers(props) {
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Price</strong>
+                                    <strong className='d-block mb-2'>{t("item_price")}</strong>
                                     <input type="number"
                                         value={Price}
                                         onChange={(e) => {
                                             setPrice(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Price" />
+                                        className="form-control" placeholder={t("item_price")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Discount</strong>
+                                    <strong className='d-block mb-2'>{t("item_dicount")}</strong>
                                     <input type="number"
                                         value={Discount}
                                         onChange={(e) => {
                                             setDiscount(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Discount" />
+                                        className="form-control" placeholder={t("item_dicount")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Booked</strong>
+                                    <strong className='d-block mb-2'>{t("book")}</strong>
                                     <input type="number"
                                         value={Booked}
                                         onChange={(e) => {
                                             setBooked(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Booked" />
+                                        className="form-control" placeholder={t("book")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Booking Date</strong>
+                                    <strong className='d-block mb-2'>{t("booking_date")}</strong>
                                     <input type="date"
                                         value={BookingDate}
                                         onChange={(e) => {
                                             setBookingDate(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Booking Date" />
+                                        className="form-control" placeholder={t("booking_date")} />
 
                                 </div>
                             </div>
                             <div className="col-lg-6 mb-3">
                                 <div className="form-group">
-                                    <strong className='d-block mb-2'>Info</strong>
+                                    <strong className='d-block mb-2'>{t("info")}</strong>
                                     <input type="text"
                                         value={Info}
                                         onChange={(e) => {
                                             setInfo(e.target.value);
                                         }}
-                                        className="form-control" placeholder="Info" />
+                                        className="form-control" placeholder={t("info")} />
 
                                 </div>
                             </div>
@@ -278,7 +278,7 @@ function EditOffers(props) {
 
 
                             <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>Submit</button>
+                                <button type="submit" className={`btn ${style.btnCreate} mb-3`}>{t("submit")}</button>
                             </div>
                         </div>
                     </form>

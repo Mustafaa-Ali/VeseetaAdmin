@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import changeUser from "../../store/Actions/user";
 import changeShow from '../../store/Actions/show';
+import changeUserPhone from '../../store/Actions/userphone';
 import { useTranslation } from 'react-i18next';
+import Swal from "sweetalert2";
 const Login = () => {
 
     const { t } = useTranslation();
@@ -19,29 +21,91 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
 
-        auth.signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                console.log(user.auth.uid);
-                localStorage.setItem('token', true);
-                const user1 = JSON.stringify(user)
+    //     auth.signInWithEmailAndPassword(email, password)
+    //         .then((userCredential) => {
+    //             // Signed in
+    //             const user = userCredential.user;
+    //             console.log(user);
+    //             console.log(user.auth.uid);
+    //             localStorage.setItem('token', true);
+    //             const user1 = JSON.stringify(user)
+    //             console.log(user1)
+    //             localStorage.setItem('user',user1)
+    //             dispatch(changeUser(user))
+    //             dispatch(changeShow('d-block'))
+    //             navigate('/home');
+    //         })
+    //         .catch((error) => {
+    //             const errorCode = error.code;
+    //             const errorMessage = error.message;
+    //             console.log(errorMessage);
+    //         });
+    // };
+
+ 
+    function showAlert(message, icon) {
+        Swal.fire({
+            title: message,
+            icon: icon,
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
+let token = localStorage.getItem('token');
+
+const handleSubmit = (event) => {
+    event.preventDefault();
+
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        console.log("user" , user)
+        console.log(user.uid);
+        await db
+          .collection("users")
+          .doc(user.uid)
+          .get()
+          .then((res) => {
+            console.log("res",res.data());
+            const userDoc = res.data();
+            console.log("userDoc",userDoc);
+            if (userDoc.iAdmin) {
+              const user1 = JSON.stringify(userDoc)
+                console.log(user1)
+                localStorage.setItem("token", true);
                 localStorage.setItem('user',user1)
                 dispatch(changeUser(user))
                 dispatch(changeShow('d-block'))
-                navigate('/home');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage);
-            });
-    };
-let token = localStorage.getItem('token');
+            //   localStorage.setItem("token", true);
+            //   localStorage.setItem("user", JSON.stringify(userDoc));
+            //   dispatch(changeUser(JSON.stringify(userDoc)))
+            //   dispatch(changeShow('d-block'))
+              navigate("/home");
+            } else if(userDoc.isDoctor) {
+                localStorage.setItem("token", true);
+              localStorage.setItem("user", JSON.stringify(userDoc));
+              dispatch(changeUser(userDoc))
+              dispatch(changeShow('d-block'))
+              const userPhone = window.prompt('You Are A Doctor Please Enter Your Mobile:')
+              console.log("userPhone", userPhone)
+              dispatch(changeUserPhone(userPhone ))
+                navigate("/doctorappoint");
+            
+            }else{
+                showAlert('You have No Permission', 'error')
+            }
+          });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        showAlert(error, 'error')
+      });
+  };
 
     useEffect(() => {
       if(token){
