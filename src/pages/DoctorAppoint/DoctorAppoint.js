@@ -11,16 +11,18 @@ import '../../index.css'
 import { db, auth } from '../../Firebase/Firebase';
 import ReactPaginate from "react-paginate";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 // import userphone from '../../store/Actions/userphone'
 const AppointmentsAppoint = () => {
 
-
+    const navigate = useNavigate()
     const { t } = useTranslation();
     const [Appointments, setAppointments] = useState([])
     const [AppointmentsId, setAppointmentsId] = useState('')
     // const user = useSelector(state => state.user.user);
-    const userphone = useSelector(state => state.userphone.userphone);
+    // const userphone = useSelector(state => state.userphone.userphone);
+    const userphone = sessionStorage.getItem("doctorPhone")
     console.log("usrphone in apponit",userphone)
     const user = localStorage.getItem('user');
     function afterDelete(message, icon) {
@@ -153,7 +155,11 @@ const AppointmentsAppoint = () => {
     useEffect(() => {
         // handleSubmit();
         fetchAppoint();
-    }, []);
+
+        // if(!userphone){
+        //     navigate("/login")
+        // }
+    }, [userphone]);
 
 
     console.log("Appointments", Appointments)

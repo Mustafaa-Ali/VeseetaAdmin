@@ -3,22 +3,23 @@ import react, { useEffect, useState } from 'react';
 import ReactLoading from "react-loading";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {userphone} from '../store/Actions/userphone'
 
 
-const PrivateRoutes = () => {
+const DoctorRoutes = () => {
 
     
     const token = localStorage.getItem("token");
  
-    const doctorPhone = sessionStorage.getItem("doctorPhone");
-    
-
+    // const userphone = useSelector(state => state.userphone.userphone);
+    const userphone = sessionStorage.getItem('doctorPhone');
+    console.log("userPhone route", userphone)
 
 
     return (
         <>
             {
-                 (token  ? <Outlet /> : <Navigate to="/login" />) 
+                 (userphone  ? <Outlet /> : <Navigate to="/login" />) 
 
             }
 
@@ -30,4 +31,4 @@ const PrivateRoutes = () => {
 }
 
 
-export default PrivateRoutes;
+export default DoctorRoutes;

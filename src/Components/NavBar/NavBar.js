@@ -51,7 +51,9 @@ const NavBar = () => {
                 sethidden("d-block")
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
+                sessionStorage.removeItem('doctorPhone')
                 navigate('/login')
+                
             })
             .catch((error) => {
                 console.log(error)

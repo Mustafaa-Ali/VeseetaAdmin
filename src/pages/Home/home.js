@@ -123,7 +123,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className='col-lg-4 my-3 '>
+              <div className='col-lg-6 my-3 '>
                 <div className="card" style={{ backgroundColor: "rgb(146, 103, 255)" }}>
                   <div className="card-body">
                     <h5 className="card-title">{t("_speaciality")}</h5>
@@ -133,7 +133,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className='col-lg-4 my-3 '>
+              <div className='col-lg-6 my-3 '>
                 <div className="card" >
                   <div className="card-body" style={{ backgroundColor: "#f699e0", color: "white" }}>
                     <h5 className="card-title">{t("_user")}</h5>
@@ -157,9 +157,9 @@ const Home = () => {
 
             </div>
 
-            <div className='row my-5'>
+            <div className='row my-5 justify-content-center'>
               <div className='col-lg-6'>
-                <BarChart />
+                <BarChart info={[doctors, city, speasiality, offers, users]}/>
 
               </div>
 
