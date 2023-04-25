@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Column } from '@ant-design/plots';
-
-const DemoColumn = () => {
+import { useTranslation } from 'react-i18next';
+const DemoColumn = (props) => {
+  const { t } = useTranslation();
+  console.log("props", props)
   const data = [
     {
-      action: '2018',
-      pv: 50000,
+      action: t("_doctor"),
+      pv: props.info[0].Number,
     },
     {
-      action: '2019',
-      pv: 35000,
+      action: t("_city"),
+      pv:props.info[1].Number,
     },
     {
-      action: '2020',
-      pv: 25000,
+      action: t("_speaciality"),
+      pv: props.info[2].Number,
     },
     {
-      action: '2021',
-      pv: 15000,
+      action: t("_offer"),
+      pv: props.info[3].Number,
     },
     {
-      action: '2022',
-      pv: 8500,
+      action: t("_user"),
+      pv: props.info[4].Number,
     },
   ];
   const config = {

@@ -21,30 +21,6 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-
-    //     auth.signInWithEmailAndPassword(email, password)
-    //         .then((userCredential) => {
-    //             // Signed in
-    //             const user = userCredential.user;
-    //             console.log(user);
-    //             console.log(user.auth.uid);
-    //             localStorage.setItem('token', true);
-    //             const user1 = JSON.stringify(user)
-    //             console.log(user1)
-    //             localStorage.setItem('user',user1)
-    //             dispatch(changeUser(user))
-    //             dispatch(changeShow('d-block'))
-    //             navigate('/home');
-    //         })
-    //         .catch((error) => {
-    //             const errorCode = error.code;
-    //             const errorMessage = error.message;
-    //             console.log(errorMessage);
-    //         });
-    // };
-
  
     function showAlert(message, icon) {
         Swal.fire({
@@ -86,15 +62,25 @@ const handleSubmit = (event) => {
             //   dispatch(changeShow('d-block'))
               navigate("/home");
             } else if(userDoc.isDoctor) {
-                localStorage.setItem("token", true);
-              localStorage.setItem("user", JSON.stringify(userDoc));
-              dispatch(changeUser(userDoc))
-              dispatch(changeShow('d-block'))
-              const userPhone = window.prompt('You Are A Doctor Please Enter Your Mobile:')
-              console.log("userPhone", userPhone)
-              dispatch(changeUserPhone(userPhone ))
+               
+              const userPhone = window.prompt('You Are A Doctor Please Enter Your Phone:')
+              if (userPhone !== null && userPhone !== '') {
+                // OK button was clicked
+                // localStorage.setItem("token", true);
+                localStorage.setItem("user", JSON.stringify(userDoc));
+                dispatch(changeUser(userDoc))
+                dispatch(changeShow('d-block'))
+                dispatch(changeUserPhone(userPhone ))
+               
+                sessionStorage.setItem("doctorPhone",userPhone)
                 navigate("/doctorappoint");
             
+              } else {
+                // Cancel button was clicked
+               alert("Phone is Required.");
+              }
+              console.log("userPhone", userPhone)
+              
             }else{
                 showAlert('You have No Permission', 'error')
             }
