@@ -95,8 +95,9 @@ const Doctors = () => {
             <>
             <tr key={index} className={`${style.tr_shadow}`}>
                 <td>{index + 1}</td>
+                
+                <td><img src={Doctor.ImgUrl} className='rounded-circle' width={80} height={80} alt="" /></td>
                 <td>{Doctor.Name}</td>
-                <td><img src={Doctor.ImgUrl} className='rounded' width={100} height={100} alt="" /></td>
                 <td>{Doctor.Speciality}</td>
                 <td>{Doctor.City}</td>
                 <td>{Doctor.Phone}</td>
@@ -117,7 +118,11 @@ const Doctors = () => {
                             <i className={`bi bi-eye-fill fs-6   ${style.text_creat}`} ></i>
                         </Link>
 
-                        <form>
+                       
+                    </div>
+                </td>
+                <td>
+                <form>
                             <Link type='button' className="item p-2"
                                 onClick={() => {
                                     DeleteAlert(Doctor.id)
@@ -125,7 +130,6 @@ const Doctors = () => {
                                 <i className="fa-solid fa-trash fs-6 text-danger"></i>
                             </Link>
                         </form>
-                    </div>
                 </td>
             </tr>
         </>
@@ -195,14 +199,16 @@ const Doctors = () => {
                                             <thead className={`${style.thead} text-white`}>
                                                 <tr>
                                                     <th className='text-white'>{t("id")}</th>
-                                                    <th className='text-white'>{t("item_name")} </th>
+                                                   
                                                     <th className='text-white'>{t("item_img")}</th>
+                                                    <th className='text-white'>{t("item_name")} </th>
                                                     <th className='text-white'>{t("item_speciality")} </th>
                                                     <th className='text-white'>{t("item_city")}</th>
                                                     <th className='text-white'>{t("item_phone")} </th>
 
 
-                                                    <th></th>
+                                                    <th className='text-white'>{t("show")}</th>
+                                                    <th className='text-white'>{t("delete")}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

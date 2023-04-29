@@ -60,8 +60,9 @@ const Speaciality = () => {
             <>
             <tr key={index} className={`${style.tr_shadow}`}>
                 <td>{index + 1}</td>
+                <td><img className='rounded-circle' src={Speaciality.imgUrl} width={80} height={80} alt="" /></td>
                 <td>{Speaciality.Name}</td>
-                <td><img className='rounded' src={Speaciality.imgUrl} width={100} height={100} alt="" /></td>
+             
 
                 <td>
                     <div className="d-flex justify-content-around">
@@ -79,7 +80,11 @@ const Speaciality = () => {
                             <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                         </Link>
 
-                        <form>
+                        
+                    </div>
+                </td>
+                <td>
+                <form>
                             <Link type='button' className="item p-2"
                                 onClick={() => {
                                     DeleteAlert(Speaciality.id)
@@ -87,7 +92,6 @@ const Speaciality = () => {
                                 <i className="fa-solid fa-trash fs-6 text-danger"></i>
                             </Link>
                         </form>
-                    </div>
                 </td>
             </tr>
         </>
@@ -191,11 +195,14 @@ const Speaciality = () => {
                                             <thead className={`${style.thead}`}>
                                                 <tr>
                                                     <th className='text-white'>{t("id")} </th>
-                                                    <th className='text-white'>{t("item_name")} </th>
                                                     <th className='text-white'>{t("item_img")} </th>
+                                                    <th className='text-white'>{t("item_name")} </th>
+                                                    <th className='text-white'>{t("edit")} </th>
+                                                    <th className='text-white'>{t("delete")} </th>
+                                                   
 
 
-                                                    <th></th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>

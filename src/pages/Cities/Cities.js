@@ -94,8 +94,8 @@ const Cities = () => {
         return (
             <>
                 <tr key={index} className={`${style.tr_shadow}`}>
-                    <td>{index + 1}</td>
-                    <td>{city.Name}</td>
+                    <td> {index + 1} </td>
+                    <td><i class="fa-solid fa-city me-2"></i>{city.Name}</td>
 
                     <td>
                         <div className="d-flex justify-content-around">
@@ -113,7 +113,11 @@ const Cities = () => {
                                 <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                             </Link>
 
-                            <form>
+                           
+                        </div>
+                    </td>
+                    <td>
+                    <form>
                                 <Link type='button' className="item p-2"
                                     onClick={() => {
                                         DeleteAlert(city.id)
@@ -121,7 +125,6 @@ const Cities = () => {
                                     <i className="fa-solid fa-trash fs-6  text-danger"></i>
                                 </Link>
                             </form>
-                        </div>
                     </td>
                 </tr>
             </>
@@ -199,7 +202,8 @@ const Cities = () => {
 
 
 
-                                                    <th></th>
+                                                    <th  className='text-white'>{t("edit")}</th>
+                                                    <th  className='text-white'>{t("delete")}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
