@@ -6,7 +6,8 @@ import { db, auth } from '../../Firebase/Firebase';
 import BarChart from '../../Components/BarChart/BarChart';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import '../../index.css'
+import '../../index.css';
+import RingChart from '../../Components/RingChart/RingChart';
 const Home = () => {
 
   const { t } = useTranslation();
@@ -160,6 +161,13 @@ const Home = () => {
             <div className='row my-5 justify-content-center'>
               <div className='col-lg-6'>
                 <BarChart info={[doctors, city, speasiality, offers, users]}/>
+
+              </div>
+              <div className='col-lg-4 offset-lg-2 d-flex justify-content-center align-items-center flex-column'>
+                <div>
+                  <h3 className='mb-3'>{t("our_city")}</h3>
+                </div>
+                <RingChart info={[doctors, city, speasiality, offers, users]}/>
 
               </div>
 

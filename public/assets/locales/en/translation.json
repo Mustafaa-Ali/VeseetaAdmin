@@ -63,7 +63,10 @@
 "info":"Information",
 "status": "Change Status",
 "active":"Active",
-"block":"Block"
+"block":"Block",
+"delete":"Delete",
+"our_city":"Our Cities in Egypt",
+"show":"Show"
 
 }
 

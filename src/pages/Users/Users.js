@@ -100,15 +100,15 @@ const Users = () => {
             <>
                 <tr key={index} className={`${style.tr_shadow}`}>
                     <td>{index + 1}</td>
-                    <td>{User.Name}</td>
-                    <td>{User.UName}</td>
+                    <td><i class="bi bi-person-fill me-2"></i>{User.Name}</td>
+                    {/* <td>{User.UName}</td> */}
                     <td>{User.Email}</td>
-                    <td>{User.City}</td>
+                    {/* <td>{User.City}</td> */}
                     <td>{User.Phone}</td>
                     <td>{User.Status}</td>
 
                     <td>
-                        <div className="d-flex justify-content-around">
+                        <div className="">
                             <Link className="item p-2" type='button' onClick={() => {
                                 window.scrollTo(0, 0);
                                 setUserId(User.id);
@@ -123,14 +123,14 @@ const Users = () => {
                                 <i className={`bi bi-eye-fill fs-6   ${style.text_creat}`} ></i>
                             </Link>
 
-                            <form>
-                                {/* <Link type='button' className="item p-2"
+                            {/* <form>
+                                <Link type='button' className="item p-2"
                                     onClick={() => {
                                         DeleteAlert(User.id)
                                     }}>
                                     <i className="fa-solid fa-trash fs-6 text-danger"></i>
-                                </Link> */}
-                            </form>
+                                </Link>
+                            </form> */}
                         </div>
                     </td>
                 </tr>
@@ -202,14 +202,14 @@ const Users = () => {
                                                 <tr>
                                                     <th className='text-white'>{t("id")} </th>
                                                     <th className='text-white'>{t("item_name")}</th>
-                                                    <th className='text-white'>{t("item_username")}</th>
+                                                    {/* <th className='text-white'>{t("item_username")}</th> */}
                                                     <th className='text-white'>{t("item_email")}  </th>
-                                                    <th className='text-white'>{t("item_city")} </th>
+                                                    {/* <th className='text-white'>{t("item_city")} </th> */}
                                                     <th className='text-white'>{t("item_phone")}  </th>
                                                     <th className='text-white'>{t("item_status")}  </th>
 
 
-                                                    <th></th>
+                                                    <th className='text-white'>{t("show")} </th>
                                                 </tr>
                                             </thead>
                                             <tbody>

@@ -94,10 +94,11 @@ const Offers = () => {
             <>
             <tr key={index} className={`${style.tr_shadow}`}>
                 <td>{index + 1}</td>
+                <td><img className='rounded-circle' src={Offers.ImgUrl} width={80} height={80} alt="" /></td>
                 <td>{Offers.SessionName}</td>
 
 
-                <td><img className='rounded' src={Offers.ImgUrl} width={100} height={100} alt="" /></td>
+                
                 <td>{`${Offers.Available}`}</td>
                 <td>{Offers.Price}&pound;</td>
                 <td>{Offers.Discount}%</td>
@@ -117,7 +118,11 @@ const Offers = () => {
                             <i className={`fa-solid fa-pen fs-6   ${style.text_creat}`} ></i>
                         </Link>
 
-                        <form>
+                       
+                    </div>
+                </td>
+                <td>
+                <form>
                             <Link type='button' className="item p-2"
                                 onClick={() => {
                                     DeleteAlert(Offers.id)
@@ -125,7 +130,6 @@ const Offers = () => {
                                 <i className="fa-solid fa-trash fs-6 text-danger"></i>
                             </Link>
                         </form>
-                    </div>
                 </td>
             </tr>
         </>
@@ -196,15 +200,18 @@ const Offers = () => {
                                             <thead className={`${style.thead} text-white`}>
                                                 <tr>
                                                     <th className='text-white'>{t("id")}</th>
-                                                    <th className='text-white'>{t("item_name")} </th>
+                                                   
                                                     <th className='text-white'>{t("item_img")} </th>
+                                                    <th className='text-white'>{t("item_name")} </th>
                                                     <th className='text-white'>{t("item_available")} </th>
                                                     <th className='text-white'>{t("item_price")}  </th>
                                                     <th className='text-white'>{t("item_dicount")}   </th>
+                                                    <th className='text-white'>{t("edit")}   </th>
+                                                    <th className='text-white'>{t("delete")}   </th>
 
 
 
-                                                    <th></th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
