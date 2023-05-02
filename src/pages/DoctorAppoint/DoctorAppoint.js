@@ -12,6 +12,7 @@ import { db, auth } from '../../Firebase/Firebase';
 import ReactPaginate from "react-paginate";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import ReactApexChart from 'react-apexcharts';
 
 // import userphone from '../../store/Actions/userphone'
 const AppointmentsAppoint = () => {
@@ -19,12 +20,51 @@ const AppointmentsAppoint = () => {
     const navigate = useNavigate()
     const { t } = useTranslation();
     const [Appointments, setAppointments] = useState([])
+    const [AllApp, setAllApp] = useState([])
+    const [DoneCount, setDoneCount] = useState(1)
+    const [DoneApp, setDoneApp] = useState([])
+    const [date, setDate] = useState([])
     const [AppointmentsId, setAppointmentsId] = useState('')
     // const user = useSelector(state => state.user.user);
     // const userphone = useSelector(state => state.userphone.userphone);
     const userphone = sessionStorage.getItem("doctorPhone")
-    console.log("usrphone in apponit",userphone)
+    console.log("usrphone in apponit", userphone)
     const user = localStorage.getItem('user');
+    const state = {
+      
+        series: [{
+          name: 'All Aoopintments',
+          data: AllApp
+        }, {
+          name: 'Done Appointments',
+          data: DoneApp
+        }],
+        options: {
+          chart: {
+            height: 350,
+            type: 'area'
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: 'smooth'
+          },
+          xaxis: {
+            type: 'datetime',
+            categories: date
+          },
+          tooltip: {
+            x: {
+              format: 'dd/MM/yy HH:mm'
+            },
+          },
+        },
+      
+      
+      };
+    
+console.log("infoooooo", AllApp,DoneApp, date)
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -58,6 +98,55 @@ const AppointmentsAppoint = () => {
         });
     }
 
+    function showAlert(message, icon) {
+        Swal.fire({
+          title: message,
+          icon: icon,
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }
+    
+
+
+      const updateField = (docId, field, value) => {
+        db.collection('bookings').doc(docId).update({
+          [field]: value
+        })
+        .then(() => {
+          console.log("Document successfully updated!");
+          fetchAppoint()
+        })
+        .catch((error) => {
+          console.error("Error updating document: ", error);
+        });
+      }
+    // const handleEditData = (id) => {
+     
+    
+      
+         
+    //       db.collection("City")
+    //         .doc(id)
+    //         .update({
+    //           Name: Name
+    
+    //         })
+    //         .then(() => {
+    //           console.log("Document successfully updated!");
+    //           showAlert("Document successfully updated!", "success");
+    //           let EditCity = document.getElementById("edit_city");
+    //           EditCity.classList.add("d-none");
+    //           props.fetchData();
+    //         })
+    //         .catch((error) => {
+    //           console.error("Error updating document: ", error);
+    //           showAlert("Error updating document", 'error')
+    //         });
+        
+    
+    //   };
+
 
     // const handleSubmit = async () => {
     //     try {
@@ -85,12 +174,35 @@ const AppointmentsAppoint = () => {
                 const AppointmentsData = AppointmentsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
                 console.log("Appointments", AppointmentsData);
-                AppointmentsData.map((app,index)=>{
+                AppointmentsData.map((app, index) => {
                     console.log("app.docror", app.doctor)
                     console.log("app.docror.id", app.doctorID)
                 })
-               let newAppoint = AppointmentsData.filter(apoint => apoint.mobile == userphone)
-               console.log("newApp",newAppoint)
+                let allapp = [];
+                let doneapp = [];
+                let dateapp = [];
+                let test = [];
+                setDoneCount(1)
+                let newAppoint = AppointmentsData.filter(apoint => apoint.mobile == userphone)
+                newAppoint.map((item, index)=>{
+
+                    allapp.push(index+1);
+                    dateapp.push(item.dateSelected)
+                   test.push(item)
+                    
+                  
+                })
+                let doneAppoint = test.filter(apoint => apoint.status === "done")
+                doneAppoint.map((item, index)=>{
+
+                    doneapp.push(index+1);
+                 
+                   
+                })
+                setAllApp(allapp)
+                setDoneApp(doneapp)
+                setDate(dateapp)
+                console.log("newApp", newAppoint)
                 setAppointments(newAppoint);
             } catch (error) {
                 console.log(error);
@@ -106,19 +218,32 @@ const AppointmentsAppoint = () => {
     let currentPageData = Appointments.slice(offset, offset + PER_PAGE).map((Appointments, index) => {
         return (
             <>
-            <tr key={index} className={`${style.tr_shadow}`}>
-                <td>{index + 1}</td>
-                <td>{Appointments.name}</td>
-                <td>{Appointments.dateSelected}</td>
-                <td>{Appointments.timeSelected}</td>
-                <td>{Appointments.email}</td>
-                <td>{Appointments.mobile}</td>
-                <td>{Appointments.notes}</td>
-               
+                <tr key={index} className={`${style.tr_shadow}`}>
+                    <td>{index + 1}</td>
+                    <td><i class="bi bi-person-fill me-2"></i> {Appointments.name}</td>
+                    <td>{Appointments.dateSelected}</td>
+                    <td>{Appointments.timeSelected}</td>
+                    <td>{Appointments.email}</td>
+                    <td>{Appointments.mobile}</td>
+                    <td>{Appointments.notes}</td>
 
-                <td>
-                    <div className="d-flex justify-content-around">
-                        {/* <Link className="item p-2" type='button' onClick={() => {
+
+                    <td>
+                        <div className="d-flex justify-content-around">
+
+                            <div className='d-flex mx-2'>
+                                <input type="radio" id="wait"  checked={Appointments.status === 'wait'} onChange={()=>{
+                                    updateField(Appointments.id, 'status', 'wait');
+                                }}/>
+                                <label for="wait" className='px-2'>Wait</label>
+                            </div>
+                            <div className='d-flex mx-2'>
+                                <input type="radio" id="done"  checked={Appointments.status === 'done'}onChange={()=>{
+                                   updateField(Appointments.id, 'status', 'done');
+                                }} />
+                                <label for="done" className='px-2'>Done</label>
+                            </div>
+                            {/* <Link className="item p-2" type='button' onClick={() => {
                             window.scrollTo(0, 0);
                             setAppointmentsId(Appointments.id);
                             // let editAppointments = document.getElementById("edit_Appointments");
@@ -132,18 +257,18 @@ const AppointmentsAppoint = () => {
                             <i className={`bi bi-eye-fill fs-6   ${style.text_creat}`} ></i>
                         </Link> */}
 
-                        <form>
+                            {/* <form>
                             <Link type='button' className="item p-2"
                                 onClick={() => {
                                     DeleteAlert(Appointments.id)
                                 }}>
                                 <i className="fa-solid fa-trash fs-6 text-danger"></i>
                             </Link>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-        </>
+                        </form> */}
+                        </div>
+                    </td>
+                </tr>
+            </>
         )
     });
     let pageCount = Math.ceil(Appointments.length / PER_PAGE);
@@ -151,6 +276,8 @@ const AppointmentsAppoint = () => {
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
     }
+
+
 
     useEffect(() => {
         // handleSubmit();
@@ -177,6 +304,10 @@ const AppointmentsAppoint = () => {
                                 <div className="col-lg-12 row my-4">
                                     <div className='col-6 p-0'>
                                         <h2 >{t("_Appointments")}</h2>
+                                    </div>
+
+                                    <div id="chart">
+                                        <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
                                     </div>
                                     <div className={`${style.pull_right} col-6 p-0`}>
                                         {/* <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
@@ -221,14 +352,14 @@ const AppointmentsAppoint = () => {
                                                     <th className='text-white'>{t("item_email")} </th>
                                                     <th className='text-white'>{t("item_phone")} </th>
                                                     <th className='text-white'>{t("item_notes")} </th>
-                                                   
+
 
 
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                              {currentPageData}
+                                                {currentPageData}
 
 
                                             </tbody>
