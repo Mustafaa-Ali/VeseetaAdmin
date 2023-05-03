@@ -13,8 +13,10 @@ import ReactPaginate from "react-paginate";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ReactApexChart from 'react-apexcharts';
-
+import AppChart from '../../Components/AppointChart/AppointChart'
 // import userphone from '../../store/Actions/userphone'
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 const AppointmentsAppoint = () => {
 
     const navigate = useNavigate()
@@ -23,6 +25,7 @@ const AppointmentsAppoint = () => {
     const [AllApp, setAllApp] = useState([])
     const [DoneCount, setDoneCount] = useState(1)
     const [DoneApp, setDoneApp] = useState([])
+    const [WaitApp, setWaitApp] = useState([])
     const [date, setDate] = useState([])
     const [AppointmentsId, setAppointmentsId] = useState('')
     // const user = useSelector(state => state.user.user);
@@ -31,40 +34,40 @@ const AppointmentsAppoint = () => {
     console.log("usrphone in apponit", userphone)
     const user = localStorage.getItem('user');
     const state = {
-      
+
         series: [{
-          name: 'All Aoopintments',
-          data: AllApp
+            name: 'All Aoopintments',
+            data: AllApp
         }, {
-          name: 'Done Appointments',
-          data: DoneApp
+            name: 'Done Appointments',
+            data: DoneApp
         }],
         options: {
-          chart: {
-            height: 350,
-            type: 'area'
-          },
-          dataLabels: {
-            enabled: false
-          },
-          stroke: {
-            curve: 'smooth'
-          },
-          xaxis: {
-            type: 'datetime',
-            categories: date
-          },
-          tooltip: {
-            x: {
-              format: 'dd/MM/yy HH:mm'
+            chart: {
+                height: 350,
+                type: 'area'
             },
-          },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: date
+            },
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy HH:mm'
+                },
+            },
         },
-      
-      
-      };
-    
-console.log("infoooooo", AllApp,DoneApp, date)
+
+
+    };
+
+    console.log("infoooooo", AllApp, DoneApp, date)
     function afterDelete(message, icon) {
         Swal.fire({
             title: message,
@@ -100,37 +103,37 @@ console.log("infoooooo", AllApp,DoneApp, date)
 
     function showAlert(message, icon) {
         Swal.fire({
-          title: message,
-          icon: icon,
-          showConfirmButton: false,
-          timer: 2000
+            title: message,
+            icon: icon,
+            showConfirmButton: false,
+            timer: 2000
         });
-      }
-    
+    }
 
 
-      const updateField = (docId, field, value) => {
+
+    const updateField = (docId, field, value) => {
         db.collection('bookings').doc(docId).update({
-          [field]: value
+            [field]: value
         })
-        .then(() => {
-          console.log("Document successfully updated!");
-          fetchAppoint()
-        })
-        .catch((error) => {
-          console.error("Error updating document: ", error);
-        });
-      }
+            .then(() => {
+                console.log("Document successfully updated!");
+                fetchAppoint()
+            })
+            .catch((error) => {
+                console.error("Error updating document: ", error);
+            });
+    }
     // const handleEditData = (id) => {
-     
-    
-      
-         
+
+
+
+
     //       db.collection("City")
     //         .doc(id)
     //         .update({
     //           Name: Name
-    
+
     //         })
     //         .then(() => {
     //           console.log("Document successfully updated!");
@@ -143,8 +146,8 @@ console.log("infoooooo", AllApp,DoneApp, date)
     //           console.error("Error updating document: ", error);
     //           showAlert("Error updating document", 'error')
     //         });
-        
-    
+
+
     //   };
 
 
@@ -180,30 +183,41 @@ console.log("infoooooo", AllApp,DoneApp, date)
                 })
                 let allapp = [];
                 let doneapp = [];
+                let waitapp = [];
                 let dateapp = [];
                 let test = [];
                 setDoneCount(1)
                 let newAppoint = AppointmentsData.filter(apoint => apoint.mobile == userphone)
-                newAppoint.map((item, index)=>{
 
-                    allapp.push(index+1);
-                    dateapp.push(item.dateSelected)
-                   test.push(item)
-                    
-                  
-                })
-                let doneAppoint = test.filter(apoint => apoint.status === "done")
-                doneAppoint.map((item, index)=>{
+                let doneAppp = newAppoint.filter(apoint => apoint.status == 'done');
+                let waitAppp = newAppoint.filter(apoint => apoint.status == 'wait');
+                // newAppoint.map((item, index) => {
 
-                    doneapp.push(index+1);
-                 
-                   
-                })
-                setAllApp(allapp)
-                setDoneApp(doneapp)
-                setDate(dateapp)
-                console.log("newApp", newAppoint)
+                //     allapp.push(index + 1);
+                //     dateapp.push(item.dateSelected)
+                //     test.push(item)
+
+
+                // })
+                // if(newAppoint.length === 1){
+                //     setDoneApp([])
+                // }else{
+                //     let doneAppoint = test.filter(apoint => apoint.status === "done")
+                //     doneAppoint.map((item, index) => {
+
+                //         doneapp.push(index + 1);
+
+
+                //     })
+                //     setAllApp(allapp)
+                //     setDoneApp(doneAppoint)
+                // }
+
+                // setDate(dateapp)
+                // console.log("newApp", newAppoint)
                 setAppointments(newAppoint);
+                setDoneApp(doneAppp)
+                setWaitApp(waitAppp)
             } catch (error) {
                 console.log(error);
             }
@@ -232,14 +246,14 @@ console.log("infoooooo", AllApp,DoneApp, date)
                         <div className="d-flex justify-content-around">
 
                             <div className='d-flex mx-2'>
-                                <input type="radio" id="wait"  checked={Appointments.status === 'wait'} onChange={()=>{
+                                <input type="radio" id="wait" checked={Appointments.status === 'wait'} onChange={() => {
                                     updateField(Appointments.id, 'status', 'wait');
-                                }}/>
+                                }} />
                                 <label for="wait" className='px-2'>Wait</label>
                             </div>
                             <div className='d-flex mx-2'>
-                                <input type="radio" id="done"  checked={Appointments.status === 'done'}onChange={()=>{
-                                   updateField(Appointments.id, 'status', 'done');
+                                <input type="radio" id="done" checked={Appointments.status === 'done'} onChange={() => {
+                                    updateField(Appointments.id, 'status', 'done');
                                 }} />
                                 <label for="done" className='px-2'>Done</label>
                             </div>
@@ -301,28 +315,8 @@ console.log("infoooooo", AllApp,DoneApp, date)
                     <div className='page_content'>
                         <div className="">
                             <div className="row justify-content-center mx-2">
-                                <div className="col-lg-12 row my-4">
-                                    <div className='col-6 p-0'>
-                                        <h2 >{t("_Appointments")}</h2>
-                                    </div>
 
-                                    <div id="chart">
-                                        <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
-                                    </div>
-                                    <div className={`${style.pull_right} col-6 p-0`}>
-                                        {/* <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
-                                            // let addAppointments = document.getElementById("add_Appointments");
-                                            // addAppointments.classList.remove("d-none");
 
-                                            // let editAppointments = document.getElementById("edit_Appointments");
-                                            // if (editAppointments.classList.contains('d-none') === false) {
-                                            //     editAppointments.classList.add("d-none");
-                                            // }
-                                        }}>  + {t("one_Appointments")}</Link> */}
-                                    </div>
-                                    <br />
-                                    <br />
-                                </div>
                             </div>
 
                             {/* <div id="add_Appointments" className='d-none'>
@@ -339,58 +333,153 @@ console.log("infoooooo", AllApp,DoneApp, date)
                         </div>
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-md-12">
-
-                                    <div className="table-responsive table-responsive-data2" style={{ maxHeight: "100vh" }}>
-                                        <table className={`table ${style.table_data2}  `} >
-                                            <thead className={`${style.thead} text-white`}>
-                                                <tr>
-                                                    <th className='text-white'>{t("id")}</th>
-                                                    <th className='text-white'>{t("item_name")} </th>
-                                                    <th className='text-white'>{t("item_date")}</th>
-                                                    <th className='text-white'>{t("item_time")} </th>
-                                                    <th className='text-white'>{t("item_email")} </th>
-                                                    <th className='text-white'>{t("item_phone")} </th>
-                                                    <th className='text-white'>{t("item_notes")} </th>
-
-
-
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {currentPageData}
-
-
-                                            </tbody>
-                                        </table>
-                                        <div className="w-75 mx-auto">
-
-                                            <ReactPaginate
-                                                nextLabel={t("next")}
-                                                onPageChange={handlePageClick}
-                                                pageRangeDisplayed={3}
-                                                marginPagesDisplayed={2}
-                                                pageCount={pageCount}
-                                                previousLabel={t("prev")}
-                                                pageClassName="page-item"
-                                                pageLinkClassName="page-link"
-                                                previousClassName="page-item"
-                                                previousLinkClassName="page-link"
-                                                nextClassName="page-item"
-                                                nextLinkClassName="page-link"
-                                                breakLabel="..."
-                                                breakClassName="page-item"
-                                                breakLinkClassName="page-link"
-                                                containerClassName="pagination"
-                                                activeClassName="active"
-                                                renderOnZeroPageCount={null}
-                                            />
-
-
-                                        </div>
+                                <div className='col-12'>
+                                    <div className='col-6 p-0'>
+                                        <h2 >{t("_Appointments")}</h2>
                                     </div>
+                                    <Tabs
+                                        defaultActiveKey="appointments"
+                                        id="uncontrolled-tab-example"
+                                        className="my-3"
+                                    >
+                                        <Tab eventKey="appointments" title="Appointments" className='fs-5'>
+                                            <div className='row'>
+                                                <div className="col-lg-12 row my-4">
+
+
+                                                    <div id="chart">
+                                                        <AppChart info={[WaitApp.length, DoneApp.length]} />
+                                                        {/* <ReactApexChart options={state.options} series={state.series} type="area" height={350} /> */}
+                                                    </div>
+                                                    <div className={`${style.pull_right} col-6 p-0`}>
+                                                        {/* <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
+                                            // let addAppointments = document.getElementById("add_Appointments");
+                                            // addAppointments.classList.remove("d-none");
+
+                                            // let editAppointments = document.getElementById("edit_Appointments");
+                                            // if (editAppointments.classList.contains('d-none') === false) {
+                                            //     editAppointments.classList.add("d-none");
+                                            // }
+                                        }}>  + {t("one_Appointments")}</Link> */}
+                                                    </div>
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                                <div className="col-md-12">
+
+                                                    <div className="table-responsive table-responsive-data2" style={{ maxHeight: "100vh" }}>
+                                                        <table className={`table ${style.table_data2}  `} >
+                                                            <thead className={`${style.thead} text-white`}>
+                                                                <tr>
+                                                                    <th className='text-white'>{t("id")}</th>
+                                                                    <th className='text-white'>{t("item_name")} </th>
+                                                                    <th className='text-white'>{t("item_date")}</th>
+                                                                    <th className='text-white'>{t("item_time")} </th>
+                                                                    <th className='text-white'>{t("item_email")} </th>
+                                                                    <th className='text-white'>{t("item_phone")} </th>
+                                                                    <th className='text-white'>{t("item_notes")} </th>
+
+
+
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {currentPageData}
+
+
+                                                            </tbody>
+                                                        </table>
+                                                        <div className="w-75 mx-auto">
+
+                                                            <ReactPaginate
+                                                                nextLabel={t("next")}
+                                                                onPageChange={handlePageClick}
+                                                                pageRangeDisplayed={3}
+                                                                marginPagesDisplayed={2}
+                                                                pageCount={pageCount}
+                                                                previousLabel={t("prev")}
+                                                                pageClassName="page-item"
+                                                                pageLinkClassName="page-link"
+                                                                previousClassName="page-item"
+                                                                previousLinkClassName="page-link"
+                                                                nextClassName="page-item"
+                                                                nextLinkClassName="page-link"
+                                                                breakLabel="..."
+                                                                breakClassName="page-item"
+                                                                breakLinkClassName="page-link"
+                                                                containerClassName="pagination"
+                                                                activeClassName="active"
+                                                                renderOnZeroPageCount={null}
+                                                            />
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </Tab>
+                                        <Tab eventKey="questions" title="Questions" className='fs-5'>
+                                            <div className="col-md-12">
+
+                                                <div className="table-responsive table-responsive-data2" style={{ maxHeight: "100vh" }}>
+                                                    <table className={`table ${style.table_data2}  `} >
+                                                        <thead className={`${style.thead} text-white`}>
+                                                            <tr>
+                                                                <th className='text-white'>{t("id")}</th>
+                                                                <th className='text-white'>{t("item_name")} </th>
+                                                                <th className='text-white'>{t("item_date")}</th>
+                                                                <th className='text-white'>{t("item_time")} </th>
+                                                                <th className='text-white'>{t("item_email")} </th>
+                                                                <th className='text-white'>{t("item_phone")} </th>
+                                                                <th className='text-white'>{t("item_notes")} </th>
+
+
+
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {currentPageData}
+
+
+                                                        </tbody>
+                                                    </table>
+                                                    <div className="w-75 mx-auto">
+
+                                                        <ReactPaginate
+                                                            nextLabel={t("next")}
+                                                            onPageChange={handlePageClick}
+                                                            pageRangeDisplayed={3}
+                                                            marginPagesDisplayed={2}
+                                                            pageCount={pageCount}
+                                                            previousLabel={t("prev")}
+                                                            pageClassName="page-item"
+                                                            pageLinkClassName="page-link"
+                                                            previousClassName="page-item"
+                                                            previousLinkClassName="page-link"
+                                                            nextClassName="page-item"
+                                                            nextLinkClassName="page-link"
+                                                            breakLabel="..."
+                                                            breakClassName="page-item"
+                                                            breakLinkClassName="page-link"
+                                                            containerClassName="pagination"
+                                                            activeClassName="active"
+                                                            renderOnZeroPageCount={null}
+                                                        />
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Tab>
+
+
+                                    </Tabs>
+
                                 </div>
+
                             </div>
 
 
