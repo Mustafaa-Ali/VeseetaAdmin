@@ -66,7 +66,14 @@
 "block":"Block",
 "delete":"Delete",
 "our_city":"Our Cities in Egypt",
-"show":"Show"
+"show":"Show",
+"item_question": " Question",
+"item_q_speaciality": " Speaciality",
+"item_gender": " Gender",
+"item_forr": " For",
+"item_age": " Age",
+"item_detailes": " Detailes",
+"item_answer" : "Add Answer"
 
 }
 

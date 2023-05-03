@@ -16,6 +16,15 @@ code {
   margin-top: 5rem !important;
   margin-left: 70px;
 }
+
+
+@media only screen and (min-width: 992px){
+  .page-section {
+    margin-top: 5rem !important;
+    margin-left: unset;
+  }
+}
+
 body[dir='rtl'] .page-section {
    margin-left: unset;
   margin-right: 70px;
