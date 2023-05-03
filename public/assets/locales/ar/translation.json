@@ -24,6 +24,12 @@
 "id": "رقم التعريف",
 "city_name": "اسم المدينة",
 "item_name": " الاسم",
+"item_question": " السؤال",
+"item_q_speaciality": " التخصص",
+"item_gender": " النوع",
+"item_forr": " لمن",
+"item_age": " العمر",
+"item_detailes": " التفاصيل",
 "item_img": "  الصورة",
 "item_phone": "رقم الهاتف",
 "item_city": "المدينة ",
@@ -66,7 +72,8 @@
 "block":"غير نشط",
 "delete":"احذف",
 "our_city":"المدن الخاصة بنا في مصر",
-"show":"اظهر"
+"show":"اظهر",
+"item_answer":"أضف اجابة"
 
 
 

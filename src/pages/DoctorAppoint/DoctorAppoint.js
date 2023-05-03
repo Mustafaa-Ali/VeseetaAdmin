@@ -17,11 +17,22 @@ import AppChart from '../../Components/AppointChart/AppointChart'
 // import userphone from '../../store/Actions/userphone'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 const AppointmentsAppoint = () => {
 
     const navigate = useNavigate()
     const { t } = useTranslation();
     const [Appointments, setAppointments] = useState([])
+    const [Questions, setQuestions] = useState([])
+    const [QuestionId, setQuestionId] = useState('')
+    const [question11, setquestion11] = useState('')
+    const [speciality, setspeciality] = useState('')
+    const [gender, setgender] = useState('')
+    const [forr, setforr] = useState('')
+    const [details, setdetails] = useState('')
+    const [age, setage] = useState('')
+    const [Answer, setAnswer] = useState('')
     const [AllApp, setAllApp] = useState([])
     const [DoneCount, setDoneCount] = useState(1)
     const [DoneApp, setDoneApp] = useState([])
@@ -33,39 +44,7 @@ const AppointmentsAppoint = () => {
     const userphone = sessionStorage.getItem("doctorPhone")
     console.log("usrphone in apponit", userphone)
     const user = localStorage.getItem('user');
-    const state = {
 
-        series: [{
-            name: 'All Aoopintments',
-            data: AllApp
-        }, {
-            name: 'Done Appointments',
-            data: DoneApp
-        }],
-        options: {
-            chart: {
-                height: 350,
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            xaxis: {
-                type: 'datetime',
-                categories: date
-            },
-            tooltip: {
-                x: {
-                    format: 'dd/MM/yy HH:mm'
-                },
-            },
-        },
-
-
-    };
 
     console.log("infoooooo", AllApp, DoneApp, date)
     function afterDelete(message, icon) {
@@ -181,12 +160,8 @@ const AppointmentsAppoint = () => {
                     console.log("app.docror", app.doctor)
                     console.log("app.docror.id", app.doctorID)
                 })
-                let allapp = [];
-                let doneapp = [];
-                let waitapp = [];
-                let dateapp = [];
-                let test = [];
-                setDoneCount(1)
+               
+                
                 let newAppoint = AppointmentsData.filter(apoint => apoint.mobile == userphone)
 
                 let doneAppp = newAppoint.filter(apoint => apoint.status == 'done');
@@ -218,6 +193,25 @@ const AppointmentsAppoint = () => {
                 setAppointments(newAppoint);
                 setDoneApp(doneAppp)
                 setWaitApp(waitAppp)
+            } catch (error) {
+                console.log(error);
+            }
+
+
+        }
+    };
+    const fetchQuestions = async () => {
+
+        // const user = auth.currentUser;
+        console.log("user", user);
+        if (user) {
+            try {
+                const QuestionsRef = db.collection('Questions');
+                const QuestionsSnapshot = await QuestionsRef.get();
+                const QuestionsData = QuestionsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+                console.log("Questions", QuestionsData);
+                setQuestions(QuestionsData)
             } catch (error) {
                 console.log(error);
             }
@@ -286,6 +280,55 @@ const AppointmentsAppoint = () => {
         )
     });
     let pageCount = Math.ceil(Appointments.length / PER_PAGE);
+    let currentPageData1 = Questions.slice(offset, offset + PER_PAGE).map((Questions, index) => {
+        return (
+            <>
+                <tr key={index} className={`${style.tr_shadow}`}>
+                    <td>{index + 1}</td>
+                    <td>{Questions.question}</td>
+                    <td>{Questions.speciality}</td>
+                    <td>{Questions.gender}</td>
+                    <td>{Questions.forr}</td>
+                    <td>{Questions.age}</td>
+                    <td>{Questions.details}</td>
+
+
+                    <td>
+                        <div className="d-flex justify-content-around">
+
+
+                            <Link className="item p-2" type='button' onClick={(e) => {
+                                e.preventDefault();
+                                window.scrollTo(0, 0);
+                                setQuestionId(Questions.id)
+                                getAllInfo(Questions.id)
+                               
+                                // let editAppointments = document.getElementById("edit_Appointments");
+                                // editAppointments.classList.remove("d-none");
+
+                                // let addAppointments = document.getElementById("add_Appointments");
+                                // if (addAppointments.classList.contains('d-none') === false) {
+                                //     addAppointments.classList.add("d-none");
+                                // }
+                            }}>
+                                <i className={`fa-solid fa-pen fs-6  ${style.text_creat}`} ></i>
+                            </Link>
+
+                            {/* <form>
+                            <Link type='button' className="item p-2"
+                                onClick={() => {
+                                    DeleteAlert(Appointments.id)
+                                }}>
+                                <i className="fa-solid fa-trash fs-6 text-danger"></i>
+                            </Link>
+                        </form> */}
+                        </div>
+                    </td>
+                </tr>
+            </>
+        )
+    });
+    let pageCount1 = Math.ceil(Questions.length / PER_PAGE);
 
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
@@ -293,17 +336,75 @@ const AppointmentsAppoint = () => {
 
 
 
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
+    const handleEditData = () => {
+        // event.preventDefault();
+
+        // if (props.cityId) {
+            const id = QuestionId;
+            db.collection("Questions")
+                .doc(id)
+                .update({
+                    question: question11,
+                    speciality: speciality,
+                    gender: gender,
+                    forr: forr,
+                    age: age,
+                    details: details,
+                    answer:Answer
+
+                })
+                .then(() => {
+                    console.log("Document successfully updated!");
+                    showAlert("Document successfully updated!", "success");
+                     handleClose()
+                     fetchQuestions()
+                })
+                .catch((error) => {
+                    console.error("Error updating document: ", error);
+                    showAlert("Error updating document", 'error')
+                });
+        }
+
+    
+   const getAllInfo = (id) => {
+    if(id == ''){
+       
+    }else{
+     let item = Questions.find(ele => ele.id === QuestionId)
+     
+//   let element = myArray.find(item => item.id === 2); 
+     console.log("item: ", item)
+     setquestion11(item.question);
+     setspeciality(item.speciality);
+     setgender(item.gender)
+     setforr(item.forr);
+     setdetails(item.details);
+     setage(item.age);
+     handleShow()
+    }
+   }
+
+
     useEffect(() => {
         // handleSubmit();
         fetchAppoint();
-
+        fetchQuestions();
         // if(!userphone){
         //     navigate("/login")
         // }
+
+
+
     }, [userphone]);
 
 
-    console.log("Appointments", Appointments)
+    console.log("alllllllllllllllll", Answer, question11, speciality, gender, forr, details, age)
     // console.log("Appointments Doctor", Appointments.Doctor)
 
     return (
@@ -428,12 +529,12 @@ const AppointmentsAppoint = () => {
                                                         <thead className={`${style.thead} text-white`}>
                                                             <tr>
                                                                 <th className='text-white'>{t("id")}</th>
-                                                                <th className='text-white'>{t("item_name")} </th>
-                                                                <th className='text-white'>{t("item_date")}</th>
-                                                                <th className='text-white'>{t("item_time")} </th>
-                                                                <th className='text-white'>{t("item_email")} </th>
-                                                                <th className='text-white'>{t("item_phone")} </th>
-                                                                <th className='text-white'>{t("item_notes")} </th>
+                                                                <th className='text-white'>{t("item_question")} </th>
+                                                                <th className='text-white'>{t("item_q_speaciality")}</th>
+                                                                <th className='text-white'>{t("item_gender")} </th>
+                                                                <th className='text-white'>{t("item_forr")} </th>
+                                                                <th className='text-white'>{t("item_age")} </th>
+                                                                <th className='text-white'>{t("item_detailes")} </th>
 
 
 
@@ -441,7 +542,7 @@ const AppointmentsAppoint = () => {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {currentPageData}
+                                                            {currentPageData1}
 
 
                                                         </tbody>
@@ -453,7 +554,7 @@ const AppointmentsAppoint = () => {
                                                             onPageChange={handlePageClick}
                                                             pageRangeDisplayed={3}
                                                             marginPagesDisplayed={2}
-                                                            pageCount={pageCount}
+                                                            pageCount={pageCount1}
                                                             previousLabel={t("prev")}
                                                             pageClassName="page-item"
                                                             pageLinkClassName="page-link"
@@ -477,6 +578,49 @@ const AppointmentsAppoint = () => {
 
 
                                     </Tabs>
+
+
+
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Add Answer</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <form className={`${style.create_accont}`}>
+
+                                                <div className="row">
+                                                    {/* <div className={` col-12`}>
+                                                        <button className={`${style.pull_right} fa-solid fa-square-xmark fs-4  text-danger`} style={{ border: "none" }} > </button>
+                                                    </div> */}
+
+                                                    <div className="col-12 mb-3">
+                                                        <div className="form-group">
+                                                            <strong className='d-block mb-2'> {t("item_question")}: {question11}</strong>
+                                                            <input type="text"
+                                                               
+                                                                onChange={(e) => {
+                                                                    setAnswer(e.target.value)
+                                                                }}
+                                                                className="form-control" placeholder={t("item_answer")} />
+
+                                                        </div>
+                                                    </div>
+
+                                                    {/* <div className="col-xs-12 col-sm-12 col-md-12 text-center">
+                                                        <button type="submit" className={`btn ${style.btnCreate} mb-3`}>{t("submit")}</button>
+                                                    </div> */}
+                                                </div>
+                                            </form>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                Close
+                                            </Button>
+                                            <Button variant="primary" onClick={ handleEditData}>
+                                                Save Changes
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
 
                                 </div>
 
