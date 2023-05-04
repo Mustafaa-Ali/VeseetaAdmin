@@ -97,7 +97,7 @@ const Doctors = () => {
                 <td>{index + 1}</td>
                 
                 <td><img src={Doctor.ImgUrl} className='rounded-circle' width={80} height={80} alt="" /></td>
-                <td>{Doctor.Name}</td>
+                <td><i class="fa-solid fa-user-doctor me-2"></i>{Doctor.Name}</td>
                 <td>{Doctor.Speciality}</td>
                 <td>{Doctor.City}</td>
                 <td>{Doctor.Phone}</td>

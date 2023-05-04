@@ -100,12 +100,12 @@ const Users = () => {
             <>
                 <tr key={index} className={`${style.tr_shadow}`}>
                     <td>{index + 1}</td>
-                    <td><i class="bi bi-person-fill me-2"></i>{User.Name}</td>
+                    {/* <td><i class="bi bi-person-fill me-2"></i>{User.Name}</td> */}
                     {/* <td>{User.UName}</td> */}
-                    <td>{User.Email}</td>
+                    <td><i class="bi bi-person-fill me-2"></i>{User.email}</td>
                     {/* <td>{User.City}</td> */}
-                    <td>{User.Phone}</td>
-                    <td>{User.Status}</td>
+                    {/* <td>{User.Phone}</td> */}
+                    <td>{User.status}</td>
 
                     <td>
                         <div className="">
@@ -164,7 +164,7 @@ const Users = () => {
                                     <div className='col-6 p-0'>
                                         <h2 >{t("_user")}</h2>
                                     </div>
-                                    <div className={`${style.pull_right} col-6 p-0`}>
+                                    {/* <div className={`${style.pull_right} col-6 p-0`}>
                                         <Link className={` btn ${style.btnCreate} float-end`} type="button" onClick={() => {
                                             let addUser = document.getElementById("add_User");
                                             addUser.classList.remove("d-none");
@@ -174,7 +174,7 @@ const Users = () => {
                                                 editUser.classList.add("d-none");
                                             }
                                         }}>  + {t("one_user")}</Link>
-                                    </div>
+                                    </div> */}
                                     <br />
                                     <br />
                                 </div>
@@ -201,11 +201,11 @@ const Users = () => {
                                             <thead className={`${style.thead} text-white`}>
                                                 <tr>
                                                     <th className='text-white'>{t("id")} </th>
-                                                    <th className='text-white'>{t("item_name")}</th>
+                                                    {/* <th className='text-white'>{t("item_name")}</th> */}
                                                     {/* <th className='text-white'>{t("item_username")}</th> */}
                                                     <th className='text-white'>{t("item_email")}  </th>
                                                     {/* <th className='text-white'>{t("item_city")} </th> */}
-                                                    <th className='text-white'>{t("item_phone")}  </th>
+                                                    {/* <th className='text-white'>{t("item_phone")}  </th> */}
                                                     <th className='text-white'>{t("item_status")}  </th>
 
 

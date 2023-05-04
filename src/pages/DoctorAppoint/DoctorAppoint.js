@@ -291,6 +291,7 @@ const AppointmentsAppoint = () => {
                     <td>{Questions.forr}</td>
                     <td>{Questions.age}</td>
                     <td>{Questions.details}</td>
+                    <td>{(Questions.answer)? Questions.answer : "No Answer Yet!"}</td>
 
 
                     <td>
@@ -535,6 +536,7 @@ const AppointmentsAppoint = () => {
                                                                 <th className='text-white'>{t("item_forr")} </th>
                                                                 <th className='text-white'>{t("item_age")} </th>
                                                                 <th className='text-white'>{t("item_detailes")} </th>
+                                                                <th className='text-white'>{t("item_answer")} </th>
 
 
 

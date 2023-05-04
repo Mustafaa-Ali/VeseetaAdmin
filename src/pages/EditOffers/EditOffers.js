@@ -21,7 +21,7 @@ function EditOffers(props) {
     const [DoctorImg, setDoctorImg] = useState('')
     const [Discount, setDiscount] = useState(0)
     const [Booked, setBooked] = useState(0)
-    const [Available, setAvailable] = useState('')
+    const [Available, setAvailable] = useState()
     const [BookingDate, setBookingDate] = useState('')
 
     function showAlert(message, icon) {
@@ -190,13 +190,13 @@ function EditOffers(props) {
                                     <div className='row mb-3'>
                                         <div className='col-6'>
                                             {console.log("Available", Available)}
-                                            {console.log("Available true", Available === true)}
+                                            {console.log("Available true", Available == "true")}
                                             <input type="radio" id="true" name="available" className='mx-2'
                                                 value='true'
                                                 
-                                                onChange={(e) => {
+                                                checked={Available == "true"} onChange={(e) => {
                                                     setAvailable(e.target.value);
-                                                }}checked={Available === 'true'} />
+                                                }} />
                                             <label for="true">{t("item_available")} </label>
                                         </div>
 
@@ -204,9 +204,9 @@ function EditOffers(props) {
                                             <input type="radio" id="false" name="available" className='mx-2'
                                                 value='false'
                                                 
-                                                onChange={(e) => {
-                                                    setAvailable(e.target.value);
-                                                }} checked={Available === 'false'}/>
+                                               checked={Available === false}  onChange={(e) => {
+                                                setAvailable(e.target.value);
+                                            }} />
                                             <label for="false">{t("item_not_available")} </label>
                                         </div>
                                     </div>

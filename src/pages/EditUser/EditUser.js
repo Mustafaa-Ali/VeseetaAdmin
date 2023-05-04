@@ -36,7 +36,7 @@ function EditUser(props) {
         const id = props.id;
         console.log("idd", id)
         console.log("props", props)
-        db.collection("Users")
+        db.collection("users")
             .doc(id)
             .get()
             .then((doc) => {
@@ -45,7 +45,7 @@ function EditUser(props) {
                     console.log("dataaaaaaaaaaaaaaa", data)
                     setData(data);
                     setName(data.Name);
-                    setEmail(data.Email);
+                    setEmail(data.email);
                     setUName(data.Name);
                     setCity(data.City);
                     setPhone(data.Phone);
@@ -68,11 +68,11 @@ function EditUser(props) {
             db.collection("users")
                 .doc(id)
                 .update({
-                    Name: Name,
-                    Email: email,
-                    UName: uName,
-                    City: city,
-                    Phone: phone,
+                    // Name: Name,
+                    email: email,
+                    // UName: uName,
+                    // City: city,
+                    // Phone: phone,
                     Status:status
                 })
                 .then(() => {
@@ -109,7 +109,7 @@ function EditUser(props) {
                 <div className="row justify-content-center  mx-1 mb-5">
                     <div className="col-lg-12 mb-4">
                         <div className={` ${style.pull_left}`}>
-                            <h2>{t("edit")}</h2>
+                            <h2>View</h2>
                         </div>
                     </div>
 
@@ -120,7 +120,7 @@ function EditUser(props) {
                                 <button className={`${style.pull_right} fa-solid fa-square-xmark fs-4  text-danger`} style={{ border: "none" }} onClick={close}> </button>
                             </div>
 
-                            <div className="col-12 mb-3">
+                            {/* <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>{t("item_name")}:</strong>
                                     <input type="text" value={Name} disabled
@@ -130,7 +130,7 @@ function EditUser(props) {
                                         className="form-control" placeholder={t("item_name")} />
 
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="col-12 mb-3">
                                 <div className="form-group">
@@ -144,7 +144,7 @@ function EditUser(props) {
                                 </div>
                             </div>
 
-                            <div className="col-12 mb-3">
+                            {/* <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>{t("item_city")}:</strong>
                                     <input type="text" value={city} disabled
@@ -154,9 +154,9 @@ function EditUser(props) {
                                         className="form-control" placeholder={t("item_city")} />
 
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div className="col-12 mb-3">
+                            {/* <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>{t("item_phone")}:</strong>
                                     <input type="text" value={phone} disabled
@@ -166,7 +166,7 @@ function EditUser(props) {
                                         className="form-control" placeholder={t("item_phone")} />
 
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="col-12 mb-3">
                                 <div className="form-group">
                                     <strong className='d-block mb-2'>{t("status")}:</strong>
