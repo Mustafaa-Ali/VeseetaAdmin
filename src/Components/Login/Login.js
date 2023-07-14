@@ -118,7 +118,7 @@ const handleSubmit = (event) => {
                                     className="form-control" id="email" name="email" required
                                     value={email}
                                     onChange={(event) => setEmail(event.target.value)}
-                                    placeholder="use this => test@test.test"
+                                    placeholder="use this => hamada22@gmail.com"
                                 />
                             </div><br />
 
