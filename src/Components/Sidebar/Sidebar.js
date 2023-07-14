@@ -41,7 +41,7 @@ function Sidebar() {
                             <li className="side-bar__item side__item--menu terms ">
                                 <Link to="/home" className="page-section-link">
                               
-                                <i className="  side-bar__item--icon text-white  fs-2  bi bi-house-lock-fill"></i>
+                                <i className="  side-bar__item--icon text-white  fs-2  bi bi-house-fill"></i>
                                     <span className="side-bar__item--text">{t('home')}</span>
                                 </Link>
                             </li>
