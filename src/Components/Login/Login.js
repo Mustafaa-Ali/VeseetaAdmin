@@ -118,6 +118,7 @@ const handleSubmit = (event) => {
                                     className="form-control" id="email" name="email" required
                                     value={email}
                                     onChange={(event) => setEmail(event.target.value)}
+                                    placeholder="use this => test@test.test"
                                 />
                             </div><br />
 
@@ -133,6 +134,7 @@ const handleSubmit = (event) => {
                                     id="password" name="password" required
                                     value={password}
                                     onChange={(event) => setPassword(event.target.value)}
+                                    placeholder="Password => 123123"
                                 />
                                 <br />
                                 <button type="submit" class="btn btn-danger w-75 ">{t("sign")}</button>
